@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="500">
+
+    <defs>
+        <pattern id="transformedPattern"
+                 x="10" y="10" width="20" height="20"
+                 patternUnits="userSpaceOnUse"
+                 patternTransform="rotate(35)"
+        >
+
+            <circle cx="10" cy="10" r="10" style="stroke: none; fill: #0000ff" />
+
+        </pattern>
+    </defs>
+
+    <rect x="10" y="10" width="300" height="300"
+          style="stroke: #000000;
+             fill: url(#transformedPattern);" />
+</svg>

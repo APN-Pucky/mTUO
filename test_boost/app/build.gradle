@@ -1,0 +1,94 @@
+apply plugin: 'com.android.model.application'
+
+//-------------------------------
+def my_inc =     [
+
+        boost_inc_dir()
+]
+//-------------------------------------------------
+def my_incs =     my_inc.collect{ "-I"  + file(it)}
+//---------------------------------------------------
+
+model {
+
+
+    android {
+
+        compileSdkVersion = my_compileSdkVersion()
+        buildToolsVersion = my_buildToolsVersion()
+
+
+        defaultConfig {
+            minSdkVersion.apiLevel = my_minSdkVersion()
+            targetSdkVersion.apiLevel = my_targetSdkVersion()
+
+            applicationId = 'com.testboost'
+            versionCode = 1
+            versionName = '1.0'
+        }
+
+        ndk {
+            moduleName = 'test_boost'
+            //------------------------------
+
+            platformVersion = platform_ver() // defaultConfig.minSdkVersion.apiLevel.asType(Integer) // keep equal to minSdk
+            toolchain = tc_name()
+            toolchainVersion = tc_ver()
+            stl = std_lib()
+            //--------------------------------
+            cppFlags.addAll(['-std=c++14', '-frtti', '-fexceptions'])
+            cppFlags.addAll(my_incs)
+
+            ldLibs.addAll(['log'])
+            abiFilters.addAll(my_abis())
+        }
+
+        sources {
+            main {
+                jni {
+
+                    exportedHeaders
+                    {
+                        srcDirs "src/main/jni"
+                    }
+
+                    dependencies {
+
+                        library 'boost_chrono'              linkage 'shared'
+                        library 'boost_system'              linkage 'shared'
+
+                    }
+                }
+            }
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles.add(file('proguard-android.txt'))
+            }
+        }
+    }
+
+    repositories {
+        libs(PrebuiltLibraries) {
+
+            boost_chrono    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_chrono.so") } }
+            boost_system    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_system.so") } }
+        }
+    }
+
+    android.lintOptions {  // was getting lint error that apparently was a problemm with lint itself ... maybe doesnt know syntax of new gradle experimental properly yet?
+        abortOnError false
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+}
+
+
+//----------------------------------------------------------------------------------------
