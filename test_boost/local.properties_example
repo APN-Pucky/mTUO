@@ -2,4 +2,4 @@
 ndk.dir=/home/declan/Documents/zone/mid/lib/android/sdk/ndk-bundle
 sdk.dir=/home/declan/Documents/zone/mid/lib/android/sdk
 
-boost.dir=/home/declan/Documents/zone/mid/lib/boost/boost_for_android/build/boost/1.64.0
+boost.dir=../../build/boost/1.64.0
