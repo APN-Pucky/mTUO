@@ -52,6 +52,50 @@ To use the test app make sure to adjust the paths in local.properties (see local
 Note: The test app uses [Gradle Experimental](http://tools.android.com/tech-docs/new-build-system/gradle-experimental)
 
 
+## *Header-only* Boost Libraries
+Many of the boost libraries (eg. *algorithm*) can be used as "header only" ie do not require compilation . So you may get away with not building boost if you only
+want to use these. To see which of the libraries do require building you can switch to the dir where you extracted the boost download and call:
+
+```
+> ./bootstrap.sh --show-libraries 
+```
+
+which for example with boost 1.65.1 produces the output:
+
+```
+The Boost libraries requiring separate building and installation are:
+    - atomic
+    - chrono
+    - container
+    - context
+    - coroutine
+    - date_time
+    - exception
+    - fiber
+    - filesystem
+    - graph
+    - graph_parallel
+    - iostreams
+    - locale
+    - log
+    - math
+    - metaparse
+    - mpi
+    - program_options
+    - python
+    - random
+    - regex
+    - serialization
+    - signals
+    - stacktrace
+    - system
+    - test
+    - thread
+    - timer
+    - type_erasure
+    - wave
+```
+
 
 
 
