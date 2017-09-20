@@ -1,5 +1,22 @@
 
+# Path to the android ndk you want this project to use
 ndk.dir=/home/declan/Documents/zone/mid/lib/android/sdk/ndk-bundle
+
+# Path to then android sdk (see "Android Studio" -> "SDK Manager" ->  "Android Sdk Location"
 sdk.dir=/home/declan/Documents/zone/mid/lib/android/sdk
+
+
+# Path to where a built version of boost is "installed" (expects dir structure like:
+
+# 1.64.0/
+#   include/
+#       boost/
+#           algorithm/
+#           .....
+#   libs/
+#       armeabi-v7a/
+#           gnu-4.9/
+#           llvm-3.5/
+#       x86/
 
 boost.dir=../../build/boost/1.64.0
