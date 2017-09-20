@@ -11,17 +11,14 @@
 BOOST_SRC_DIR=/home/declan/Documents/zone/mid/lib/boost
 
 # Specify the version of boost in the source dir
-#BOOST_VERSION=1.64.0
-BOOST_VERSION=1.65.1
+BOOST_VERSION=1.64.0
 
 # Specify path to (Google) Ndk
-#GOOGLE_DIR=/home/declan/Documents/zone/mid/lib/android/sdk/ndk-bundle
-GOOGLE_DIR=/home/declan/Documents/zone/mid/lib/android/ndk/15c/android-ndk-r15c
-#GOOGLE_DIR=/home/declan/Documents/zone/mid/lib/android/ndk/16b1/android-ndk-r16-beta1
+CRYSTAX_DIR=/home/declan/Documents/zone/mid/lib/android/crystax/stable
 
 
 # Dont modify
-export ANDROID_NDK_ROOT=$GOOGLE_DIR
+export ANDROID_NDK_ROOT=$CRYSTAX_DIR
 
 # Modify if desired
 # log file where build messages will be stored
@@ -34,8 +31,8 @@ rm $logFile
 
 
 
-./build_tools/build-boost.sh --version=1.65.1 --stdlibs="gnu-4.9, llvm-3.5" --abis="armeabi-v7a, x86"  --ndk-dir=$ANDROID_NDK_ROOT --linkage="shared,static" --verbose $BOOST_SRC_DIR  2>&1 | tee -a $logFile 
+$CRYSTAX_DIR/build/tools/build-boost.sh --version=1.64.0 --stdlibs="gnu-4.9, gnu-5, llvm-3.6, llvm-3.7" --abis="armeabi-v7a, x86"  --ndk-dir=$ANDROID_NDK_ROOT --verbose $BOOST_SRC_DIR  2>&1 | tee -a $logFile 
 # ./build_tools/build-boost.sh --version=1.64.0 --stdlibs="gnu-4.9" --abis="armeabi-v7a"  --ndk-dir=$ANDROID_NDK_ROOT --linkage="shared" --verbose $BOOST_SRC_DIR  2>&1 | tee -a $logFile
 
 
-
+# gets installed to stable/sources/boost/$BOOST_VERSION
