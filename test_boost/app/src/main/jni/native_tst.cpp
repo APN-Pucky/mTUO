@@ -16,7 +16,7 @@ extern "C"
     JNIEXPORT jstring JNICALL
     Java_com_testboost_JcNativeMan_cppInfoStr(JNIEnv *Env, jclass Cls, jstring StrIn, int num)
     {
-        string Str("hi from C++, boost should give some meaningful info here \:");
+        string Str("hi from C++, boost should give some meaningful info here :");
 
 
         boost::chrono::system_clock::time_point p  = boost::chrono::system_clock::now();

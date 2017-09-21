@@ -22,7 +22,7 @@ task clean(type: Delete) {
 }
 //-----------------------------------
 // def my_abis() { return  ["x86", "x86_64", "armeabi-v7a", "mips", "armeabi", "arm64-v8a", "mips64"] }  // some abis (eg "x86_64") require android platform_ver: 21 or newer
-def my_abis() { return  ["armeabi-v7a"] }
+def my_abis() { return  ["armeabi-v7a", "x86"] }
 
 
 def my_compileSdkVersion(){ return 26 }
@@ -36,14 +36,14 @@ def my_targetSdkVersion() { return my_compileSdkVersion().asType(Integer)}
 
 def want_gcc(){ return true}
 
-def tc_family()     { return want_gcc()? "gnu" : "llvm"}                        // "gnu"  (for gcc) or "llvm" (for clang)
-def tc_name()       { return want_gcc()? "gcc" : "clang" }                      // "gcc" or "clang"
-def tc_ver()        {return want_gcc()? "4.9" :  "3.5"}// "3.6", "3.7" (for clang)  or "4.9" , "5"  (for gcc)
-def std_lib ()     { return want_gcc()? "gnustl_shared" : "c++_shared"}               // "gnustl_shared" or "c++_shared"
+def tc_family()    { return want_gcc()? "gnu" : "llvm"}                        // "gnu"  (for gcc) or "llvm" (for clang)
+def tc_name()      { return want_gcc()? "gcc" : "clang" }                      // "gcc" or "clang"
+def tc_ver()       {return want_gcc()? "4.9" :  "3.5"}                         // "3.6", "3.7" (for clang)  or "4.9" , "5"  (for gcc)
+def std_lib ()     { return want_gcc()? "gnustl_shared" : "c++_shared"}        // "gnustl_shared" or "c++_shared"
 
 //---------------------
 
-
+def my_sys_inc(abi_tc){ return "-I" + "${ndk_dir()}/sysroot/usr/include/${abi_tc}"}
 //-----------------------
 
 def platform_ver(){return 9}
@@ -51,7 +51,7 @@ def platform_ver(){return 9}
 
 def platform_dir()      { return "${ndk_dir()}/platforms/android-${platform_ver()}" }
 
-
+def ndk_dir() { return local_props("ndk.dir") }
 def boost_dir() { return local_props("boost.dir") }
 
  def boost_inc_dir() { return "${boost_dir()}/include" }
