@@ -163,7 +163,62 @@ mktool()
         fail_panic "Could not chmod +x $tool"
     done
 }
+#-------------------------------------------------------------------
+# ndk 16+ BEGIN
+#--------------
+my_sys_inc()
+{
+    echo "$NDK_DIR/sysroot/usr/include"
+}
+#----------------------------------------
+my_triple_for()
+{
+    ABI=$1
+    case $ABI in
+    
+        armeabi*)
+            echo "arm-linux-androideabi"
+            ;;
+        arm64-v8a)
+            echo "aarch64-linux-android"
+            ;;
+        x86)
+            echo "i686-linux-android"
+            ;;
 
+        x86_64)
+            echo "x86_64-linux-android"
+            ;;
+
+       mips)
+            echo "mipsel-linux-android"
+            ;;
+        mips64)
+            echo "mips64el-linux-android"
+            ;;
+        *)
+            echo "ERROR: Unknown ABI: $ABI" 1>&2
+            #exit 1
+    esac
+}
+#---------------------
+my_abi_inc()
+{
+    echo $(my_sys_inc)"/"$(my_triple_for $1)
+}
+#---------------------
+my_abi_inc_flag()
+{
+    echo "-I"$(my_abi_inc $1)
+}
+#---------------------
+my_sys_inc_flag()
+{
+    echo "-I"$(my_sys_inc)
+}
+#---------------------
+# ndk 16+ END
+#-------------------------------------------------------------------
 # $1: ABI
 # $2: build directory
 # $3: C++ Standard Library implementation
@@ -417,7 +472,15 @@ build_boost_for_abi ()
             echo "ERROR: Unknown C++ Standard Library: '$LIBSTDCXX'" 1>&2
             exit 1
     esac
-
+#---------------
+# ndk 16+ BEGIN
+#---------------
+    LIBSTDCXX_CFLAGS="$LIBSTDCXX_CFLAGS $(my_sys_inc_flag)"
+    LIBSTDCXX_CFLAGS="$LIBSTDCXX_CFLAGS $(my_abi_inc_flag $ABI)"
+#---------------
+# ndk 16+ END
+#---------------
+    
     FLAGS="$FLAGS --sysroot=$SYSROOT"
     FLAGS="$FLAGS -fPIC"
 
