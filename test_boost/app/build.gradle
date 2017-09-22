@@ -4,10 +4,9 @@ apply plugin: 'com.android.model.application'
 def my_inc =     [
 
         boost_inc_dir(),
-      //  "${ndk_dir()}/sysroot/usr/include/arm-linux-androideabi",
-        "/home/declan/Documents/zone/mid/lib/android/ndk/16b1/android-ndk-r16-beta1/sysroot/usr/include"
-       // , "/home/declan/Documents/zone/mid/lib/android/ndk/16b1/android-ndk-r16-beta1/sysroot/usr/include/arm-linux-androideabi"
 
+        // necessary from ndk 16+
+        "${ndk_dir()}/sysroot/usr/include",
 ]
 
 
@@ -49,11 +48,15 @@ model {
             cppFlags.addAll(my_incs)
 
             abis {
-                create("armeabi-v7a") {
-                    cppFlags.add(my_sys_inc("arm-linux-androideabi"))
-                }
-                create("x86") {
-                    cppFlags.add(my_sys_inc("i686-linux-android"))
+                // add abi specific include path (necessary from ndk 16+)
+                my_abis().each
+                {
+                    def abi = "${it}"
+                    def arch = arch(abi)
+                    def triple = arch_triple(arch)
+                    def inc = arch_triple_inc(triple)
+
+                    create(abi) { cppFlags.add(inc) }
                 }
             }
 
@@ -91,6 +94,7 @@ model {
 
     repositories {
         libs(PrebuiltLibraries) {
+            println "targetPlatform.getName() = " + "${targetPlatform.getName()}"
             boost_chrono    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_chrono.so") } }
             boost_system    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_system.so") } }
         }
