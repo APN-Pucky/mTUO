@@ -94,7 +94,6 @@ model {
 
     repositories {
         libs(PrebuiltLibraries) {
-            println "targetPlatform.getName() = " + "${targetPlatform.getName()}"
             boost_chrono    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_chrono.so") } }
             boost_system    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_system.so") } }
         }
