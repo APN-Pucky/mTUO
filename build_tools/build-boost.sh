@@ -240,7 +240,7 @@ build_boost_for_abi ()
 
     dump "Building Boost $LVERSION $ABI libraries (C++ stdlib: $LIBSTDCXX)"
 
-    local APILEVEL=9
+    local APILEVEL=14
     if [ ${ABI%%64*} != ${ABI} ]; then
         APILEVEL=21
     fi
