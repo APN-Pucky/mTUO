@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Original work Copyright (c) 2011-2015 CrystaX. 
-# Modified work Copyright (c) 2017 Declan Moran (www.silverglint.com)
+# Original work Copyright (c) 2011-2016 (24.4.2016)  CrystaX. 
+# Modified work Copyright (c) 2017-2018 (24.4.2018)  Declan Moran (www.silverglint.com) 
 
 
 
