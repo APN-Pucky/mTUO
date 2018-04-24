@@ -1,26 +1,25 @@
 # Default values used by several dev-scripts.
 #
 
-# Current list of platform levels we support
-#
-# Note: levels 6 and 7 are omitted since they have the same native
-# APIs as level 5. Same for levels 10, 11 and 12
-#
-API_LEVELS="3 4 5 8 9 12 13 14 15 16 17 18 19 21"
+# This script is imported while building the NDK, while running the tests, and
+# when running make-standalone-toolchain.sh. Check if we have our own platforms
+# tree (as we would in an installed NDK) first, and fall back to prebuilts/ndk.
+PLATFORMS_DIR=$ANDROID_NDK_ROOT/platforms
+if [ ! -d "$PLATFORMS_DIR" ]; then
+    PLATFORMS_DIR=$ANDROID_NDK_ROOT/../prebuilts/ndk/current/platforms
+fi
+API_LEVELS=$(ls $PLATFORMS_DIR | sed 's/android-//' | sort -n)
+
+# The latest API level is the last one in the list.
+LATEST_API_LEVEL=$(echo $API_LEVELS | awk '{ print $NF }')
 
 FIRST_API64_LEVEL=21
 
 # Default ABIs for the target prebuilt binaries.
-PREBUILT_ABIS="armeabi armeabi-v7a x86 mips armeabi-v7a-hard arm64-v8a x86_64 mips64"
+PREBUILT_ABIS="armeabi-v7a x86 mips armeabi-v7a-hard arm64-v8a x86_64 mips64"
 
 # Location of the libcrystax sources, relative to the NDK root directory
 CRYSTAX_SUBDIR=sources/crystax
-
-# Location of the STLport sources, relative to the NDK root directory
-STLPORT_SUBDIR=sources/cxx-stl/stlport
-
-# Location of the GAbi++ sources, relative to the NDK root directory
-GABIXX_SUBDIR=sources/cxx-stl/gabi++
 
 # Location of the GNU libstdc++ headers and libraries, relative to the NDK
 # root directory.
@@ -34,7 +33,7 @@ LIBCXX_SUBDIR=sources/cxx-stl/llvm-libc++
 LIBCXXABI_SUBDIR=sources/cxx-stl/llvm-libc++abi/libcxxabi
 
 # Location of the GNUstep libobjc2 headers and libraries, relative to the NDK root directory
-GNUSTEP_OBJC2_SUBDIR=sources/objc/gnustep-libobjc2
+GNUSTEP_OBJC2_SUBDIR=packages/libobjc2/1.8.1
 
 # Location of the Cocotron headers and libraries, relative to the NDK root directory
 COCOTRON_SUBDIR=sources/objc/cocotron/0.1.0
@@ -50,7 +49,7 @@ COMPILER_RT_SUBDIR=sources/android/compiler-rt
 
 # Location of the boost sources, relative to the NDK root directory
 BOOST_SUBDIR=sources/boost
-BOOST_VERSIONS="1.59.0"
+BOOST_VERSIONS="1.62.0"
 
 # Location of the ICU sources, relative to the NDK root directory
 ICU_SUBDIR=sources/icu
@@ -65,23 +64,23 @@ PYTHON_VERSIONS="2.7 3.5"
 
 # Location of the OpenSSL libraries, relative to the NDK root directory
 OPENSSL_SUBDIR=sources/openssl
-OPENSSL_VERSIONS="1.0.1p"
+OPENSSL_VERSIONS="1.0.2h"
 DEFAULT_OPENSSL_VERSION=$(echo $OPENSSL_VERSIONS | tr ' ' '\n' | head -n 1)
 
 # Location of the libpng libraries, relative to the NDK root directory
-LIBPNG_SUBDIR=sources/libpng
-LIBPNG_VERSIONS="1.6.19"
+LIBPNG_VERSIONS="1.6.29"
+LIBPNG_SUBDIR=packages/libpng
 
 # Location of the libjpeg libraries, relative to the NDK root directory
-LIBJPEG_SUBDIR=sources/libjpeg
-LIBJPEG_VERSIONS="9a"
+LIBJPEG_SUBDIR=packages/libjpeg
+LIBJPEG_VERSIONS="9b"
 
 # Location of the libjpeg-turbo libraries, relative to the NDK root directory
-LIBJPEGTURBO_SUBDIR=sources/libjpeg-turbo
+LIBJPEGTURBO_SUBDIR=packages/libjpeg-turbo
 LIBJPEGTURBO_VERSIONS="1.4.2"
 
 # Location of the libtiff libraries, relative to the NDK root directory
-LIBTIFF_SUBDIR=sources/libtiff
+LIBTIFF_SUBDIR=packages/libtiff
 LIBTIFF_VERSIONS="4.0.6"
 
 # Location of the gccunwind sources, relative to the NDK root directory
@@ -96,9 +95,9 @@ SUPPORT_SUBDIR=sources/android/support
 TOOLCHAIN_GIT_DATE=now
 
 # The space-separated list of all GCC versions we support in this NDK
-DEFAULT_GCC_VERSION_LIST="4.9 5"
+DEFAULT_GCC_VERSION_LIST="4.9 5 6"
 
-DEFAULT_GCC_VERSION=$(echo $DEFAULT_GCC_VERSION_LIST | tr ' ' '\n' | head -n 1)
+DEFAULT_GCC_VERSION=5
 
 DEFAULT_GCC32_VERSION=$DEFAULT_GCC_VERSION
 DEFAULT_GCC64_VERSION=$DEFAULT_GCC_VERSION
@@ -110,11 +109,12 @@ DEFAULT_LLVM_GCC64_VERSION=$DEFAULT_GCC_VERSION
 DEFAULT_BINUTILS_VERSION=2.25
 DEFAULT_GDB_VERSION=7.10
 DEFAULT_MPFR_VERSION=3.1.2
-DEFAULT_GMP_VERSION=6.0.0
+DEFAULT_GMP_VERSION=6.1.1
 DEFAULT_MPC_VERSION=1.0.3
-DEFAULT_CLOOG_VERSION=0.18.0
-DEFAULT_CLOOG_VERSION_FOR_GCC5=0.18.3
+DEFAULT_CLOOG_VERSION=0.18.3
+DEFAULT_CLOOG_VERSION_FOR_GCC49=0.18.0
 DEFAULT_ISL_VERSION=0.11.1
+DEFAULT_ISL_VERSION_FOR_GCC6=0.14.1
 DEFAULT_PPL_VERSION=1.1
 DEFAULT_PYTHON_VERSION=2.7.5
 DEFAULT_PERL_VERSION=5.16.2
@@ -149,7 +149,7 @@ DEFAULT_ARCH_TOOLCHAIN_NAME_mips64=mips64el-linux-android
 DEFAULT_ARCH_TOOLCHAIN_PREFIX_mips64=mips64el-linux-android
 
 # The space-separated list of all LLVM versions we support in NDK
-DEFAULT_LLVM_VERSION_LIST="3.6 3.7"
+DEFAULT_LLVM_VERSION_LIST="3.6 3.7 3.8"
 
 # The default LLVM version (first item in the list)
 DEFAULT_LLVM_VERSION=$(echo "$DEFAULT_LLVM_VERSION_LIST" | tr ' ' '\n' | head -n 1)
@@ -221,7 +221,7 @@ get_default_abis_for_arch ()
     local RET
     case $1 in
         arm)
-            RET="armeabi armeabi-v7a armeabi-v7a-hard"
+            RET="armeabi-v7a armeabi-v7a-hard"
             ;;
         arm64)
             RET="arm64-v8a"
