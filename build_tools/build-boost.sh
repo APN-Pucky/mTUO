@@ -79,7 +79,7 @@ LIB_LINKAGE=static,shared
 register_var_option "--linkage=<shared,static>" LIB_LINKAGE "Whether to build boost as static (.a), dynamic (.so) libs or both [shared,static]"
 
 LIB_INSTALL_DIR=$ABS_PATH_THIS_SCRIPT/../build
-register_var_option "--install_dir=<./build>" LIB_LINKAGE "Absolute path to dir where built binaries should be copied [./build]"
+register_var_option "--install_dir=<./build>" LIB_INSTALL_DIR "Absolute path to dir where built binaries should be copied [./build]"
 
 STDLIBS=""
 for VERSION in $DEFAULT_GCC_VERSION_LIST; do
