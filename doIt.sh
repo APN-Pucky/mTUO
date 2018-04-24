@@ -11,17 +11,17 @@
 
 
 # Specify the path to boost source code dir 
-BOOST_SRC_DIR=/home/declan/Documents/zone/mid/lib/boost/down
+BOOST_SRC_DIR=/home/declan/Documents/zone/low/boost/src
 
 #------------------------------------------------------------------------------------------
 # Specify the version of boost youre building
 #BOOST_VERSION=1.64.0
-BOOST_VERSION=1.65.1
+BOOST_VERSION=1.67.0
 
 #------------------------------------------------------------------------------------------
 # Specify path to the (Google) Ndk  (by default  downloded to "..sdk/ndk-bundle" by android studio)
 #ANDROID_NDK_ROOT=/home/declan/Documents/zone/mid/lib/android/ndk/15c/android-ndk-r15c
-export ANDROID_NDK_ROOT=/home/declan/Documents/zone/mid/lib/android/ndk/16b1/android-ndk-r16-beta1
+export ANDROID_NDK_ROOT=/home/declan/Documents/zone/mid/lib/android/sdk/ndk-bundle
 
 #------------------------------------------------------------------------------------------
 # Modify if desired
@@ -40,12 +40,14 @@ rm $logFile
 # which compiler to use       
 # possible values:   {llvm-3.5, gnu-4.9}
 STD_LIBS="llvm-3.5"              
-# STD_LIBS="llvm-3.5, gnu-4.9"    
+ #STD_LIBS="llvm-3.5,gnu-4.9"    
 
 # which abis (~ architecture + instruction set) to build for     
 # possible values:  {armeabi-v7a, x86, mips}
-ABIS="armeabi-v7a"              
-# ABIS="armeabi-v7a, x86, mips"
+#ABIS="armeabi-v7a"
+#ABIS=x86
+ABIS="armeabi-v7a"
+# ABIS="armeabi-v7a,x86,mips"
 
 # whether to build shared or static libraries (or both)          
 # possible values:   {shared, static}
