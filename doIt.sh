@@ -39,7 +39,8 @@ rm $logFile
 #------------------------------------------------------------------------------------------
 # which compiler to use       
 # possible values:   {llvm-3.5, gnu-4.9}
-STD_LIBS="llvm-3.5"              
+STD_LIBS="llvm"
+#STD_LIBS="llvm-3.5"              
  #STD_LIBS="llvm-3.5,gnu-4.9"    
 
 # which abis (~ architecture + instruction set) to build for     
