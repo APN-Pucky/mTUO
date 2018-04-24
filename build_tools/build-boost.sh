@@ -374,6 +374,11 @@ build_boost_for_abi ()
 
     local GCC_DIR=$NDK_DIR/toolchains/$TCNAME-$GCC_VERSION/prebuilt/$HOST_TAG
     local LLVM_DIR=$NDK_DIR/toolchains/llvm-$LLVM_VERSION/prebuilt/$HOST_TAG
+    
+    # path_to_google_ndk/toolchains/llvm does not contain the version (eg .../toolchains/llvm-3.5) number so dont require it
+    if [ ! -d $LLVM_DIR ]; then
+        LLVM_DIR=$NDK_DIR/toolchains/llvm/prebuilt/$HOST_TAG
+    fi
 
     local SRCDIR=$BUILDDIR/src
     copy_directory $BOOST_SRCDIR $SRCDIR
@@ -409,7 +414,8 @@ build_boost_for_abi ()
                 echo "using gcc : $ARCH : g++ ;"
                 echo "project : default-build <toolset>gcc ;"
                 ;;
-            llvm-*)
+           # llvm-*)
+            llvm*)
                 echo "using clang : $ARCH : clang++ ;"
                 echo "project : default-build <toolset>clang ;"
                 ;;
@@ -455,7 +461,8 @@ build_boost_for_abi ()
             LIBSTDCXX_LDFLAGS="-L$GNULIBCXX/libs/$ABI"
             LIBSTDCXX_LDLIBS="-lgnustl_shared"
             ;;
-        llvm-*)
+        # llvm-*)
+        llvm*)
             CXX="$LLVM_DIR/bin/clang++ -target $LLVMTRIPLE -gcc-toolchain $GCC_DIR"
             CXXNAME=clang++
             #local LLVMLIBCXX=$NDK_DIR/sources/cxx-stl/llvm-libc++/$(expr "$LIBSTDCXX" : "^llvm-\(.*\)$")
