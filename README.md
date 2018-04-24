@@ -3,7 +3,7 @@
 
 Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.65.1** and **Google's Ndk 16**  (current versions as of Nov 2017)
+Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of Apr 2018)
 
 [Crystax](https://www.crystax.net/) is an excellent alternative to Google's Ndk. It ships with prebuilt boost binaries, and dedicated build scripts.
 These binaries will however not work with Goolge's Ndk. If for some reason you can't or don't want to use Crystax then you can't use their boost binaries or build scripts.
@@ -11,7 +11,9 @@ These binaries will however not work with Goolge's Ndk. If for some reason you c
 This bash script is based on the Crystax build script but modified so that it will build boost with the Google Ndk.
 
 
-Works with **gcc** and **clang** (llvm)
+Works with **clang** (llvm) 
+*- as of ndk 16 google no longer supports gcc*.
+
 Creates binaries for multiple abis (**armeabi-v7a**, **x86**, mips etc).
 
 
@@ -20,22 +22,15 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86**, mips etc).
 ## Usage
 
 * Download and extract the boost source archive to a directory of the form *..../major.minor.patch* 
-  eg */home/declan/Documents/zone/mid/lib/boost/1.65.1*
+  eg */home/declan/Documents/zone/mid/lib/boost/1.67.1*
   
-  *__Note__:* After the extarction *..../boost/1.65.1* should then be the direct parent dir of "bootstrap.sh", "boost-build.jam" etc
+  *__Note__:* After the extarction *..../boost/1.67.1* should then be the direct parent dir of "bootstrap.sh", "boost-build.jam" etc
 
 ```
-> ls /home/declan/Documents/zone/mid/lib/boost/1.65.1
+> ls /home/declan/Documents/zone/mid/lib/boost/1.67.1
 boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 ``` 
 
-* Create a symbolic link *llvm-3.5* to *llvm* in the *toolchains* subdir of the ndk *(This is only necessary if you want to be able to build with clang)*
-
-eg
-```
-cd path_to_ndk/toolchains
-ln -s llvm llvm-3.5
-```
 
 * You may need to have *libncurses.so.5* available on you development machine. Install via your os package manager (eg Yast) if necessary.
 
@@ -60,7 +55,8 @@ want to use these. To see which of the libraries do require building you can swi
 > ./bootstrap.sh --show-libraries 
 ```
 
-which for example with boost 1.65.1 produces the output:
+which for example with boost 1.67.
+0produces the output:
 
 ```
 The Boost libraries requiring separate building and installation are:
