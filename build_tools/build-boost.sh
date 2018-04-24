@@ -3,6 +3,32 @@
 # Original work Copyright (c) 2011-2016 (24.4.2016)  CrystaX. 
 # Modified work Copyright (c) 2017-2018 (24.4.2018)  Declan Moran (www.silverglint.com) 
 
+#-----------------------------------------------
+# Thanks to Ryan Pavlik for improvements made in a fork
+# https://github.com/sensics/Boost-for-Android
+
+# When using Clang, build in C++11 mode for ABI reasons. 
+
+# @@ -472,8 +472,9 @@ build_boost_for_abi ()
+#              #local LLVMLIBCXXABI=$NDK_DIR/sources/cxx-stl/llvm-libc++abi
+#              #LIBSTDCXX_CFLAGS="-I$LLVMLIBCXX/libcxx/include -I$LLVMLIBCXXABI/libcxxabi/include"
+#              LIBSTDCXX_CFLAGS="-I$NDK_DIR/sources/cxx-stl/llvm-libc++/include -I$NDK_DIR/sources/cxx-stl/llvm-libc++abi/include -I$NDK_DIR/sources/android/support/include"
+# +            CXXFLAGS_EXTRA="-std=c++11"
+#              
+# -            LIBSTDCXX_LDFLAGS="-L$LLVMLIBCXX/libs/$ABI"
+# +            LIBSTDCXX_LDFLAGS="-std=c++11 -L$LLVMLIBCXX/libs/$ABI"
+#              LIBSTDCXX_LDLIBS="-lc++_shared"
+#              FLAGS="$FLAGS -fno-integrated-as"
+#              ;;
+# @@ -646,6 +647,7 @@ EOF
+#          address-model=$BJAMADDRMODEL \
+#          architecture=$BJAMARCH \
+#          abi=$BJAMABI \
+# +        cxxflags="$CXXFLAGS_EXTRA" \
+#          --user-config=user-config.jam \
+#          --layout=system \
+#          --prefix=$PREFIX \
+#-----------------------------------------------         
 
 
 # All rights reserved.
