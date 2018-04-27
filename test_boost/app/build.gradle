@@ -1,115 +1,77 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.application'
 
-//-------------------------------
-def my_inc =     [
+//def my_boost_version()  { return "1.67.0" }
+def my_boost_version =    "1.67.0" ;
 
-        boost_inc_dir(),
+// dir where build boots was 'installed' ie  boost_build_dir/1.67.0 should contain a "libs" and an "include" subdir
+def my_boost_build_dir = "$projectDir/../../build/boost/" + my_boost_version
 
-        // necessary from ndk 16+
-        "${ndk_dir()}/sysroot/usr/include",
-]
+// println '.... my message : boost_build_dir = ' + boost_build_dir
 
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.declan.myapplication"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++14"
+                arguments '-DANDROID_STL=c++_shared'
+                // this causes libc++_shared.so to get packaged  into .apk
 
-//-------------------------------------------------
-def my_incs =     my_inc.collect{ "-I"  + file(it)}
-//---------------------------------------------------
-
-model {
-
-
-    android {
-
-        compileSdkVersion = my_compileSdkVersion()
-        buildToolsVersion = my_buildToolsVersion()
-
-
-        defaultConfig {
-            minSdkVersion.apiLevel = my_minSdkVersion()
-            targetSdkVersion.apiLevel = my_targetSdkVersion()
-
-            applicationId = 'com.testboost'
-            versionCode = 1
-            versionName = '1.0'
+                arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_build_dir + '/libs/'
+                arguments '-DMY_BOOST_INC_DIR='  + my_boost_build_dir + '/include/'
+                // this doesnt (need to additionally copy required .so files to jniLibs.srcDirs - see below),
+                // but still need this here for linking
+            }
         }
 
         ndk {
-            moduleName = 'test_boost'
-            //------------------------------
-
-            platformVersion = platform_ver() // defaultConfig.minSdkVersion.apiLevel.asType(Integer) // keep equal to minSdk
-            toolchain = tc_name()
-            toolchainVersion = tc_ver()
-            stl = std_lib()
-            //--------------------------------
-            cppFlags.addAll([
-                            '-std=c++14', '-frtti', '-fexceptions'
-                            //,'-D__ANDROID_API__=9'
-            ])
-            cppFlags.addAll(my_incs)
-
-            abis {
-                // add abi specific include path (necessary from ndk 16+)
-                my_abis().each
-                {
-                    def abi = "${it}"
-                    def arch = arch(abi)
-                    def triple = arch_triple(arch)
-                    def inc = arch_triple_inc(triple)
-
-                    create(abi) { cppFlags.add(inc) }
-                }
-            }
-
-            ldLibs.addAll(['log'])
-            abiFilters.addAll(my_abis())
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'armeabi-v7a' //, 'x86', 'x86_64', 'armeabi', 'arm64-v8a'
         }
 
-        sources {
-            main {
-                jni {
 
-                    exportedHeaders
-                    {
-                        srcDirs "src/main/jni"
-                    }
-
-                    dependencies {
-
-                        library 'boost_chrono'              linkage 'shared'
-                        library 'boost_system'              linkage 'shared'
-
-                    }
-                }
-            }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
 
-        buildTypes {
-            release {
-                minifyEnabled false
-                proguardFiles.add(file('proguard-android.txt'))
-            }
+    sourceSets {
+        main {
+            // this causes all *.so files in ABI (eg "armeabi-v7a") subdir of this dir to get packaged into .apk - relative to "app" dir
+             jniLibs.srcDirs = [
+                     'src/main/JniLibs/boost/' + my_boost_version
+                     ]
+             // jniLibs.srcDirs '../../../../mid/lib/android/boost/1.67.0_tst/libs'
+
         }
     }
 
 
-    repositories {
-        libs(PrebuiltLibraries) {
-            boost_chrono    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_chrono.so") } }
-            boost_system    { binaries.withType(SharedLibraryBinary) { sharedLibraryFile = file("${boost_lib_dir()}/${targetPlatform.getName()}/${tc_family()}-${tc_ver()}/libboost_system.so") } }
-        }
-    }
 
-    android.lintOptions {  // was getting lint error that apparently was a problemm with lint itself ... maybe doesnt know syntax of new gradle experimental properly yet?
-        abortOnError false
-    }
 }
-
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:design:27.1.1'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
-
-
-//----------------------------------------------------------------------------------------
