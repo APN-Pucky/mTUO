@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 //def my_boost_version()  { return "1.67.0" }
-def my_boost_version =    "1.67.0" ;
+// def my_boost_version =    "1.67.0" ;
+def my_boost_version = local_props("boost.version")
+
 
 // dir where build boots was 'installed' ie  boost_build_dir/1.67.0 should contain a "libs" and an "include" subdir
 def my_boost_build_dir = "$projectDir/../../build/boost/" + my_boost_version
@@ -74,4 +76,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+//------------------------------------------------------------
+def local_props(key) { // reads ~ value from local.properties
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def val = properties.getProperty(key, null)
+    if (val == null)
+        throw new GradleException("""\
+                cant find value '${key}' in file 'local.properties'.  """)
+
+    return val
 }
