@@ -1,9 +1,6 @@
-# Boost for Android
-
-
 Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of Apr 2018)
+Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of May 2018)
 
 [Crystax](https://www.crystax.net/) is an excellent alternative to Google's Ndk. It ships with prebuilt boost binaries, and dedicated build scripts.
 These binaries will however not work with Goolge's Ndk. If for some reason you can't or don't want to use Crystax then you can't use their boost binaries or build scripts.
@@ -42,9 +39,9 @@ boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 
 
 ## Test App 
-Also included is test app which can be opened by Android Studio (see ./test-boost).
-To use the test app make sure to adjust the paths in local.properties (see local.properties_example).
-Note: The test app uses [Gradle Experimental](http://tools.android.com/tech-docs/new-build-system/gradle-experimental)
+Also included is test app which can be opened by Android Studio (see ./test-boost). If you build and run this app it should show the date and time as calculated by boost_chrono.so (indicating that you have built, linked to and called the boost libraray correctly).
+To use the test app make sure to adjust the values in local.properties.
+*Note:* The test app uses [CMake for Android](https://developer.android.com/ndk/guides/cmake)
 
 
 ## *Header-only* Boost Libraries
@@ -55,8 +52,7 @@ want to use these. To see which of the libraries do require building you can swi
 > ./bootstrap.sh --show-libraries 
 ```
 
-which for example with boost 1.67.
-0produces the output:
+which for example with boost 1.67 produces the output:
 
 ```
 The Boost libraries requiring separate building and installation are:
@@ -64,6 +60,7 @@ The Boost libraries requiring separate building and installation are:
     - chrono
     - container
     - context
+    - contract
     - coroutine
     - date_time
     - exception
@@ -75,7 +72,6 @@ The Boost libraries requiring separate building and installation are:
     - locale
     - log
     - math
-    - metaparse
     - mpi
     - program_options
     - python
@@ -96,6 +92,3 @@ The Boost libraries requiring separate building and installation are:
 - Many thanks to [crystax](https://github.com/crystax/android-platform-ndk/tree/master/build/tools) for their version of *build-boost.sh* which I adapted to make it work with the google ndk.
 - Thanks to [google](https://android.googlesource.com/platform/ndk/+/master/build/tools) for the  files *dev-defaults.sh, ndk-common.sh, prebuilt-common.sh*.
 - Thanks to [Ryan Pavlik](https://github.com/sensics/Boost-for-Android) for his fork with some improvements.
-
-
-
