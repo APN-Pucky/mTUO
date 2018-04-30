@@ -1,6 +1,8 @@
 Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of May 2018)
+Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of May 2018).
+
+*Note: Please use the [ndk_15 branch](https://github.com/dec1/Boost-for-Android/edit/ndk_15) if you want to build using ndk 15.*
 
 [Crystax](https://www.crystax.net/) is an excellent alternative to Google's Ndk. It ships with prebuilt boost binaries, and dedicated build scripts.
 These binaries will however not work with Goolge's Ndk. If for some reason you can't or don't want to use Crystax then you can't use their boost binaries or build scripts.
@@ -39,7 +41,7 @@ boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 
 
 ## Test App 
-Also included is test app which can be opened by Android Studio (see ./test-boost). If you build and run this app it should show the date and time as calculated by boost_chrono.so (indicating that you have built, linked to and called the boost libraray correctly).
+Also included is test app which can be opened by Android Studio (see ./test-boost). If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
 To use the test app make sure to adjust the values in local.properties.
 *Note:* The test app uses [CMake for Android](https://developer.android.com/ndk/guides/cmake)
 
