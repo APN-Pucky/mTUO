@@ -700,7 +700,8 @@ EOF
         export BOOST_HEADERS_INSTALLED
     fi
 
-    local INSTALLDIR=$BOOST_DSTDIR/libs/$ABI/$LIBSTDCXX
+    # local INSTALLDIR=$BOOST_DSTDIR/libs/$ABI/$LIBSTDCXX 
+    local INSTALLDIR=$BOOST_DSTDIR/libs//$LIBSTDCXX/$ABI # install into dir with name like "..../llvm/armeabi-v7a" , rather than "..../armeabi-v7a/llvm" .. makes it easier to link to android projects which expect binaries directly under "armeabi-v7a "
 
     log "Install Boost $BOOST_VERSION $ABI libraries into $BOOST_DSTDIR"
     run mkdir -p $INSTALLDIR
