@@ -15,13 +15,13 @@ add_library (native-lib  SHARED
 add_library (boost_system SHARED IMPORTED)
 
 set_target_properties( boost_system PROPERTIES IMPORTED_LOCATION
-                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/llvm/libboost_system.so
+                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_system.so
                     )
 #-----------------------------------------
 add_library( boost_chrono SHARED IMPORTED)
 
 set_target_properties(boost_chrono PROPERTIES IMPORTED_LOCATION
-                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/llvm/libboost_chrono.so
+                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_chrono.so
                     )
 #-----------------------------------------
 

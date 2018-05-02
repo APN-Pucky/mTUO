@@ -1,12 +1,9 @@
 apply plugin: 'com.android.application'
 
-//def my_boost_version()  { return "1.67.0" }
-// def my_boost_version =    "1.67.0" ;
-def my_boost_version = local_props("boost.version")
+def my_boost_dir = local_props("boost.dir")
+def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
+def my_boost_dir_inc  = my_boost_dir + "/include"
 
-
-// dir where build boots was 'installed' ie  boost_build_dir/1.67.0 should contain a "libs" and an "include" subdir
-def my_boost_build_dir = "$projectDir/../../build/boost/" + my_boost_version
 
 // println '.... my message : boost_build_dir = ' + boost_build_dir
 
@@ -25,8 +22,8 @@ android {
                 arguments '-DANDROID_STL=c++_shared'
                 // this causes libc++_shared.so to get packaged  into .apk
 
-                arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_build_dir + '/libs/'
-                arguments '-DMY_BOOST_INC_DIR='  + my_boost_build_dir + '/include/'
+                arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_dir_libs
+                arguments '-DMY_BOOST_INC_DIR='  + my_boost_dir_inc
                 // this doesnt (need to additionally copy required .so files to jniLibs.srcDirs - see below),
                 // but still need this here for linking
             }
@@ -54,12 +51,15 @@ android {
 
     sourceSets {
         main {
-            // this causes all *.so files in ABI (eg "armeabi-v7a") subdir of this dir to get packaged into .apk - relative to "app" dir
+            // Android Studio doesnt package precompiled external (*.so) libs into apk, even if linked against via "add_library (... SHARED IMPORTED) in CMakeLists.txt
+            // See eg https://stackoverflow.com/questions/24357687/how-to-include-so-library-in-android-studio/29234765
+            // So need to add them manually here
+            // This causes ALL *.so files in ABI (eg "armeabi-v7a") subdir of this dir to get packaged into .apk - relative to "app" dir
+            // If you want to just include those necessary (eh chrono,, system) copy/link them to a separate dir, and reference taht dir here
              jniLibs.srcDirs = [
-                     'src/main/JniLibs/boost/' + my_boost_version
+                       // should contanin any extrenal libs which should be compiled in {armeabi-v7a,arm64-v8a,x86,x86_64,mips} subdirs
+                       my_boost_dir_libs
                      ]
-             // jniLibs.srcDirs '../../../../mid/lib/android/boost/1.67.0_tst/libs'
-
         }
     }
 

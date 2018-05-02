@@ -47,7 +47,7 @@ STD_LIBS="llvm"
 # possible values:  {armeabi-v7a, x86, mips}
 #ABIS="armeabi-v7a"
 #ABIS=x86
-ABIS="armeabi-v7a"
+ABIS="armeabi-v7a,arm64-v8a,x86,x86_64,mips"
 # ABIS="armeabi-v7a,x86,mips"
 
 # whether to build shared or static libraries (or both)          
