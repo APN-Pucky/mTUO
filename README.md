@@ -2,21 +2,18 @@ Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform
 
 Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of May 2018).
 
-*Note: Please use the [ndk_15 branch](https://github.com/dec1/Boost-for-Android/edit/ndk_15) if you want to build using ndk 15.*
-
-[Crystax](https://www.crystax.net/) is an excellent alternative to Google's Ndk. It ships with prebuilt boost binaries, and dedicated build scripts.
-These binaries will however not work with Goolge's Ndk. If for some reason you can't or don't want to use Crystax then you can't use their boost binaries or build scripts.
-
-This bash script is based on the Crystax build script but modified so that it will build boost with the Google Ndk.
 
 
 Works with **clang** (llvm) 
 *- as of ndk 16 google no longer supports gcc*.
 
-Creates binaries for multiple abis (**armeabi-v7a**, **x86**, mips etc).
+Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 
 
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
+
+*Note: Please use the [ndk_15 branch](https://github.com/dec1/Boost-for-Android/edit/ndk_15) if you want to build with the older ndk 15.*
+
 
 ## Usage
 
@@ -30,10 +27,23 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86**, mips etc).
 boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 ``` 
 
+* Clone this repo:
+
+```
+> git clone https://github.com/dec1/Boost-for-Android.git ./boost_for_android
+``` 
+
+
+* Modify the paths (where the ndk is) and variables (which abis you want to build for, which compiler to use etc) in *doIt.sh*, and execute it. If the build succeeds then the boost binaries should then be available in the dir *boost_for_android/build*
+
+```
+> cd boost_for_android
+> ./doIt.sh
+```
 
 * You may need to have *libncurses.so.5* available on you development machine. Install via your os package manager (eg Yast) if necessary.
 
-* Modify the paths (where the ndk is) and variables (which abis you want to build for, which compiler to use etc) in *doIt.sh*, and execute it.
+
 
 * *__Note__:* If for some reason the build fails you may want to manually clear the */tmp/ndk-your_username* dir (which gets cleared automatically after a successful build).
 
@@ -41,8 +51,9 @@ boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 
 
 ## Test App 
-Also included is test app which can be opened by Android Studio (see ./test-boost). If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
-To use the test app make sure to adjust the values in local.properties.
+Also included is test app which can be opened by Android Studio (see *./test-boost*). If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
+To use the test app make sure to adjust the values in the  file **local.properties**.
+
 *Note:* The test app uses [CMake for Android](https://developer.android.com/ndk/guides/cmake)
 
 
@@ -89,6 +100,9 @@ The Boost libraries requiring separate building and installation are:
     - type_erasure
     - wave
 ```
+## Crystax
+[Crystax](https://www.crystax.net/) is an excellent alternative to Google's Ndk. It ships with prebuilt boost binaries, and dedicated build scripts.
+These binaries will however not work with Goolge's Ndk. If for some reason you can't or don't want to use Crystax then you can't use their boost binaries or build scripts.
 
 ## Contributions
 - Many thanks to [crystax](https://github.com/crystax/android-platform-ndk/tree/master/build/tools) for their version of *build-boost.sh* which I adapted to make it work with the google ndk.
