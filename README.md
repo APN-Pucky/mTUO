@@ -13,7 +13,7 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
 
 ## Prebuilt
-You can just use the prebuilt binaries from *./prebuilt/* if you dont need to customize the build, or don't have access to a unix like development machine.
+You can just use the [prebuilt binaries](./prebuilt/) if you dont need to customize the build, or don't have access to a unix like development machine.
 
 ## Build Yourself
 * Download and extract the boost source archive to a directory of the form *..../major.minor.patch* 
@@ -50,8 +50,8 @@ boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 
 
 ## Test App 
-Also included is test app which can be opened by Android Studio (see *./test-boost*). If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
-To use the test app make sure to adjust the values in the  file **local.properties**.
+Also included is a [test app](./test_boost/) which can be opened by Android Studio (see . If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
+To use the test app make sure to adjust the values in the [local.properties](./test_boost/local.properties) file.
 
 *Note:* The test app uses [CMake for Android](https://developer.android.com/ndk/guides/cmake)
 
