@@ -37,18 +37,14 @@ rm $logFile
 
 # The options --stdlibs, --abis and --linkage can be one or more of the listed posible values. If you specify more than one, then separate individual values by a comma
 #------------------------------------------------------------------------------------------
-# which compiler to use       
-# possible values:   {llvm-3.5, gnu-4.9}
+# which compiler to use       // gnu-4.9 removed as of ndk 16
 STD_LIBS="llvm"
-#STD_LIBS="llvm-3.5"              
- #STD_LIBS="llvm-3.5,gnu-4.9"    
+  
 
 # which abis (~ architecture + instruction set) to build for     
-# possible values:  {armeabi-v7a, x86, mips}
+# possible values:  {armeabi-v7a,arm64-v8a,x86,x86_64}
 #ABIS="armeabi-v7a"
-#ABIS=x86
-ABIS="armeabi-v7a,arm64-v8a,x86,x86_64,mips"
-# ABIS="armeabi-v7a,x86,mips"
+ABIS="armeabi-v7a,arm64-v8a,x86,x86_64"
 
 # whether to build shared or static libraries (or both)          
 # possible values:   {shared, static}
