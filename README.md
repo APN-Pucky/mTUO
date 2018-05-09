@@ -16,7 +16,7 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 You can just use the [prebuilt binaries](./prebuilt/) if you dont need to customize the build, or don't have access to a unix like development machine.
 
 ## Build Yourself
-* Download and extract the boost source archive to a directory of the form *..../major.minor.patch* 
+* Download the [boost source](https://www.boost.org) and extract to a directory of the form *..../major.minor.patch* 
   eg */home/declan/Documents/zone/mid/lib/boost/1.67.1*
   
   *__Note__:* After the extarction *..../boost/1.67.1* should then be the direct parent dir of "bootstrap.sh", "boost-build.jam" etc
