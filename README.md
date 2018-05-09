@@ -1,6 +1,6 @@
 Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.67.0** and **Google's Ndk 16b**  (current versions as of May 2018).
+Tested with **Boost 1.67.0** and **Google's Ndk 17**  (current versions as of May 2018).
 
 
 
@@ -11,8 +11,6 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 
 
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
-
-*Note: Please use the [ndk_15 branch](https://github.com/dec1/Boost-for-Android/edit/ndk_15) if you want to build with the older ndk 15.*
 
 
 ## Usage
