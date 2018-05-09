@@ -11,7 +11,7 @@
 
 
 # Specify the path to boost source code dir 
-BOOST_SRC_DIR=/home/declan/Documents/zone/low/boost/src
+BOOST_SRC_DIR=/home/declan/Documents/zone/low/Boost-for-Android/src
 
 #------------------------------------------------------------------------------------------
 # Specify the version of boost youre building
