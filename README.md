@@ -12,9 +12,10 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
 
+## Prebuilt
+You can just use the prebuilt binaries from *./prebuilt/* if you dont need to customize the build, or don't have access to a unix like development machine.
 
-## Usage
-
+## Build Yourself
 * Download and extract the boost source archive to a directory of the form *..../major.minor.patch* 
   eg */home/declan/Documents/zone/mid/lib/boost/1.67.1*
   
