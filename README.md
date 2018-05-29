@@ -1,4 +1,4 @@
-Builds the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
+Build and/or simply download the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
 Tested with **Boost 1.67.0** and **Google's Ndk 17**  (current versions as of May 2018).
 
