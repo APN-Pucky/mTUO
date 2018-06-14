@@ -1,6 +1,6 @@
 Build and/or simply download the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.67.0** and **Google's Ndk 17**  (current versions as of May 2018).
+Tested with **Boost 1.67.0** and **Google's Ndk 17b**  (current versions as of June 2018).
 
 
 
@@ -13,7 +13,7 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
 
 ## Prebuilt
-You can just use the [prebuilt binaries](./prebuilt/) if you dont need to customize the build, or don't have access to a unix like development machine.
+You can just use the [prebuilt binaries](./prebuilt/) if you don't need to customize the build, or don't have access to a unix like development machine.
 
 ## Build Yourself
 * Download the [boost source](https://www.boost.org) and extract to a directory of the form *..../major.minor.patch* 
