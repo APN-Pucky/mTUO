@@ -50,8 +50,8 @@ boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 
 
 ## Test App 
-Also included is a [test app](./test_boost/) which can be opened by Android Studio. If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
-To use the test app make sure to adjust the values in the [local.properties](./test_boost/local.properties) file.
+Also included is a [test app](./example_app/) which can be opened by Android Studio. If you build and run this app it should show the date and time as calculated by boost *chrono*  (indicating that you have built, linked to and called the boost library correctly).
+To use the test app make sure to adjust the values in the [local.properties](./example_app/local.properties) file.
 
 *Note:* The test app uses [CMake for Android](https://developer.android.com/ndk/guides/cmake)
 
