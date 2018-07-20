@@ -13,7 +13,7 @@ Creates binaries for multiple abis (**armeabi-v7a**, **x86** ...).
 *Tested with a development machine running OpenSuse Tumbleweed Linux.*
 
 ## Prebuilt
-You can just use the [prebuilt binaries](./prebuilt/) if you don't need to customize the build, or don't have access to a unix like development machine.
+You can just use the [prebuilt binaries](./prebuilt/) (shared, clang/llvm) if you don't need to customize the build, or don't have access to a unix like development machine. 
 
 ## Build Yourself
 * Download the [boost source](https://www.boost.org) and extract to a directory of the form *..../major.minor.patch* 
