@@ -1255,7 +1255,7 @@ convert_abi_to_arch ()
             RET=arm64
             ;;
         *)
-            >&2 echo "ERROR: Unsupported ABI name: $ABI, use one of: armeabi, armeabi-v7a, x86, mips, armeabi-v7a-hard, arm64-v8a, x86_64 or mips64"
+            >&2 echo "ERROR: Unsupported ABI name: $ABI, use one of: armeabi-v7a, x86, mips, armeabi-v7a-hard, arm64-v8a, x86_64 or mips64"
             exit 1
             ;;
     esac
