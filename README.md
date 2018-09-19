@@ -1,6 +1,6 @@
 Build and/or simply download the [Boost C++ Libraries](http://www.boost.org/) for the Android platform, with Google's Ndk.
 
-Tested with **Boost 1.67.0** and **Google's Ndk 17b**  (current versions as of June 2018).
+Tested with **Boost 1.68.0** and **Google's Ndk 17c**  (current versions as of Aug 2018).
 
 
 
@@ -17,12 +17,12 @@ You can just use the [prebuilt binaries](./prebuilt/) (shared, clang/llvm) if yo
 
 ## Build Yourself
 * Download the [boost source](https://www.boost.org) and extract to a directory of the form *..../major.minor.patch* 
-  eg */home/declan/Documents/zone/mid/lib/boost/1.67.1*
+  eg */home/declan/Documents/zone/mid/lib/boost/1.68.0*
   
-  *__Note__:* After the extarction *..../boost/1.67.1* should then be the direct parent dir of "bootstrap.sh", "boost-build.jam" etc
+  *__Note__:* After the extarction *..../boost/1.68.0* should then be the direct parent dir of "bootstrap.sh", "boost-build.jam" etc
 
 ```
-> ls /home/declan/Documents/zone/mid/lib/boost/1.67.1
+> ls /home/declan/Documents/zone/mid/lib/boost/1.68.0
 boost  boost-build.jam  boostcpp.jam  boost.css  boost.png  ....
 ``` 
 
