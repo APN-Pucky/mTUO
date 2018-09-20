@@ -75,6 +75,9 @@ The output will be placed in appropriate sub-directories of
 <ndk>/$BOOST_SUBDIR, but you can override this with the --out-dir=<path>
 option.
 "
+LOWEST_NDK_API_LEVEL=16   # this should be the lowest platform available in the ndk, for backward compatibility
+                          # eg $NDK_DIR/platforms/android-16/ -> 16 currently
+#                         # Will need to increase this at some future stage if/when ndk drops platform android-16 -> would be better to automatically detect this.
 
 # override "sources/boost" in dev-defaults.sh 
 BOOST_SUBDIR=boost
@@ -273,7 +276,7 @@ build_boost_for_abi ()
 
     dump "Building Boost $LVERSION $ABI libraries (C++ stdlib: $LIBSTDCXX)"
 
-    local APILEVEL=14
+    local APILEVEL=$LOWEST_NDK_API_LEVEL   
     if [ ${ABI%%64*} != ${ABI} ]; then
         APILEVEL=21
     fi
