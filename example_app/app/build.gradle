@@ -19,7 +19,9 @@ android {
         externalNativeBuild {
             cmake {
                 // flags for the c++ compiler eg "-std=c++14 -frtti -fexceptions"
-                cppFlags "-std=c++14"
+                // If you set cppFlags to "-std=c++14", you may need to build your boost libraries
+                // with the same flags, depending on your compiler defaults.
+                // cppFlags "-std=c++14"
 
                 // this causes libc++_shared.so to get packaged into .apk
                 arguments '-DANDROID_STL=c++_shared'
