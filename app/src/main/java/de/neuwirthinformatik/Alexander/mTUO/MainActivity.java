@@ -1,10 +1,18 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,9 +25,14 @@ import android.widget.Button;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     public static final int CARD_SECTIONS_COUNT = 17;
+    public static String out = "";
     private String tuodir;
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -45,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
             directory.mkdirs();
         }
 
-        final Button button_sim = findViewById(R.id.RunSim);
+        final Button button_sim = findViewById(R.id.b_runsim);
         button_sim.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callMain(new String[]{"tuo","Mission#140","Mission#140","sim", "1000","-t", "2", "prefix", tuodir});
+                startSIM();
             }
         });
 
-        final Button button_xml = findViewById(R.id.updatexml);
+        final Button button_xml = findViewById(R.id.b_updatexml);
         button_xml.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                updateXML(true);
@@ -84,8 +97,85 @@ public class MainActivity extends AppCompatActivity {
 
     public void messageMe(String msg) {
         // Example of a call to a native method
-        TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.sample_text);
-        tv.setText(tv.getText() + msg);
+        //TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.sample_text);
+        //tv.setText(tv.getText() + msg);
+        //TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.tv_out);
+        //tv.setText(tv.getText() + msg);
+        out += msg;
+        if(OutActivity.tv!= null && OutActivity._this != null)
+        {
+            OutActivity._this.runOnUiThread(new Runnable(){public void run(){OutActivity.tv.setText(out);}});
+        }
+    }
+
+    private void startSIM()
+    {
+        //grab info
+        String mydeck = ((EditText)findViewById(R.id.et_mydeck)).getText().toString();
+        String enemydeck = ((EditText)findViewById(R.id.et_enemydeck)).getText().toString();
+        String myfort = ((EditText)findViewById(R.id.et_myfort)).getText().toString();
+        String enemyfort = ((EditText)findViewById(R.id.et_enemyfort)).getText().toString();
+
+        String mode = ((Spinner)findViewById(R.id.sp_mode)).getSelectedItem().toString();
+        String operation = ((Spinner)findViewById(R.id.sp_operation)).getSelectedItem().toString();
+        String effect = ((Spinner)findViewById(R.id.sp_effect)).getSelectedItem().toString();
+        String endgame = ((Spinner)findViewById(R.id.sp_endgame)).getSelectedItem().toString();
+
+
+        String fund = ((EditText)findViewById(R.id.et_fund)).getText().toString();
+        String threads = ((EditText)findViewById(R.id.et_threads)).getText().toString();
+        String iterations = ((EditText)findViewById(R.id.et_iterations1)).getText().toString();
+
+        String[] pre = new String[]{"tuo",mydeck,enemydeck,"prefix", tuodir,"yf", myfort,"ef",enemyfort, operation, iterations,"-t", threads, "endgame", endgame, "fund", fund, "-e",effect, mode};
+
+        //parse flags field
+        List<String> list = new ArrayList<String>();
+        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(((EditText)findViewById(R.id.et_flags)).getText().toString());
+        while (m.find())
+            list.add(m.group(1).replace("\"", ""));
+        String[] post = list.toArray(new String[]{});
+        final String[] param = new String[pre.length+post.length];
+        out = "./";
+        for(int i = 0; i < param.length;i++)
+        {
+            param[i] = i<pre.length?pre[i]:post[i-pre.length];
+            out += param[i] + " ";
+        }
+        out += "\n\n";
+
+        //Notification
+        final NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default",
+                    "YOUR_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+                .setSmallIcon(R.mipmap.ic_launcher) // notification icon
+                .setContentTitle(operation) // title for notification
+                .setContentText("Running")// message for notification
+                .setOngoing(true);
+        Intent intent = new Intent(getApplicationContext(), OutActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pi);
+        mNotificationManager.notify(0, mBuilder.build());
+
+        AsyncTask.execute(new Runnable(){
+            public void run()
+            {
+                callMain(param);
+                mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
+                mNotificationManager.notify(0, mBuilder.build());
+            }
+        });
+        //mNotificationManager.cancel(0);
+    }
+
+    void showNotification(String title, String content) {
+
     }
 
     public void updateXML()  {updateXML(false);}

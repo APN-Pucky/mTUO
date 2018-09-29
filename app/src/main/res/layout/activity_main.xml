@@ -6,42 +6,411 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main"
-        android:layout_height="343dp" />
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="513dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/updatexml"
-        android:layout_width="192dp"
-        android:layout_height="wrap_content"
-        android:text="Update XML"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|bottom" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/RunSim"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:text="Run Sim"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|bottom" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_mydeck"
+                            android:layout_width="72dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_mydeck" />
+
+                        <EditText
+                            android:id="@+id/et_mydeck"
+                            android:layout_width="296dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Mission#10" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/ty_myfort"
+                            android:layout_width="72dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_myfort" />
+
+                        <EditText
+                            android:id="@+id/et_myfort"
+                            android:layout_width="296dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_enemydeck"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_enemydeck" />
+
+                        <EditText
+                            android:id="@+id/et_enemydeck"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Mission#10" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_enemyfort"
+                            android:layout_width="72dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_enemyfort" />
+
+                        <EditText
+                            android:id="@+id/et_enemyfort"
+                            android:layout_width="296dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_effect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_effect" />
+
+                        <Spinner
+                            android:id="@+id/sp_effect"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_effects" />
+
+                        <TextView
+                            android:id="@+id/tv_endgame"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_endgame" />
+
+                        <Spinner
+                            android:id="@+id/sp_endgame"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_endgame" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_mode" />
+
+                        <Spinner
+                            android:id="@+id/sp_mode"
+                            android:layout_width="148dp"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_mode" />
+
+                        <TextView
+                            android:id="@+id/tv_order"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_order" />
+
+                        <Spinner
+                            android:id="@+id/sp_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_order" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_operation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_operation" />
+
+                        <Spinner
+                            android:id="@+id/sp_operation"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_operation" />
+
+                        <TextView
+                            android:id="@+id/tv_dominion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_dominion" />
+
+                        <Spinner
+                            android:id="@+id/sp_dominion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_dominion" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_monofaction"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_monofaction" />
+
+                        <Spinner
+                            android:id="@+id/sp_monofaction"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_monofaction" />
+
+                        <TextView
+                            android:id="@+id/tv_strategy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_strategy" />
+
+                        <Spinner
+                            android:id="@+id/sp_strategy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/a_strategy" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_fund"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_fund" />
+
+                        <EditText
+                            android:id="@+id/et_fund"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberSigned"
+                            android:text="0" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_threads"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_threads" />
+
+                        <EditText
+                            android:id="@+id/et_threads"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberSigned"
+                            android:text="1" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_iterations1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_iterations1" />
+
+                        <EditText
+                            android:id="@+id/et_iterations1"
+                            android:layout_width="62dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberSigned"
+                            android:text="1000" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_iterations2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_iterations2" />
+
+                        <EditText
+                            android:id="@+id/et_iterations2"
+                            android:layout_width="59dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberSigned" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_iterations3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_iterations3" />
+
+                        <EditText
+                            android:id="@+id/et_iterations3"
+                            android:layout_width="73dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="numberDecimal" />
+                    </TableRow>
+                </TableLayout>
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_flags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_flags" />
+
+                        <EditText
+                            android:id="@+id/et_flags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/b_runsim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_runsim" />
+
+                        <Button
+                            android:id="@+id/b_updatexml"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_updatexml" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/b_ownedcards"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_ownedcards" />
+
+                        <Button
+                            android:id="@+id/b_customdecks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_customdecks" />
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

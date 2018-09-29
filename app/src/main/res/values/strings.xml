@@ -1,4 +1,91 @@
 <resources>
     <string name="app_name">mTUO</string>
     <string name="action_settings">Settings</string>
+    <string name="s_runsim">Simulate</string>
+    <string name="s_updatexml">Update XMLs</string>
+    <string name="s_ownedcards">Ownedcards</string>
+    <string name="s_customdecks">Customdecks</string>
+    <string name="s_mydeck">My Deck:</string>
+    <string name="s_myfort">My Fort:</string>
+    <string name="s_enemydeck">Enemy Deck:</string>
+    <string name="s_enemyfort">Enemy Fort:</string>
+    <string name="s_effect">Effect</string>
+    <string name="s_operation">Operation</string>
+    <string name="s_mode">Mode</string>
+    <string name="s_dominion">Dominion</string>
+    <string name="s_strategy">Strategy</string>
+    <string name="s_flags">Flags</string>
+    <string name="s_monofaction">Monofaction</string>
+    <string name="s_order">Order</string>
+    <string name="s_endgame">Endgame</string>
+    <string name="s_fund">Fund</string>
+    <string name="s_threads">Threads</string>
+    <string name="s_iterations1">iterations</string>
+    <string name="s_iterations2">iterations2</string>
+    <string name="s_iterations3">iterations3</string>
+
+    <string-array name="a_effects">
+        <item></item>
+        <item>Crackdown</item>
+        <item>Devotion</item>
+        <item>Unity</item>
+        <item>Iron Will</item>
+    </string-array>
+
+    <string-array name="a_endgame">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="a_order">
+        <item>random</item>
+        <item>ordered</item>
+        <item>flexible</item>
+    </string-array>
+
+    <string-array name="a_dominion">
+        <item>dom-owned</item>
+        <item>dom-maxed</item>
+        <item>dom-none</item>
+    </string-array>
+
+    <string-array name="a_strategy">
+        <item></item>
+        <item>recent</item>
+        <item>jam</item>
+        <item>strike</item>
+    </string-array>
+
+    <string-array name="a_monofaction">
+        <item></item>
+        <item>imperial</item>
+        <item>raider</item>
+        <item>bloodthristy</item>
+        <item>xeno</item>
+        <item>righteous</item>
+        <item>progenitor</item>
+    </string-array>
+
+    <string-array name="a_operation">
+        <item>sim</item>
+        <item>climb</item>
+        <item>reorder</item>
+        <item>climbex</item>
+        <item>anneal</item>
+        <item>debug</item>
+        <item>climb_forts</item>
+    </string-array>
+
+    <string-array name="a_mode">
+        <item>pvp</item>
+        <item>pvp-defense</item>
+        <item>gwr</item>
+        <item>gw-defense</item>
+        <item>brawl</item>
+        <item>brawl-defense</item>
+        <item>raid</item>
+        <item>surge</item>
+        <item>campaign</item>
+    </string-array>
 </resources>
