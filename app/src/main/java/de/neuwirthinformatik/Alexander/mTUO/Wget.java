@@ -105,7 +105,7 @@ public class Wget {
 		return ret;
 	}
 
-	public static void wGetAsync(final String saveAsFile, final String urlOfFile) {AsyncTask.execute(new Runnable(){public void run(){wGet(saveAsFile,urlOfFile);}});}
+	//public static void wGetAsync(final String saveAsFile, final String urlOfFile) {wGet(saveAsFile,urlOfFile);}});}
 	public static Wget.Status wGet(String saveAsFile, String urlOfFile) {
 		File yourFile = new File(saveAsFile);
 		InputStream httpIn = null;
