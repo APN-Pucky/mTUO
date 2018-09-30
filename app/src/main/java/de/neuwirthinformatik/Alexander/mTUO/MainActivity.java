@@ -6,13 +6,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private String tuodir;
 
     NotificationManager mNotificationManager;
+    SharedPreferences preferences;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -73,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
             directory.mkdirs();
         }
 
+        initButtons();
+
+        mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        loadPrefs();
+    }
+
+    private void initButtons()
+    {
         final Button button_sim = findViewById(R.id.b_runsim);
         button_sim.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -100,9 +116,48 @@ public class MainActivity extends AppCompatActivity {
                 editFile(tuodir + "data/customdecks.txt");
             }
         });
+    }
 
-        mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    private void loadPrefs()
+    {
+        String mydeck = preferences.getString("mydeck", null);
+        if(mydeck!=null) ((EditText) findViewById(R.id.et_mydeck)).setText(mydeck);
+        String enemydeck = preferences.getString("enemydeck", null);
+        if(enemydeck!=null) ((EditText) findViewById(R.id.et_enemydeck)).setText(enemydeck);
+        String myfort = preferences.getString("myfort", null);
+        if(myfort!=null) ((EditText) findViewById(R.id.et_myfort)).setText(myfort);
+        String enemyfort = preferences.getString("enemyfort", null);
+        if(enemyfort!=null) ((EditText) findViewById(R.id.et_enemyfort)).setText(enemyfort);
+
+        String flags = preferences.getString("flags", null);
+        if(flags!=null) ((EditText) findViewById(R.id.et_flags)).setText(flags);
+        String fund = preferences.getString("fund", null);
+        if(fund!=null) ((EditText) findViewById(R.id.et_fund)).setText(fund);
+        String threads = preferences.getString("threads", null);
+        if(threads!=null) ((EditText) findViewById(R.id.et_threads)).setText(threads);
+        String iterations1 = preferences.getString("iterations1", null);
+        if(iterations1!=null) ((EditText) findViewById(R.id.et_iterations1)).setText(iterations1);
+
+
+        String mode = preferences.getString("mode", null);
+        if(mode!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_mode));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(mode));}
+        String order = preferences.getString("order", null);
+        if(order!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_order));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(order));}
+        String operation = preferences.getString("operation", null);
+        if(operation!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_operation));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(operation));}
+        String effect = preferences.getString("effect", null);
+        if(effect!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_effect));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(effect));}
+        String endgame = preferences.getString("endgame", null);
+        if(endgame!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_endgame));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(endgame));}
+        String  dominion = preferences.getString("dominion", null);
+        if(dominion!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_dominion));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( dominion));}
+        String  strategy = preferences.getString("strategy", null);
+        if(strategy!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_strategy));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( strategy));}
+        String  monofaction = preferences.getString("monofaction", null);
+        if(monofaction!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_monofaction));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( monofaction));}
+
+
+
     }
 
     @Override
@@ -225,9 +280,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mNotificationManager.cancelAll();
-        //mNotificationManager.cancel(0);
-        //mNotificationManager.cancel(1);
+        //mNotificationManager.cancelAll();
+        mNotificationManager.cancel(0);
+        mNotificationManager.cancel(1);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("mydeck",((EditText) findViewById(R.id.et_mydeck)).getText().toString() );
+        editor.putString("enemydeck",((EditText) findViewById(R.id.et_enemydeck)).getText().toString() );
+        editor.putString("myfort",((EditText) findViewById(R.id.et_myfort)).getText().toString() );
+        editor.putString("enemyfort",((EditText) findViewById(R.id.et_enemyfort)).getText().toString() );
+
+        editor.putString("flags",((EditText) findViewById(R.id.et_flags)).getText().toString() );
+        editor.putString("fund",((EditText) findViewById(R.id.et_fund)).getText().toString() );
+        editor.putString("threads",((EditText) findViewById(R.id.et_threads)).getText().toString() );
+        editor.putString("iterations1",((EditText) findViewById(R.id.et_iterations1)).getText().toString() );
+
+        editor.putString("dominion",((Spinner) findViewById(R.id.sp_dominion)).getSelectedItem().toString());
+        editor.putString("mode",((Spinner) findViewById(R.id.sp_mode)).getSelectedItem().toString());
+        editor.putString("operation",((Spinner) findViewById(R.id.sp_operation)).getSelectedItem().toString());
+        editor.putString("monofaction",((Spinner) findViewById(R.id.sp_monofaction)).getSelectedItem().toString());
+        editor.putString("strategy",((Spinner) findViewById(R.id.sp_strategy)).getSelectedItem().toString());
+        editor.putString("order",((Spinner) findViewById(R.id.sp_order)).getSelectedItem().toString());
+        editor.putString("endgame",((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString());
+        editor.putString("effect",((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString());
+        editor.commit();
     }
 
 

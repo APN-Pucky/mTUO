@@ -163,7 +163,7 @@
     <string-array name="a_mode">
         <item>pvp</item>
         <item>pvp-defense</item>
-        <item>gwr</item>
+        <item>gw</item>
         <item>gw-defense</item>
         <item>brawl</item>
         <item>brawl-defense</item>
