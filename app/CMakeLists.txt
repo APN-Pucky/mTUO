@@ -5,7 +5,10 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+set( CMAKE_CXX_STANDARD 11 )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Ofast")
 
+add_definitions(-DTYRANT_OPTIMIZER_VERSION="Android Build" -DNDEBUG -DNQUEST -DNTIMER)
 #-----------------------------------------
 #add_library (tuo  SHARED
 #             src/main/cpp/tyrant_optimize.cpp)

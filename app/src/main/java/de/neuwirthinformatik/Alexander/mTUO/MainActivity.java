@@ -6,10 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,6 +27,8 @@ import android.widget.Button;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -55,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             requestPermissions(new String[]{Manifest.permission.INTERNET}, 1);
         }
+        if(Build.VERSION.SDK_INT>=24){
+            try{
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
         tuodir = Environment.getExternalStorageDirectory() + "/TUO/";
         File directory = new File(tuodir);
         if (!directory.exists()) {
@@ -72,6 +84,20 @@ public class MainActivity extends AppCompatActivity {
         button_xml.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 updateXML(true);
+            }
+        });
+
+        final Button button_owned = findViewById(R.id.b_ownedcards);
+        button_owned.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                editFile(tuodir + "data/ownedcards.txt");
+            }
+        });
+
+        final Button button_custom = findViewById(R.id.b_customdecks);
+        button_custom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                editFile(tuodir + "data/customdecks.txt");
             }
         });
 
@@ -101,6 +127,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void editFile(String abs_file)
+    {
+        try {
+            File yourFile = new File(abs_file);
+            yourFile.getParentFile().mkdirs();
+            yourFile.createNewFile(); // if file already exists will do nothing
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        Uri uri = Uri.parse("file://"+abs_file);
+        intent.setDataAndType(uri, "text/plain");
+        startActivity(intent);
+    }
+
     public void messageMe(String msg) {
         // Example of a call to a native method
         //TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.sample_text);
@@ -128,13 +170,14 @@ public class MainActivity extends AppCompatActivity {
         String operation = ((Spinner) findViewById(R.id.sp_operation)).getSelectedItem().toString();
         String effect = ((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString();
         String endgame = ((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString();
+        String dominion = ((Spinner) findViewById(R.id.sp_dominion)).getSelectedItem().toString();
 
 
         String fund = ((EditText) findViewById(R.id.et_fund)).getText().toString();
         String threads = ((EditText) findViewById(R.id.et_threads)).getText().toString();
         String iterations = ((EditText) findViewById(R.id.et_iterations1)).getText().toString();
 
-        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, operation, iterations, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode};
+        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, operation, iterations, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion};
 
         //parse flags field
         List<String> list = new ArrayList<String>();

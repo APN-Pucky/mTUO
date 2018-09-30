@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -29,7 +29,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="513dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -136,7 +136,7 @@
 
                         <Spinner
                             android:id="@+id/sp_effect"
-                            android:layout_width="85dp"
+                            android:layout_width="92dp"
                             android:layout_height="wrap_content"
                             android:entries="@array/a_effects" />
 
@@ -148,7 +148,7 @@
 
                         <Spinner
                             android:id="@+id/sp_endgame"
-                            android:layout_width="85dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:entries="@array/a_endgame" />
                     </TableRow>
@@ -165,7 +165,7 @@
 
                         <Spinner
                             android:id="@+id/sp_mode"
-                            android:layout_width="148dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:entries="@array/a_mode" />
 
@@ -177,7 +177,7 @@
 
                         <Spinner
                             android:id="@+id/sp_order"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:entries="@array/a_order" />
 
@@ -263,6 +263,7 @@
                             android:id="@+id/et_fund"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:ems="10"
                             android:inputType="numberSigned"
                             android:text="0" />
@@ -282,6 +283,7 @@
                             android:id="@+id/et_threads"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="numberSigned"
                             android:text="1" />
@@ -299,8 +301,9 @@
 
                         <EditText
                             android:id="@+id/et_iterations1"
-                            android:layout_width="62dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="numberSigned"
                             android:text="1000" />
@@ -318,8 +321,9 @@
 
                         <EditText
                             android:id="@+id/et_iterations2"
-                            android:layout_width="59dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="numberSigned" />
                     </TableRow>
@@ -336,8 +340,9 @@
 
                         <EditText
                             android:id="@+id/et_iterations3"
-                            android:layout_width="73dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="numberDecimal" />
                     </TableRow>
@@ -362,6 +367,7 @@
                             android:id="@+id/et_flags"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="textPersonName"
                             android:text="" />
@@ -380,12 +386,14 @@
                             android:id="@+id/b_runsim"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/s_runsim" />
 
                         <Button
                             android:id="@+id/b_updatexml"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/s_updatexml" />
 
                     </TableRow>
@@ -398,12 +406,14 @@
                             android:id="@+id/b_ownedcards"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/s_ownedcards" />
 
                         <Button
                             android:id="@+id/b_customdecks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="@string/s_customdecks" />
                     </TableRow>
                 </TableLayout>

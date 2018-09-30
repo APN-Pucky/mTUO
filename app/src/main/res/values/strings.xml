@@ -9,27 +9,58 @@
     <string name="s_myfort">My Fort:</string>
     <string name="s_enemydeck">Enemy Deck:</string>
     <string name="s_enemyfort">Enemy Fort:</string>
-    <string name="s_effect">Effect</string>
-    <string name="s_operation">Operation</string>
-    <string name="s_mode">Mode</string>
-    <string name="s_dominion">Dominion</string>
-    <string name="s_strategy">Strategy</string>
-    <string name="s_flags">Flags</string>
-    <string name="s_monofaction">Monofaction</string>
-    <string name="s_order">Order</string>
-    <string name="s_endgame">Endgame</string>
-    <string name="s_fund">Fund</string>
-    <string name="s_threads">Threads</string>
-    <string name="s_iterations1">iterations</string>
-    <string name="s_iterations2">iterations2</string>
-    <string name="s_iterations3">iterations3</string>
+    <string name="s_effect">Effect:</string>
+    <string name="s_operation">Operation:</string>
+    <string name="s_mode">Mode:</string>
+    <string name="s_dominion">Dominion:</string>
+    <string name="s_strategy">Strategy:</string>
+    <string name="s_flags">Flags:</string>
+    <string name="s_monofaction">Mono:</string>
+    <string name="s_order">Order:</string>
+    <string name="s_endgame">Endgame:</string>
+    <string name="s_fund">Fund:</string>
+    <string name="s_threads">Threads:</string>
+    <string name="s_iterations1">Iterations:</string>
+    <string name="s_iterations2">Iterations 2 (climbex/anneal):</string>
+    <string name="s_iterations3">Iterations 3 (anneal):</string>
 
     <string-array name="a_effects">
         <item></item>
         <item>Crackdown</item>
         <item>Devotion</item>
         <item>Unity</item>
-        <item>Iron Will</item>
+        <item>Iron-Will</item>
+        <item>Cold-Sleep</item>
+        <item>Blood-Vengeance</item>
+        <item>Oath-of-Loyalty</item>
+        <item>Furiosity</item>
+        <item>TemporalBacklash</item>
+        <item>CriticalReach</item>
+        <item>Devour</item>
+        <item>HaltedOrders</item>
+        <item>ZealotsPreservation</item>
+        <item>Virulence</item>
+        <item>Enfeeble all X</item>
+        <item>Enhance all S X</item>
+        <item>Evolve n S1 S2</item>
+        <item>Heal all X</item>
+        <item>Mortar X</item>
+        <item>Protect all X</item>
+        <item>Rally all X</item>
+        <item>Siege all X</item>
+        <item>Strike all X</item>
+        <item>Weaken all X</item>
+        <item>Brigade</item>
+        <item>Bloodlust X</item>
+        <item>Counterflux</item>
+        <item>Divert</item>
+        <item>EnduringRage</item>
+        <item>Fortification</item>
+        <item>Heroism</item>
+        <item>Metamorphosis</item>
+        <item>Megamorphosis</item>
+        <item>Revenge X</item>
+        <item>TurningTides</item>
     </string-array>
 
     <string-array name="a_endgame">
@@ -54,7 +85,59 @@
         <item></item>
         <item>recent</item>
         <item>jam</item>
+        <item>mortar</item>
+        <item>siege</item>
         <item>strike</item>
+        <item>sunder</item>
+        <item>weaken</item>
+        <item>enhance</item>
+        <item>evolve</item>
+        <item>heal</item>
+        <item>mend</item>
+        <item>overload</item>
+        <item>protect</item>
+        <item>rally</item>
+        <item>fortify</item>
+        <item>enrage</item>
+        <item>entrap</item>
+        <item>rush</item>
+        <item>mimic</item>
+        <item>armor</item>
+        <item>avenge</item>
+        <item>scavenge</item>
+        <item>corrosive</item>
+        <item>counter</item>
+        <item>evade</item>
+        <item>subdue</item>
+        <item>absorb</item>
+        <item>flying</item>
+        <item>payback</item>
+        <item>revenge</item>
+        <item>tribute</item>
+        <item>refresh</item>
+        <item>wall</item>
+        <item>barrier</item>
+        <item>coalition</item>
+        <item>legion</item>
+        <item>pierce</item>
+        <item>rupture</item>
+        <item>swipe</item>
+        <item>drain</item>
+        <item>venom</item>
+        <item>hunt</item>
+        <item>berserk</item>
+        <item>inhibit</item>
+        <item>sabotage</item>
+        <item>leech</item>
+        <item>poison</item>
+        <item>allegiance</item>
+        <item>flurry</item>
+        <item>valor</item>
+        <item>stasis</item>
+        <item>summon</item>
+        <item>bravery</item>
+        <item>enfeeble</item>
+        <item>mark</item>
     </string-array>
 
     <string-array name="a_monofaction">
