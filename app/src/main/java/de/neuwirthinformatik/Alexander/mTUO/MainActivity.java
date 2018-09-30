@@ -144,11 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void messageMe(String msg) {
-        // Example of a call to a native method
-        //TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.sample_text);
-        //tv.setText(tv.getText() + msg);
-        //TextView tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.tv_out);
-        //tv.setText(tv.getText() + msg);
+        // Forward tuo output
         out += msg;
         if (OutActivity.tv != null && OutActivity._this != null) {
             OutActivity._this.runOnUiThread(new Runnable() {
@@ -171,13 +167,17 @@ public class MainActivity extends AppCompatActivity {
         String effect = ((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString();
         String endgame = ((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString();
         String dominion = ((Spinner) findViewById(R.id.sp_dominion)).getSelectedItem().toString();
+        String strategy = ((Spinner) findViewById(R.id.sp_strategy)).getSelectedItem().toString();
+        String mono = ((Spinner) findViewById(R.id.sp_monofaction)).getSelectedItem().toString();
 
 
         String fund = ((EditText) findViewById(R.id.et_fund)).getText().toString();
         String threads = ((EditText) findViewById(R.id.et_threads)).getText().toString();
         String iterations = ((EditText) findViewById(R.id.et_iterations1)).getText().toString();
+        String iterations2 = ((EditText) findViewById(R.id.et_iterations2)).getText().toString();
+        String iterations3 = ((EditText) findViewById(R.id.et_iterations3)).getText().toString();
 
-        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, operation, iterations, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion};
+        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, operation, iterations, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion, "strategy",strategy, "mono", mono};
 
         //parse flags field
         List<String> list = new ArrayList<String>();
@@ -221,9 +221,13 @@ public class MainActivity extends AppCompatActivity {
         //mNotificationManager.cancel(0);
     }
 
-    void showNotification(String title, String content) {
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        mNotificationManager.cancel(0);
+        mNotificationManager.cancel(1);
     }
+
 
     public void updateXML() {
         updateXML(false);
