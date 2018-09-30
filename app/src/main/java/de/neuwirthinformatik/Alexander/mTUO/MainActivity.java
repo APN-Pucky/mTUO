@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         String enemyfort = ((EditText) findViewById(R.id.et_enemyfort)).getText().toString();
 
         String mode = ((Spinner) findViewById(R.id.sp_mode)).getSelectedItem().toString();
+        String order = ((Spinner) findViewById(R.id.sp_order)).getSelectedItem().toString();
         String operation = ((Spinner) findViewById(R.id.sp_operation)).getSelectedItem().toString();
         String effect = ((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString();
         String endgame = ((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString();
@@ -174,10 +175,10 @@ public class MainActivity extends AppCompatActivity {
         String fund = ((EditText) findViewById(R.id.et_fund)).getText().toString();
         String threads = ((EditText) findViewById(R.id.et_threads)).getText().toString();
         String iterations = ((EditText) findViewById(R.id.et_iterations1)).getText().toString();
-        String iterations2 = ((EditText) findViewById(R.id.et_iterations2)).getText().toString();
-        String iterations3 = ((EditText) findViewById(R.id.et_iterations3)).getText().toString();
+        //String iterations2 = ((EditText) findViewById(R.id.et_iterations2)).getText().toString();
+        //String iterations3 = ((EditText) findViewById(R.id.et_iterations3)).getText().toString();
 
-        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, operation, iterations, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion, "strategy",strategy, "mono", mono};
+        String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion, "strategy",strategy, "mono", mono, order,operation, iterations};
 
         //parse flags field
         List<String> list = new ArrayList<String>();
@@ -222,10 +223,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mNotificationManager.cancel(0);
-        mNotificationManager.cancel(1);
+    public void onDestroy() {
+        super.onDestroy();
+        mNotificationManager.cancelAll();
+        //mNotificationManager.cancel(0);
+        //mNotificationManager.cancel(1);
     }
 
 

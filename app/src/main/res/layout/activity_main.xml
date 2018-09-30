@@ -308,7 +308,7 @@
                             android:inputType="numberSigned"
                             android:text="1000" />
                     </TableRow>
-
+                    <!--
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -346,6 +346,7 @@
                             android:ems="10"
                             android:inputType="numberDecimal" />
                     </TableRow>
+                   -->
                 </TableLayout>
 
 
