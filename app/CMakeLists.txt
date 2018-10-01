@@ -54,7 +54,7 @@ set_target_properties(boost_filesystem PROPERTIES IMPORTED_LOCATION
 
 include_directories( ${MY_BOOST_INC_DIR}
                     )
-include_directories(src/main/cpp/)
+include_directories(src/main/cpp/tyrant_optimize/)
 #-----------------------------------------
 find_library (log-lib log)
 
@@ -62,13 +62,13 @@ find_library (log-lib log)
 
 
 add_library (tuo  SHARED
-        src/main/cpp/tyrant_optimize.cpp
-        src/main/cpp/cards.cpp
-        src/main/cpp/deck.cpp
-        src/main/cpp/read.cpp
-        src/main/cpp/sim.cpp
-        src/main/cpp/tyrant.cpp
-        src/main/cpp/xml.cpp)
+        src/main/cpp/tyrant_optimize/tyrant_optimize.cpp
+        src/main/cpp/tyrant_optimize/cards.cpp
+        src/main/cpp/tyrant_optimize/deck.cpp
+        src/main/cpp/tyrant_optimize/read.cpp
+        src/main/cpp/tyrant_optimize/sim.cpp
+        src/main/cpp/tyrant_optimize/tyrant.cpp
+        src/main/cpp/tyrant_optimize/xml.cpp)
 
 target_link_libraries( # Specifies the target library.
         tuo

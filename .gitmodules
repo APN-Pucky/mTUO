@@ -1,0 +1,3 @@
+[submodule "app/src/main/cpp/tyrant_optimize"]
+	path = app/src/main/cpp/tyrant_optimize
+	url = https://github.com/APN-Pucky/tyrant_optimize.git
