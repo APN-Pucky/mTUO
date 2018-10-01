@@ -2396,7 +2396,9 @@ int main(int argc, char** argv)
         }
         else if (strcmp(argv[argIndex], "mono") == 0 || strcmp(argv[argIndex], "-m") == 0 || strcmp(argv[argIndex], "factions") == 0 || strcmp(argv[argIndex], "-f") == 0)
         {
-            factions.push_back(faction_name_to_id(argv[argIndex + 1]));
+            if(strcmp(argv[argIndex+1],"") != 0) {
+                factions.push_back(faction_name_to_id(argv[argIndex + 1]));
+            }
             argIndex += 1;
         }
         else if (strcmp(argv[argIndex], "no-mono") == 0 || strcmp(argv[argIndex], "no-factions") == 0)
@@ -2407,13 +2409,12 @@ int main(int argc, char** argv)
         }
         else if (strcmp(argv[argIndex], "strategy") == 0 || strcmp(argv[argIndex], "skill") == 0)
         {
-            if(strcmp(argv[argIndex+1], "recent") == 0)
-            {
-                only_recent = true;
-            }
-            else
-            {
-                skills.push_back(skill_name_to_id(argv[argIndex + 1]));
+            if(strcmp(argv[argIndex+1],"") != 0) {
+                if (strcmp(argv[argIndex + 1], "recent") == 0) {
+                    only_recent = true;
+                } else {
+                    skills.push_back(skill_name_to_id(argv[argIndex + 1]));
+                }
             }
             argIndex += 1;
         }
