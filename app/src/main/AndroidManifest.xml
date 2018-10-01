@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OutActivity"></activity>
+        <activity android:name=".OutActivity"
+            android:label="mTUO - Output"></activity>
     </application>
 
 </manifest>

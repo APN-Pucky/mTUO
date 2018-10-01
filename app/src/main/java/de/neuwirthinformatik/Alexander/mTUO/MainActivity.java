@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         if(strategy!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_strategy));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( strategy));}
         String  monofaction = preferences.getString("monofaction", null);
         if(monofaction!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_monofaction));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( monofaction));}
-
+        if(out.equals("")) out = preferences.getString("out", "");
 
 
     }
@@ -175,7 +175,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_settings) {
+        if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_output) {
+            Intent intent = new Intent(getApplicationContext(), OutActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -279,7 +281,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("out",out );
+        editor.commit();
+
         super.onDestroy();
+
+
         //mNotificationManager.cancelAll();
         mNotificationManager.cancel(0);
         mNotificationManager.cancel(1);
