@@ -1,6 +1,8 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +14,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int CARD_SECTIONS_COUNT = 20;
     public static String out = "";
     private String tuodir;
+    public static MainActivity _this;
 
     NotificationManager mNotificationManager;
     SharedPreferences preferences;
@@ -53,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _this = this;
+        Log.d("TUOMainActivity", "onCreate");
         setContentView(de.neuwirthinformatik.Alexander.mTUO.R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         loadPrefs();
+
+
     }
 
     private void initButtons()
@@ -155,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         if(strategy!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_strategy));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( strategy));}
         String  monofaction = preferences.getString("monofaction", null);
         if(monofaction!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_monofaction));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition( monofaction));}
-        if(out.equals("")) out = preferences.getString("out", "");
+        //if(out.equals("")) out = preferences.getString("out", "");
 
 
     }
@@ -180,6 +189,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_xml) {
+            updateXML();
+            return true;
+        }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_own) {
+            editFile(tuodir + "data/ownedcards.txt");
+            return true;
+        }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_custom) {
+            editFile(tuodir + "data/customdecks.txt");
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -202,13 +223,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void messageMe(String msg) {
         // Forward tuo output
-        out += msg;
-        if (OutActivity.tv != null && OutActivity._this != null) {
-            OutActivity._this.runOnUiThread(new Runnable() {
-                public void run() {
-                    OutActivity.tv.setText(out);
-                }
-            });
+        out = msg;
+        if (OutActivity._this != null) {
+            OutActivity._this.setText(msg);
+
+
         }
     }
 
@@ -244,19 +263,19 @@ public class MainActivity extends AppCompatActivity {
             list.add(m.group(1).replace("\"", ""));
         String[] post = list.toArray(new String[]{});
         final String[] param = new String[pre.length + post.length];
-        out = "./";
+        //out = "./";
         for (int i = 0; i < param.length; i++) {
             param[i] = i < pre.length ? pre[i] : post[i - pre.length];
-            out += param[i] + " ";
+            //out += param[i] + " ";
         }
-        out += "\n\n";
+        //out += "\n\n";
 
         //Notification
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("default",
-                    "YOUR_CHANNEL_NAME",
+                    "TUO_CHANNEL_NAME",
                     NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
+            channel.setDescription("TUO_NOTIFICATION_CHANNEL_DISCRIPTION");
             mNotificationManager.createNotificationChannel(channel);
         }
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
@@ -267,36 +286,70 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), OutActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
-        mNotificationManager.notify(0, mBuilder.build());
+        //mNotificationManager.notify(0, mBuilder.build());
 
-        AsyncTask.execute(new Runnable() {
+        Intent i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
+        i.putExtra("param",param);
+        i.putExtra("operation",operation);
+        i.putExtra("receiver", new TUOIntentService.TUOResultReceiver(new Handler(), new TUOIntentService.TUOResultReceiver.Receiver() {
+            @Override
+            public void onReceiveResult(int resultCode, Bundle resultData) {
+
+                Log.d("TUOIntentServiceReceiver", "onReceiveResult");
+                switch (resultCode) {
+                    case TUOIntentService.STATUS_RUNNING:
+                        messageMe(resultData.getString("out"));
+                        //setProgressBarIndeterminateVisibility(true);
+                        break;
+                    case TUOIntentService.STATUS_FINISHED:
+                        //mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
+                        //mNotificationManager.notify(0, mBuilder.build());
+                        /* Hide progress & extract result from bundle */
+                        //setProgressBarIndeterminateVisibility(false);
+                        //String[] results = resultData.getStringArray("result");
+
+                        /* Update ListView with result */
+                        //arrayAdapter = new ArrayAdapter(MyActivity.this, android.R.layout.simple_list_item_2, results);
+                        //listView.setAdapter(arrayAdapter);
+                        break;
+                    case TUOIntentService.STATUS_ERROR:
+                        /* Handle the error */
+                        //String error = resultData.getString(Intent.EXTRA_TEXT);
+                        //Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        }));
+        startService(i);
+
+       /* AsyncTask.execute(new Runnable() {
             public void run() {
                 callMain(param);
                 mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
                 mNotificationManager.notify(0, mBuilder.build());
             }
-        });
+        });*/
         //mNotificationManager.cancel(0);
     }
 
     @Override
     public void onDestroy() {
 
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("out",out );
-        editor.commit();
+
 
         super.onDestroy();
+        Log.d("TUOMainActivity", "onDestroy");
 
 
         //mNotificationManager.cancelAll();
-        mNotificationManager.cancel(0);
-        mNotificationManager.cancel(1);
+        //mNotificationManager.cancel(0);
+        //mNotificationManager.cancel(1);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d("TUOMainActivity", "onStop");
         // Save UI state changes to the savedInstanceState.
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
@@ -381,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
      * A native method that is implemented by the 'tuo' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI(String s);
+    //public native String stringFromJNI(String s);
 
-    public native void callMain(String[] args);
+    //public native void callMain(String[] args);
 }

@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">mTUO</string>
-    <string name="action_output">Output</string>
-    <string name="s_runsim">Simulate</string>
+    <string name="action_output">View Output</string>
+    <string name="action_xml">Update XMLs</string>
+    <string name="action_custom">Edit Customdecks</string>
+    <string name="action_own">Edit Ownedcards</string>
+
+    <string name="s_runsim">Queue Simulation</string>
     <string name="s_updatexml">Update XMLs</string>
     <string name="s_ownedcards">Ownedcards</string>
     <string name="s_customdecks">Customdecks</string>

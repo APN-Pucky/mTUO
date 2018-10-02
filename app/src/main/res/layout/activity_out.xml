@@ -6,22 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".OutActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ScrollView
+            android:id="@+id/sv_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:scrollbars="vertical"
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tv_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textIsSelectable="true"/>
-        </LinearLayout>
-    </ScrollView>
+
+                <TextView
+                    android:id="@+id/tv_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textIsSelectable="true"
+                    android:gravity="bottom"/>
+        </ScrollView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

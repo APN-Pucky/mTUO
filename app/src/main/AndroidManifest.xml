@@ -25,6 +25,11 @@
         </activity>
         <activity android:name=".OutActivity"
             android:label="mTUO - Output"></activity>
+        <service
+            android:name=".TUOIntentService"
+            android:exported="false"
+            android:excludeFromRecents="false"
+            android:process=":tuo"/>
     </application>
 
 </manifest>
