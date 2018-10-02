@@ -2,11 +2,14 @@ package de.neuwirthinformatik.Alexander.mTUO;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -42,6 +45,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String textEditorPackage = "fr.xgouchet.texteditor";
     public static final int CARD_SECTIONS_COUNT = 20;
     public static String out = "";
     private String tuodir;
@@ -218,8 +222,42 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_EDIT);
         Uri uri = Uri.parse("file://"+abs_file);
         intent.setDataAndType(uri, "text/plain");
+        try
+        {
         startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (!isFinishing()){
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("No Editor")
+                                .setMessage("You don't have a text editor installed")
+                                .setCancelable(false)
+                                .setPositiveButton("link", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        try {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + textEditorPackage)));
+                                        } catch (android.content.ActivityNotFoundException anfe) {
+                                            //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + textEditorPackage)));
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            return;
+                                        }
+                                }).show();
+                    }
+                }
+            });
+        }
     }
+
 
     public void messageMe(String msg) {
         // Forward tuo output
@@ -295,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceiveResult(int resultCode, Bundle resultData) {
 
-                Log.d("TUOIntentServiceReceiver", "onReceiveResult");
+                Log.d("TUOIntentReceiver", "onReceiveResult");
                 switch (resultCode) {
                     case TUOIntentService.STATUS_RUNNING:
                         messageMe(resultData.getString("out"));
