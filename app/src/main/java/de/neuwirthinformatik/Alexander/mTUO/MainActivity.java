@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
                 final String tyrant_url = (dev ? "http://mobile-dev.tyrantonline.com/assets/" : "http://mobile.tyrantonline.com/assets/");
                 //XML
                 Wget.Status status = Wget.Status.Success;
-                Log.v("MainActivity", "Downloading new XMLs ...");
+                Log.d("MainActivity", "Downloading new XMLs ...");
                 int i = 1;
                 int p =0;
                 while (status == Wget.Status.Success)

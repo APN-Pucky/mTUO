@@ -28,14 +28,16 @@ public class TUOIntentService extends IntentService {
     public TUOIntentService() {
         super("TUOIntentService");
         //_this = this;
-        Log.d("TUO_IntentService", "loading TUO lib");
-        System.loadLibrary("tuo");
-        Log.d("TUO_IntentService", "load TUO lib");
     }
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
+        Log.d("TUO_IntentService", "loading TUO lib");
+        System.loadLibrary("tuo");
+        Log.d("TUO_IntentService", "load TUO lib");
+
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
         int id = (int)System.currentTimeMillis();
