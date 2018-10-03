@@ -1,9 +1,37 @@
 <resources>
     <string name="app_name">mTUO</string>
-    <string name="action_output">View Output</string>
+    <string name="title_activity_settings">mTUO - Settings</string>
+    <string name="title_activity_out"> mTUO - Output</string>
+    <string name="title_activity_history"> mTUO - History</string>
+
+    <string name="action_output">Output</string>
     <string name="action_xml">Update XMLs</string>
-    <string name="action_custom">Edit Customdecks</string>
-    <string name="action_own">Edit Ownedcards</string>
+    <string name="action_custom">Customdecks</string>
+    <string name="action_own">Ownedcards</string>
+    <string name="action_history">History</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_exit">Exit</string>
+    <string name="action_clear_history">Clear History</string>
+
+    <string name="pt_restart">RESTART MAY BE NECESSARY TO APPLY CHANGES</string>
+
+
+    <string name="pt_general">General</string>
+
+    <string name="pt_notification">Notifications</string>
+    <string name="p_notification_vibrate">Notification Vibrate</string>
+    <string name="pp_notification_vibrate">Vibrate on simulation finish</string>
+    <string name="p_notification_sound">Notification Sound</string>
+    <string name="pp_notification_sound">Sound on simulation finish</string>
+    <string name="pr_sound">Sound</string>
+    <string name="p_notification_led">Notification LED</string>
+    <string name="pp_notification_led">LED on simulation finish</string>
+
+
+    <string name="pt_output_history">Output &amp; History</string>
+    <string name="p_history">History</string>
+    <string name="pp_history">Save Output in tuo folder</string>
+
 
     <string name="s_runsim">Queue Simulation</string>
     <string name="s_updatexml">Update XMLs</string>
@@ -175,4 +203,79 @@
         <item>surge</item>
         <item>campaign</item>
     </string-array>
+    <string-array name="a_restart_keys">
+        <item>notification_vibrate</item>
+        <item>notification_sound</item>
+        <item>notification_sound_uri</item>
+        <item>notification_led</item>
+        <item>history</item>
+    </string-array>
+
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+
+    <string name="pref_title_social_recommendations">Nothing</string>
+    <string name="pref_description_social_recommendations">Placeholder </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
 </resources>

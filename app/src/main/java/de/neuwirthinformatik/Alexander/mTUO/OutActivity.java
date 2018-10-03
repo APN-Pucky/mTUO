@@ -3,6 +3,7 @@ package de.neuwirthinformatik.Alexander.mTUO;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -22,6 +23,24 @@ public class OutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("TUO_OutActivity","onCreate");
         setContentView(R.layout.activity_out);
+        setupActionBar();
+    }
+
+    /**
+     * Set up the {@link android.app.ActionBar}, if the API is available.
+     */
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
     @Override
     public void onStart() {

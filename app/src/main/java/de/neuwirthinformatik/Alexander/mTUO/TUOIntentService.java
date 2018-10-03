@@ -7,13 +7,21 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TUOIntentService extends IntentService {
     public static final int STATUS_RUNNING = 0;
@@ -21,7 +29,7 @@ public class TUOIntentService extends IntentService {
     public static final int STATUS_ERROR = 2;
     public static StringBuilder out = new StringBuilder();
     private ResultReceiver receiver;
-    //public static TUOIntentService _this;
+    public static String tuodir;
 
 
 
@@ -37,9 +45,12 @@ public class TUOIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        tuodir = Global.tuodir();//Environment.getExternalStorageDirectory() + "/TUO/";
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
+        //Hacky ugly but works
+        //SharedPreferences sp = getSharedPreferences(getPackageName()+"_preferences",Context.MODE_MULTI_PROCESS);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         int id = (int)System.currentTimeMillis();
         Log.d("TUO_PROC_IntentService", "onHandleIntent");
         receiver = intent.getParcelableExtra("receiver");
@@ -47,7 +58,12 @@ public class TUOIntentService extends IntentService {
         String op = intent.getStringExtra("operation");
         out.setLength(0);
         out.append("./");
-        for (int i = 0; i < param.length; i++) {
+        out.append(param[0] + " ");
+        out.append("\"");
+        out.append(param[1] + "\" ");
+        out.append("\"");
+        out.append(param[2] + "\" ");
+        for (int i = 3; i < param.length; i++) {
             out.append(param[i] + " ");
         }
         out.append("\n\n");
@@ -72,7 +88,7 @@ public class TUOIntentService extends IntentService {
         nintent = new Intent(getApplicationContext(), OutActivity.class);
         nintent.putExtra("stop",android.os.Process.myPid());
         pi = PendingIntent.getActivity(this, id+3, nintent, PendingIntent.FLAG_ONE_SHOT);
-        mBuilder.addAction(R.drawable.ic_cancel,"Cancel All",pi);
+        mBuilder.addAction(R.drawable.ic_clear,"Cancel All",pi);
 /*
         Intent deleteIntent = new Intent(this, TUOIntentService.class);
         deleteIntent.putExtra("stop", true);
@@ -91,11 +107,19 @@ public class TUOIntentService extends IntentService {
         mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
         mBuilder.mActions.clear();
         nintent = new Intent(getApplicationContext(), OutActivity.class);
-        nintent.putExtra("text",out.toString());
+        final String result = out.toString();
+        nintent.putExtra("text",result);
         //Log.d("TUO_Out",out);
         pi = PendingIntent.getActivity(this, id, nintent, PendingIntent.FLAG_ONE_SHOT);
         mBuilder.setContentIntent(pi);
+        if(sp.getBoolean("notification_sound",false))mBuilder.setSound(Uri.parse(sp.getString("notification_sound_uri","content://settings/system/notification_sound")));
+        if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});
+        if(sp.getBoolean("notification_led",false))mBuilder.setLights(Color.RED, 3000, 3000);
         stopForeground(true);
+        if(sp.getBoolean("history",false)) {
+            String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
+            Global.writeToFile(tuodir + "output/" + name, result);
+        }
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();
     }

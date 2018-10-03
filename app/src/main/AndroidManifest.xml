@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="de.neuwirthinformatik.Alexander.mTUO">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -23,13 +26,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OutActivity"
-            android:label="mTUO - Output"></activity>
+        <activity
+            android:name=".OutActivity"
+            android:label="@string/title_activity_out"
+            android:parentActivityName=".MainActivity"/>
+
         <service
             android:name=".TUOIntentService"
-            android:exported="false"
             android:excludeFromRecents="false"
-            android:process=":tuo"/>
+            android:exported="false"
+            android:process=":tuo" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".HistoryActivity"
+            android:label="@string/title_activity_history" ></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -111,6 +112,7 @@ public class Wget {
 		InputStream httpIn = null;
 		OutputStream fileOutput = null;
 		OutputStream bufferedOut = null;
+		Log.d("TUO_WEB",saveAsFile);
 		try {
 			yourFile.getParentFile().mkdirs();
 			yourFile.createNewFile(); // if file already exists will do nothing

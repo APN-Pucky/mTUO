@@ -44,15 +44,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String textEditorPackage = "fr.xgouchet.texteditor";
     public static final int CARD_SECTIONS_COUNT = 20;
     public static String out = "";
     private String tuodir;
-    public static MainActivity _this;
+    //public static MainActivity _this;
 
     NotificationManager mNotificationManager;
-    SharedPreferences preferences;
+    //SharedPreferences preferences;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -62,11 +62,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _this = this;
+        //_this = this;
         Log.d("TUOMainActivity", "onCreate");
         setContentView(de.neuwirthinformatik.Alexander.mTUO.R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
+        Toolbar toolbar = findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
         //Request Permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -82,10 +84,18 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        tuodir = Environment.getExternalStorageDirectory() + "/TUO/";
-        File directory = new File(tuodir);
-        if (!directory.exists()) {
-            directory.mkdirs();
+        tuodir = Global.tuodir();
+        File directory1 = new File(tuodir);
+        if (!directory1.exists()) {
+            directory1.mkdirs();
+        }
+        File directory2 = new File(tuodir + "data/");
+        if (!directory2.exists()) {
+            directory2.mkdirs();
+        }
+        File directory3 = new File(tuodir + "output/");
+        if (!directory3.exists()) {
+            directory3.mkdirs();
         }
 
         initButtons();
@@ -93,11 +103,17 @@ public class MainActivity extends AppCompatActivity {
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         loadPrefs();
+    }
 
-
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        Log.d("TUO_PREF",s);
+        for (String k :getResources().getStringArray(R.array.a_restart_keys))
+        {
+            if(k.equals(s))Global.alert(MainActivity.this,"Changes apply after restart.");
+        }
     }
 
     private void initButtons()
@@ -133,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadPrefs()
     {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String mydeck = preferences.getString("mydeck", null);
         if(mydeck!=null) ((EditText) findViewById(R.id.et_mydeck)).setText(mydeck);
         String enemydeck = preferences.getString("enemydeck", null);
@@ -205,6 +223,24 @@ public class MainActivity extends AppCompatActivity {
             editFile(tuodir + "data/customdecks.txt");
             return true;
         }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_settings)
+        {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_history)
+        {
+            Intent i = new Intent(this, HistoryActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_exit)
+        {
+            Global.stopAllTUO(this);
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -242,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                                         try {
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + textEditorPackage)));
                                         } catch (android.content.ActivityNotFoundException anfe) {
-                                            //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + textEditorPackage)));
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + textEditorPackage)));
                                         }
                                     }
                                 })
@@ -264,10 +300,9 @@ public class MainActivity extends AppCompatActivity {
         out = msg;
         if (OutActivity._this != null) {
             OutActivity._this.setText(msg);
-
-
         }
     }
+
 
     private void startSIM() {
         //grab info
@@ -392,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString("mydeck",((EditText) findViewById(R.id.et_mydeck)).getText().toString() );
