@@ -14,14 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +28,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        File[] files = new File(Global.tuodir() + "output/").listFiles();
+        File[] files = new File(GlobalData.tuodir() + "output/").listFiles();
         ArrayList<File> fal = new ArrayList<File>();
         for(int i= files.length-1;i>=0;i--)
             fal.add(files[i]);
@@ -44,7 +41,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 File f = (File)lv.getItemAtPosition(position);
 
-                final String content = Global.readFile(f.getAbsolutePath());
+                final String content = GlobalData.readFile(f.getAbsolutePath());
 
                 Intent nintent = new Intent(getApplicationContext(), OutActivity.class);
                 nintent.putExtra("text",content);
@@ -54,7 +51,7 @@ public class HistoryActivity extends AppCompatActivity {
         });
         lv.setAdapter(ada);
         setupActionBar();
-        if(files.length==0 && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("history",false))Global.alert(this,"Enable History in Settings.");
+        if(files.length==0 && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("history",false))GlobalData.alert(this,"Enable History in Settings.");
     }
 
 
@@ -74,13 +71,13 @@ public class HistoryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_clear_history) {
-            File[] files = new File(Global.tuodir() + "output/").listFiles();
+            File[] files = new File(GlobalData.tuodir() + "output/").listFiles();
             for(File f: files)
             {
                 f.delete();
             }
             ada.clear();
-            /*files = new File(Global.tuodir() + "output/").listFiles();
+            /*files = new File(GlobalData.tuodir() + "output/").listFiles();
             String[] theNamesOfFiles = new String[files.length];
             for (int i = 0; i < theNamesOfFiles.length; i++) {
                 theNamesOfFiles[i] = files[i].getName().replace("_",":").replace(".txt","");
@@ -146,7 +143,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             String date = file.getName().replace("_",":").replace(".txt","");
             //line += "";
-            String fl = Global.readFirstLine(Global.tuodir() + "output/" +file.getName());
+            String fl = GlobalData.readFirstLine(GlobalData.tuodir() + "output/" +file.getName());
             String param ="";
             Log.d("TUO_HIST",fl);
             String[] i = get(fl);

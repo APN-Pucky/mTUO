@@ -51,7 +51,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/s_mydeck" />
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_mydeck"
                             android:layout_width="296dp"
                             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/s_enemydeck" />
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_enemydeck"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -134,11 +134,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/s_effect" />
 
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/sp_effect"
                             android:layout_width="92dp"
                             android:layout_height="wrap_content"
-                            android:entries="@array/a_effects" />
+                            android:entries="@array/a_effects"/>
 
                         <TextView
                             android:id="@+id/tv_endgame"

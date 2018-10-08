@@ -4,22 +4,18 @@ import android.app.IntentService;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,7 +41,7 @@ public class TUOIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        tuodir = Global.tuodir();//Environment.getExternalStorageDirectory() + "/TUO/";
+        tuodir = GlobalData.tuodir();//Environment.getExternalStorageDirectory() + "/TUO/";
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
         //Hacky ugly but works
@@ -67,6 +63,11 @@ public class TUOIntentService extends IntentService {
             out.append(param[i] + " ");
         }
         out.append("\n\n");
+        Bundle b = new Bundle();
+        final String so = out.toString();
+        Log.d("TUO_RUN", so);
+        b.putString("out",so);
+        receiver.send(STATUS_RUNNING,b);
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("default",
@@ -118,7 +119,7 @@ public class TUOIntentService extends IntentService {
         stopForeground(true);
         if(sp.getBoolean("history",false)) {
             String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-            Global.writeToFile(tuodir + "output/" + name, result);
+            GlobalData.writeToFile(tuodir + "output/" + name, result);
         }
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();

@@ -1,9 +1,7 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,25 +14,21 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.ResultReceiver;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.util.Log;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setContentView(de.neuwirthinformatik.Alexander.mTUO.R.layout.activity_main);
         Toolbar toolbar = findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getSupportActionBar().getTitle() + " v" + BuildConfig.VERSION_NAME);
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 e.printStackTrace();
             }
         }
-        tuodir = Global.tuodir();
+        tuodir = GlobalData.tuodir();
         File directory1 = new File(tuodir);
         if (!directory1.exists()) {
             directory1.mkdirs();
@@ -105,6 +100,44 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
         loadPrefs();
+
+
+        loadAutoComplete();
+
+    }
+    public void loadAutoComplete()
+    {
+        //effects
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.sp_effect);
+        // Get the string array
+        String[] effects = getResources().getStringArray(R.array.a_effects);
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, effects);
+        textView.setAdapter(adapter);
+
+        //effects
+        AutoCompleteTextView mydeck = (AutoCompleteTextView) findViewById(R.id.et_mydeck);
+        // Get the string array
+        String decks = GlobalData.readFile(GlobalData.tuodir() + "data/customdecks.txt");
+        String[] lines = decks.split("\n");
+        ArrayList<String> al = new ArrayList<String>(lines.length);
+        for(String l : lines) {
+            String n = l.split(":")[0];
+            if(!n.equals(""))al.add(n);
+        }
+        al.add("Mission#");
+        al.add("Raid#");
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter2=
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,al );
+        mydeck.setAdapter(adapter2);
+        //effects
+        AutoCompleteTextView enemydeck = (AutoCompleteTextView) findViewById(R.id.et_enemydeck);
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter3 =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al);
+        enemydeck.setAdapter(adapter3);
     }
 
     @Override
@@ -112,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Log.d("TUO_PREF",s);
         for (String k :getResources().getStringArray(R.array.a_restart_keys))
         {
-            if(k.equals(s))Global.alert(MainActivity.this,"Changes apply after restart.");
+            if(k.equals(s))GlobalData.alert(MainActivity.this,"Changes apply after restart.");
         }
     }
 
@@ -159,6 +192,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(myfort!=null) ((EditText) findViewById(R.id.et_myfort)).setText(myfort);
         String enemyfort = preferences.getString("enemyfort", null);
         if(enemyfort!=null) ((EditText) findViewById(R.id.et_enemyfort)).setText(enemyfort);
+        String effect = preferences.getString("effect", null);
+        if(effect!=null) ((AutoCompleteTextView) findViewById(R.id.sp_effect)).setText(effect);
 
         String flags = preferences.getString("flags", null);
         if(flags!=null) ((EditText) findViewById(R.id.et_flags)).setText(flags);
@@ -176,8 +211,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if(order!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_order));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(order));}
         String operation = preferences.getString("operation", null);
         if(operation!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_operation));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(operation));}
-        String effect = preferences.getString("effect", null);
-        if(effect!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_effect));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(effect));}
         String endgame = preferences.getString("endgame", null);
         if(endgame!=null) {Spinner s = ((Spinner) findViewById(R.id.sp_endgame));s.setSelection(((ArrayAdapter)s.getAdapter()).getPosition(endgame));}
         String  dominion = preferences.getString("dominion", null);
@@ -215,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             updateXML();
             return true;
         }
+        /*
         else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_own) {
             editFile(tuodir + "data/ownedcards.txt");
             return true;
@@ -222,11 +256,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_custom) {
             editFile(tuodir + "data/customdecks.txt");
             return true;
-        }
+        }*/
         else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_settings)
         {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
+            return true;
+        }else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_donate)
+        {
+            GlobalData.error(this,"Paypal","apnpucky@gmail.com");
             return true;
         }
         else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_history)
@@ -237,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
         else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_exit)
         {
-            Global.stopAllTUO(this);
+            GlobalData.stopAllTUO(this);
             finish();
             return true;
         }
@@ -310,11 +348,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         String enemydeck = ((EditText) findViewById(R.id.et_enemydeck)).getText().toString();
         String myfort = ((EditText) findViewById(R.id.et_myfort)).getText().toString();
         String enemyfort = ((EditText) findViewById(R.id.et_enemyfort)).getText().toString();
+        String effect = ((AutoCompleteTextView) findViewById(R.id.sp_effect)).getText().toString();
 
         String mode = ((Spinner) findViewById(R.id.sp_mode)).getSelectedItem().toString();
         String order = ((Spinner) findViewById(R.id.sp_order)).getSelectedItem().toString();
         String operation = ((Spinner) findViewById(R.id.sp_operation)).getSelectedItem().toString();
-        String effect = ((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString();
         String endgame = ((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString();
         String dominion = ((Spinner) findViewById(R.id.sp_dominion)).getSelectedItem().toString();
         String strategy = ((Spinner) findViewById(R.id.sp_strategy)).getSelectedItem().toString();
@@ -326,12 +364,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         String iterations = ((EditText) findViewById(R.id.et_iterations1)).getText().toString();
         //String iterations2 = ((EditText) findViewById(R.id.et_iterations2)).getText().toString();
         //String iterations3 = ((EditText) findViewById(R.id.et_iterations3)).getText().toString();
+        String flags = ((EditText) findViewById(R.id.et_flags)).getText().toString();
+
 
         String[] pre = new String[]{"tuo", mydeck, enemydeck, "prefix", tuodir, "yf", myfort, "ef", enemyfort, "-t", threads, "endgame", endgame, "fund", fund, "-e", effect, mode,dominion, "strategy",strategy, "mono", mono, order,operation, iterations};
 
         //parse flags field
         List<String> list = new ArrayList<String>();
-        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(((EditText) findViewById(R.id.et_flags)).getText().toString());
+        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(flags);
         while (m.find())
             list.add(m.group(1).replace("\"", ""));
         String[] post = list.toArray(new String[]{});
@@ -340,6 +380,32 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         for (int i = 0; i < param.length; i++) {
             param[i] = i < pre.length ? pre[i] : post[i - pre.length];
             //out += param[i] + " ";
+        }
+        //TODO checks to prevent SIGSEGV
+        for(int i = 0; i < param.length;i++)
+        {
+            if(mydeck.equals("") || enemydeck.equals(""))
+            {
+                GlobalData.error(this,"Deck missing", "Deck missing");
+                return;
+            }
+            if(param[i].equals("climbex"))
+            {
+                if(i +2>=param.length || !param[i+2].matches("\\d+"))
+                {
+                    GlobalData.error(this,"Climbex Param missing", "Add it to the start of flags");
+                    return;
+                }
+
+            }
+            if(param[i].equals("anneal"))
+            {
+                if(i +3>=param.length || !param[i+2].matches("\\d+") || !param[i+3].matches("\\d+"))
+                {
+                    GlobalData.error(this,"Anneal Param missing", "Add it to the start of flags");
+                    return;
+                }
+            }
         }
         //out += "\n\n";
 
@@ -434,6 +500,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         editor.putString("enemydeck",((EditText) findViewById(R.id.et_enemydeck)).getText().toString() );
         editor.putString("myfort",((EditText) findViewById(R.id.et_myfort)).getText().toString() );
         editor.putString("enemyfort",((EditText) findViewById(R.id.et_enemyfort)).getText().toString() );
+        editor.putString("effect",((AutoCompleteTextView) findViewById(R.id.sp_effect)).getText().toString());
 
         editor.putString("flags",((EditText) findViewById(R.id.et_flags)).getText().toString() );
         editor.putString("fund",((EditText) findViewById(R.id.et_fund)).getText().toString() );
@@ -447,7 +514,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         editor.putString("strategy",((Spinner) findViewById(R.id.sp_strategy)).getSelectedItem().toString());
         editor.putString("order",((Spinner) findViewById(R.id.sp_order)).getSelectedItem().toString());
         editor.putString("endgame",((Spinner) findViewById(R.id.sp_endgame)).getSelectedItem().toString());
-        editor.putString("effect",((Spinner) findViewById(R.id.sp_effect)).getSelectedItem().toString());
         editor.commit();
     }
 
@@ -500,6 +566,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 Wget.wGet(tuodir + "data/" + "bges.txt", "https://raw.githubusercontent.com/APN-Pucky/tyrant_optimize/merged/data/bges.txt");
                 mNotificationManager.notify(1, mBuilder.setProgress(max_p,max_p,false).build());
                 mNotificationManager.cancel(1);
+                //GlobalData.alert(MainActivity.this,"Restart to reload XML");
             }
         });
     }

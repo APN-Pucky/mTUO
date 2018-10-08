@@ -1,33 +1,44 @@
 apply plugin: 'com.android.application'
 
-def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.67.0";
-def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
-def my_boost_dir_inc = my_boost_dir + "/include"
-
+    //def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.67.0";
+    //def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
+    //def my_boost_dir_inc = my_boost_dir + "/include"
+    def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.68.0";
+    //def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
+    //def my_boost_dir_inc = projectDir.getAbsolutePath() + "/prebuilt/1.67.0"+ "/include"
 // println '.... my message : boost_build_dir = ' + boost_build_dir
-
+def getTUOVersion = {
+    def hashStdOut = new ByteArrayOutputStream()
+    exec {
+        workingDir projectDir.getAbsolutePath() + "/src/main/cpp/tyrant_optimize"
+        commandLine 'git', 'describe', '--tags', '--abbrev=0', '--dirty'
+        standardOutput = hashStdOut
+    }
+    return hashStdOut.toString().trim()
+}
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "de.neuwirthinformatik.Alexander.mTUO"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 10
-        versionName "3.0"
+        versionCode 11
+        versionName "3.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 // flags for the c++ compiler eg "-std=c++14 -frtti -fexceptions"
                 // If you set cppFlags to "-std=c++14", you may need to build your boost libraries
                 // with the same flags, depending on your compiler defaults.
-                // cppFlags "-std=c++14"
 
                 // this causes libc++_shared.so to get packaged into .apk
-                arguments '-DANDROID_STL=c++_shared'
 
-                // This is used in CMakeLists.txt so our native code can find/use (prebuilt) boost
-                arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_dir_libs
-                arguments '-DMY_BOOST_INC_DIR=' + my_boost_dir_inc
+                arguments   '-DANDROID_STL=c++_shared'//gnustl_shared',//c++_shared',//gnustl_shared',
+                arguments            '-DTYRANT_OPTIMIZER_VERSION=' + getTUOVersion()
+                // This is used in CMakeLists167.txt so our native code can find/use (prebuilt) boost
+                arguments '-DMY_BOOST_DIR=' + my_boost_dir
+                //arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_dir_libs
+                //arguments '-DMY_BOOST_INC_DIR=' + my_boost_dir_inc
 
             }
         }
@@ -46,6 +57,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
     externalNativeBuild {
@@ -56,7 +68,7 @@ android {
 
     sourceSets {
         main {
-            // Android Studio doesn't package precompiled external (*.so) libs into apk, even if linked against via "add_library (... SHARED IMPORTED) in CMakeLists.txt
+            // Android Studio doesn't package precompiled external (*.so) libs into apk, even if linked against via "add_library (... SHARED IMPORTED) in CMakeLists167.txt
             // See eg https://stackoverflow.com/questions/24357687/how-to-include-so-library-in-android-studio/29234765
             // Hopefully this will be remedied in near future.
             // As a workaroun in the meantime, need to add them manually to jniLibs.srcDirs
@@ -64,7 +76,7 @@ android {
             // If you want to just include those necessary (eh chrono,, system) copy/link them to a separate dir, and reference that dir here instead.
             jniLibs.srcDirs = [
                     // should contain any external libs which should be compiled in {armeabi-v7a,arm64-v8a,x86,x86_64,mips} subdirs
-                    my_boost_dir_libs
+                    //my_boost_dir_libs
 
                     //, "src/main/JniLibs/boost" // could add additional dirs (with ABI subdirs) to be packaged into apk like this.
                     // Relative paths like this will be interpreted as relative to "app" dir
@@ -86,6 +98,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    //compileOnly 'org.projectlombok:lombok:1.16.22'
+    //annotationProcessor 'org.projectlombok:lombok:1.16.22'
 }
 
 //------------------------------------------------------------

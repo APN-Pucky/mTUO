@@ -1,5 +1,6 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +8,7 @@ import java.io.InputStream;
 public class StreamUtil {
 
 
-	public static String readFullyAsString(InputStream inputStream, String encoding) throws IOException {
+    public static String readFullyAsString(InputStream inputStream, String encoding) throws IOException {
         return readFully(inputStream).toString(encoding);
     }
 

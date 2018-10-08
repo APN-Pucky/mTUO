@@ -1,8 +1,5 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;
@@ -71,7 +66,7 @@ public class OutActivity extends AppCompatActivity {
         if(getIntent().hasExtra("stop"))
         {
             Log.d("TUO_OutActivity","stop");
-            Global.stopAllTUO(this);
+            GlobalData.stopAllTUO(this);
 
         }
         _this = this;

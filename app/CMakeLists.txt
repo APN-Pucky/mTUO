@@ -5,56 +5,54 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set( CMAKE_CXX_STANDARD 11 )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Ofast")
 
-add_definitions(-DTYRANT_OPTIMIZER_VERSION="Android Build" -DNDEBUG -DNQUEST -DNTIMER)
+add_definitions(-DNDEBUG -DNQUEST -DNTIMER)
 #-----------------------------------------
 #add_library (tuo  SHARED
 #             src/main/cpp/tyrant_optimize.cpp)
 
 
 #-----------------------------------------
-add_library (boost_system SHARED IMPORTED)
+add_library (boost_system STATIC IMPORTED)
 
 set_target_properties( boost_system PROPERTIES IMPORTED_LOCATION
-                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_system.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_system.a
                     )
 #-----------------------------------------
-add_library( boost_chrono SHARED IMPORTED)
+add_library( boost_chrono STATIC IMPORTED)
 
 set_target_properties(boost_chrono PROPERTIES IMPORTED_LOCATION
-                    ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_chrono.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_chrono.a
                     )
 #-----------------------------------------
-add_library( boost_thread SHARED IMPORTED)
+add_library( boost_thread STATIC IMPORTED)
 
 set_target_properties(boost_thread PROPERTIES IMPORTED_LOCATION
-        ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_thread.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_thread.a
         )
 #-----------------------------------------
-add_library( boost_regex SHARED IMPORTED)
+add_library( boost_regex STATIC IMPORTED)
 
 set_target_properties(boost_regex PROPERTIES IMPORTED_LOCATION
-        ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_regex.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_regex.a
         )
 #-----------------------------------------
-add_library( boost_timer SHARED IMPORTED)
+add_library( boost_timer STATIC IMPORTED)
 
 set_target_properties(boost_timer PROPERTIES IMPORTED_LOCATION
-        ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_timer.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_timer.a
         )
 #-----------------------------------------
-add_library( boost_filesystem SHARED IMPORTED)
+add_library( boost_filesystem STATIC IMPORTED)
 
 set_target_properties(boost_filesystem PROPERTIES IMPORTED_LOCATION
-        ${MY_BOOST_LIBS_DIR}/${ANDROID_ABI}/libboost_filesystem.so
+        ${MY_BOOST_DIR}/${ANDROID_ABI}/lib/libboost_filesystem.a
         )
 #-----------------------------------------
+#include_directories( ${MY_BOOST_DIR_INC} )
 
-include_directories( ${MY_BOOST_INC_DIR}
-                    )
-include_directories(src/main/cpp/tyrant_optimize/)
+include_directories( ${MY_BOOST_DIR}/${ANDROID_ABI}/include/boost-1_68/ )
 #-----------------------------------------
 find_library (log-lib log)
 
