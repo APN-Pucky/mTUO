@@ -1,6 +1,6 @@
 ## ArcheryStats: Privacy policy
 
-Welcome to the ArcheryStats app for Android!
+Welcome to the mTUO app for Android!
 
 This is an open source Android app developed by Alexander Puck Neuwirth. 
 The source code is available on GitHub under the GPL3+ license; the app is also available on Google Play.
