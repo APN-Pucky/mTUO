@@ -6,7 +6,7 @@ apply plugin: 'com.android.application'
     def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.68.0";
     //def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
     //def my_boost_dir_inc = projectDir.getAbsolutePath() + "/prebuilt/1.67.0"+ "/include"
-// println '.... my message : boost_build_dir = ' + boost_build_dir
+    // println '.... my message : boost_build_dir = ' + boost_build_dir
 def getTUOVersion = {
     def hashStdOut = new ByteArrayOutputStream()
     exec {
@@ -17,7 +17,7 @@ def getTUOVersion = {
     return hashStdOut.toString().trim()
 }
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
     defaultConfig {
         applicationId "de.neuwirthinformatik.Alexander.mTUO"
         minSdkVersion 21
@@ -34,7 +34,7 @@ android {
                 // this causes libc++_shared.so to get packaged into .apk
 
                 arguments   '-DANDROID_STL=c++_shared'//gnustl_shared',//c++_shared',//gnustl_shared',
-                arguments            '-DTYRANT_OPTIMIZER_VERSION=' + getTUOVersion()
+                arguments   '-DTYRANT_OPTIMIZER_VERSION=' + getTUOVersion()
                 // This is used in CMakeLists167.txt so our native code can find/use (prebuilt) boost
                 arguments '-DMY_BOOST_DIR=' + my_boost_dir
                 //arguments '-DMY_BOOST_LIBS_DIR=' + my_boost_dir_libs
@@ -83,8 +83,7 @@ android {
             ]
         }
     }
-
-
+    ndkVersion "25.0.8775105"
 }
 
 dependencies {
@@ -108,7 +107,7 @@ def local_props(key) { // reads ~ value from local.properties file
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     def val = properties.getProperty(key, null)
     if (val == null)
-        throw new GradleException("""\
+        throw new RuntimeException("""\
                 cant find value '${key}' in file 'local.properties'.  """)
 
     return val

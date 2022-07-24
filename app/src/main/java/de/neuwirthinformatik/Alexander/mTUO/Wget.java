@@ -20,7 +20,7 @@ import java.net.URL;
 
 public class Wget {
 	public static enum Status {
-		Success, MalformedUrl, IoException, UnableToCloseOutputStream;
+		Success, MalformedUrl, IoException, UnableToCloseOutputStream,MovedPermanently;
 	}
 	
 
@@ -104,6 +104,7 @@ public class Wget {
 				return null;
 			}
 		}
+		if(ret.contains("301 Moved Permanently")) return null;
 		return ret;
 	}
 
@@ -154,6 +155,7 @@ public class Wget {
 				return Wget.Status.UnableToCloseOutputStream;
 			}
 		}
+		if(GlobalData.readFile(saveAsFile).contains("301 Moved Permanently")) return Status.MovedPermanently;
 		return Wget.Status.Success;
 	}
 }

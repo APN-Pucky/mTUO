@@ -12,6 +12,7 @@
 bin/
 gen/
 out/
+app/.cxx/
 
 # Gradle files
 .gradle/
@@ -72,4 +73,5 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
 
