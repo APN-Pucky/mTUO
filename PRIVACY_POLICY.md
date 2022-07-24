@@ -1,4 +1,4 @@
-## ArcheryStats: Privacy policy
+## mTUO: Privacy policy
 
 Welcome to the mTUO app for Android!
 
