@@ -1,0 +1,131 @@
+ninja: Entering directory `/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/armeabi-v7a'
+[1/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/tyrant.cpp:1:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+1 warning generated.
+[2/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/cards.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/cards.cpp:10:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+1 warning generated.
+[3/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/deck.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/deck.cpp:1:
+In file included from ../../../../src/main/cpp/tyrant_optimize/deck.h:11:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+In file included from ../../../../src/main/cpp/tyrant_optimize/deck.cpp:13:
+../../../../src/main/cpp/tyrant_optimize/read.h:28:72: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+                                                                       ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from ../../../../src/main/cpp/tyrant_optimize/deck.cpp:13:
+../../../../src/main/cpp/tyrant_optimize/read.h:35:63: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+                                                              ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+3 warnings generated.
+[4/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/xml.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/xml.cpp:1:
+In file included from ../../../../src/main/cpp/tyrant_optimize/xml.h:5:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+1 warning generated.
+[5/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/read.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/read.cpp:1:
+In file included from ../../../../src/main/cpp/tyrant_optimize/read.h:10:
+In file included from ../../../../src/main/cpp/tyrant_optimize/deck.h:11:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+In file included from ../../../../src/main/cpp/tyrant_optimize/read.cpp:1:
+../../../../src/main/cpp/tyrant_optimize/read.h:28:72: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+                                                                       ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from ../../../../src/main/cpp/tyrant_optimize/read.cpp:1:
+../../../../src/main/cpp/tyrant_optimize/read.h:35:63: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+                                                              ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+3 warnings generated.
+[6/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/sim.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/sim.cpp:1:
+In file included from ../../../../src/main/cpp/tyrant_optimize/sim.h:14:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+1 warning generated.
+[7/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant_optimize.cpp.o
+In file included from ../../../../src/main/cpp/tyrant_optimize/tyrant_optimize.cpp:41:
+In file included from ../../../../src/main/cpp/tyrant_optimize/card.h:8:
+../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+inline uint8_t byte_bits_count(register uint8_t i)
+                               ^~~~~~~~~
+In file included from ../../../../src/main/cpp/tyrant_optimize/tyrant_optimize.cpp:44:
+../../../../src/main/cpp/tyrant_optimize/read.h:28:72: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+                                                                       ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from ../../../../src/main/cpp/tyrant_optimize/tyrant_optimize.cpp:44:
+../../../../src/main/cpp/tyrant_optimize/read.h:35:63: warning: 'ptr_fun<int, int>' is deprecated [-Wdeprecated-declarations]
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+                                                              ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional:1111:1: note: 'ptr_fun<int, int>' has been explicitly marked deprecated here
+_LIBCPP_DEPRECATED_IN_CXX11 inline _LIBCPP_INLINE_VISIBILITY
+^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:989:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+#  define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+                                      ^
+/home/apn/Android/Sdk/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config:978:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+../../../../src/main/cpp/tyrant_optimize/tyrant_optimize.cpp:195:28: warning: object backing the pointer will be destroyed at the end of the full-expression [-Wdangling-gsl]
+                auto sss = std::string(this->pbase(),
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+4 warnings generated.
+[8/8] Linking CXX shared library ../../../../build/intermediates/cxx/Debug/6a3b2315/obj/armeabi-v7a/libtuo.so

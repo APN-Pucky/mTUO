@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant_optimize.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/tyrant_optimize.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/tyrant_optimize.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/cards.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/cards.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/cards.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/deck.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/deck.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/deck.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/read.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/read.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/read.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/sim.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/sim.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/sim.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/tyrant.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/tyrant.cpp"
+},
+{
+  "directory": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64",
+  "command": "/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DNDEBUG -DNQUEST -DNTIMER -Dtuo_EXPORTS -I../../../../prebuilt/1.68.0/x86_64/include/boost-1_68 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -Ofast -O0 -fno-limit-debug-info  -fPIC -o CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/xml.cpp.o -c /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/xml.cpp",
+  "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/src/main/cpp/tyrant_optimize/xml.cpp"
+}
+]

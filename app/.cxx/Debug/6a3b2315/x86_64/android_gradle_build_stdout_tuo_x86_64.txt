@@ -1,0 +1,1 @@
+ninja: Entering directory `/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/x86_64'

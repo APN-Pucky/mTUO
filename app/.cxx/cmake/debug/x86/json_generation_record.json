@@ -1,0 +1,428 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "No CMake version was specified in build.gradle. Using default version 3.10.2.",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027/home/apn/Android/Sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "CMake \u00273.18.1\u0027 found in SDK did not match requested version \u00273.10.2\u0027.",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "CMake \u00273.22.1\u0027 found in SDK did not match requested version \u00273.10.2\u0027.",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "rebuilding JSON /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86/android_gradle_build.json due to:",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- expected json /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86/android_gradle_build.json file is not present, will remove stale json folder",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- missing previous command file /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86/build_command.txt, will remove stale json folder",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- command changed from previous, will remove stale json folder",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86\u0027",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /home/apn/Android/Sdk/cmake/3.10.2.4988404/bin/cmake\narguments : \n-H/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DCMAKE_TOOLCHAIN_FILE\u003d/home/apn/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DANDROID_ABI\u003dx86\n-DANDROID_NDK\u003d/home/apn/Android/Sdk/ndk/21.3.6528147\n-DANDROID_PLATFORM\u003dandroid-21\n-DCMAKE_ANDROID_ARCH_ABI\u003dx86\n-DCMAKE_ANDROID_NDK\u003d/home/apn/Android/Sdk/ndk/21.3.6528147\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/build/intermediates/cmake/debug/obj/x86\n-DCMAKE_MAKE_PROGRAM\u003d/home/apn/Android/Sdk/cmake/3.10.2.4988404/bin/ninja\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d21\n-DANDROID_STL\u003dc++_shared\n-DTYRANT_OPTIMIZER_VERSION\u003d1.3-dirty\n-DMY_BOOST_DIR\u003d/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/prebuilt/1.68.0\n-B/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86\n-GNinja\njvmArgs : \n\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "[\u003d\u003d \"CMake Server\" \u003d\u003d[\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"supportedProtocolVersions\":[{\"isExperimental\":true,\"major\":1,\"minor\":1}],\"type\":\"hello\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "]\u003d\u003d \"CMake Server\" \u003d\u003d]\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\n  \"type\": \"handshake\",\n  \"cookie\": \"gradle-cmake-cookie\",\n  \"protocolVersion\": {\n    \"isExperimental\": true,\n    \"major\": 1,\n    \"minor\": 1\n  },\n  \"sourceDirectory\": \"/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app\",\n  \"buildDirectory\": \"/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/cmake/debug/x86\",\n  \"generator\": \"Ninja\"\n}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"gradle-cmake-cookie\",\"inReplyTo\":\"handshake\",\"type\":\"reply\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\n  \"type\": \"configure\",\n  \"cacheArguments\": [\n    \"\",\n    \"-DCMAKE_BUILD_TYPE\\u003dDebug\",\n    \"-DCMAKE_TOOLCHAIN_FILE\\u003d/home/apn/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\",\n    \"-DANDROID_ABI\\u003dx86\",\n    \"-DANDROID_NDK\\u003d/home/apn/Android/Sdk/ndk/21.3.6528147\",\n    \"-DANDROID_PLATFORM\\u003dandroid-21\",\n    \"-DCMAKE_ANDROID_ARCH_ABI\\u003dx86\",\n    \"-DCMAKE_ANDROID_NDK\\u003d/home/apn/Android/Sdk/ndk/21.3.6528147\",\n    \"-DCMAKE_EXPORT_COMPILE_COMMANDS\\u003dON\",\n    \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\\u003d/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/build/intermediates/cmake/debug/obj/x86\",\n    \"-DCMAKE_MAKE_PROGRAM\\u003d/home/apn/Android/Sdk/cmake/3.10.2.4988404/bin/ninja\",\n    \"-DCMAKE_SYSTEM_NAME\\u003dAndroid\",\n    \"-DCMAKE_SYSTEM_VERSION\\u003d21\",\n    \"-DANDROID_STL\\u003dc++_shared\",\n    \"-DTYRANT_OPTIMIZER_VERSION\\u003d1.3-dirty\",\n    \"-DMY_BOOST_DIR\\u003d/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/prebuilt/1.68.0\"\n  ]\n}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":33,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compiler ABI info\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compiler ABI info",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":65,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compiler ABI info - done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compiler ABI info - done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compile features\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compile features",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":96,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":126,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":155,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compile features - done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compile features - done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":184,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compiler ABI info\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compiler ABI info",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":211,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compiler ABI info - done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compiler ABI info - done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compile features\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compile features",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":237,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":262,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":287,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":311,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compile features - done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compile features - done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":1000,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Configuring done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Configuring done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"type\":\"reply\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"type\":\"compute\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"message\":\"CMake Error at CMakeLists.txt:62 (add_library):\\n  Cannot find source file:\\n\\n    src/main/cpp/tyrant_optimize/tyrant_optimize.cpp\\n\\n  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp\\n  .hxx .in .txx\\n\\n\",\"title\":\"Error\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "ERROR",
+    "message": "CMake Error at /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt:62 (add_library):\n  Cannot find source file:\n\n    src/main/cpp/tyrant_optimize/tyrant_optimize.cpp\n\n  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp\n  .hxx .in .txx\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"message\":\"CMake Error: CMake can not determine linker language for target: tuo\",\"title\":\"Error\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "ERROR",
+    "message": "CMake Error: CMake can not determine linker language for target: tuo",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"progressCurrent\":1000,\"progressMaximum\":1000,\"progressMessage\":\"Generating\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"message\":\"Generating done\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Generating done",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"message\":\"CMake Warning:\\n  Manually-specified variables were not used by the project:\\n\\n    TYRANT_OPTIMIZER_VERSION\\n\\n\",\"title\":\"Warning\",\"type\":\"message\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "WARN",
+    "message": "CMake Warning:\n  Manually-specified variables were not used by the project:\n\n    TYRANT_OPTIMIZER_VERSION\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"errorMessage\":\"Failed to compute build system.\",\"inReplyTo\":\"compute\",\"type\":\"error\"}\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "ERROR",
+    "message": "Failed to compute build system.",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed with problem. Exception: com.android.ide.common.process.ProcessException: Error computing CMake server result.\r\nCheck for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang\nCheck for working C compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works\nDetecting C compiler ABI info\nDetecting C compiler ABI info - done\nDetecting C compile features\nDetecting C compile features - done\nCheck for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++\nCheck for working CXX compiler: /home/apn/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works\nDetecting CXX compiler ABI info\nDetecting CXX compiler ABI info - done\nDetecting CXX compile features\nDetecting CXX compile features - done\nConfiguring done\n",
+    "file": "/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/CMakeLists.txt",
+    "tag": "debug|x86"
+  }
+]

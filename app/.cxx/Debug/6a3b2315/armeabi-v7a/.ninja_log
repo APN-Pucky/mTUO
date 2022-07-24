@@ -1,0 +1,9 @@
+# ninja log v5
+0	1081	1658689332	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant.cpp.o	13579f3b23b44e83
+0	1974	1658689333	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/cards.cpp.o	7323d4d84ca8121d
+0	3461	1658689334	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/deck.cpp.o	82eea8f0d28d76a8
+0	3773	1658689334	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/xml.cpp.o	31222ed4402d1fb1
+0	4910	1658689336	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/read.cpp.o	a27b267cc0cd6528
+0	5193	1658689336	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/sim.cpp.o	ab3e601a46010775
+0	9309	1658689340	CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant_optimize.cpp.o	4383b1c731dcaaaa
+9309	9375	1658689340	../../../../build/intermediates/cxx/Debug/6a3b2315/obj/armeabi-v7a/libtuo.so	37eca36c844a507

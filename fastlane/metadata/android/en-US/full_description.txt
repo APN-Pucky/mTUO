@@ -1,0 +1,2 @@
+This project ports tuo to android.
+See https://github.com/APN-Pucky/tyrant_optimize
