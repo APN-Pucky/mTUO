@@ -1,3 +1,0 @@
-/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/arm64-v8a/CMakeFiles/rebuild_cache.dir
-/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/arm64-v8a/CMakeFiles/edit_cache.dir
-/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/arm64-v8a/CMakeFiles/tuo.dir

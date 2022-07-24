@@ -1,7 +1,0 @@
-ninja: Entering directory `/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/6a3b2315/arm64-v8a'
-[1/8] Building CXX object CMakeFiles/tuo.dir/src/main/cpp/tyrant_optimize/tyrant.cpp.o
-In file included from ../../../../src/main/cpp/tyrant_optimize/tyrant.cpp:1:
-../../../../src/main/cpp/tyrant_optimize/tyrant.h:411:32: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
-inline uint8_t byte_bits_count(register uint8_t i)
-                               ^~~~~~~~~
-1 warning generated.

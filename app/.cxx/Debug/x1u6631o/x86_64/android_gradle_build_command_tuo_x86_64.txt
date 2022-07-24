@@ -1,7 +1,0 @@
-Executable : /home/apn/Android/Sdk/cmake/3.18.1/bin/ninja
-arguments : 
--C
-/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/mTUO/app/.cxx/Debug/x1u6631o/x86_64
-tuo
-jvmArgs : 
-
