@@ -1,0 +1,1 @@
+Init after rename of the app to lowercase.

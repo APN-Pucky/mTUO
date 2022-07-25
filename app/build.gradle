@@ -19,7 +19,7 @@ def getTUOVersion = {
 android {
     compileSdkVersion 32
     defaultConfig {
-        applicationId "de.neuwirthinformatik.alexander.mTUO"
+        applicationId "de.neuwirthinformatik.alexander.mtuo"
         minSdkVersion 21
         //targetSdkVersion 27
         targetSdkVersion 32
