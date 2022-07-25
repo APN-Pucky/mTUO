@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

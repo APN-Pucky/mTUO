@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +58,7 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.neuwirthinformatik.Alexander.mTUO.R.menu.menu_history, menu);
+        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mTUO.R.menu.menu_history, menu);
         return true;
     }
 

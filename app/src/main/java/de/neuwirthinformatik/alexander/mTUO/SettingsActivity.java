@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.annotation.TargetApi;
 import android.content.Context;

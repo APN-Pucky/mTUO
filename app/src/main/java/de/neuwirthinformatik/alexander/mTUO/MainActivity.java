@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -43,10 +41,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.neuwirthinformatik.alexander.mTUO.R;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, Configuration.Provider {
     public static final String textEditorPackage = "fr.xgouchet.texteditor";
@@ -79,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         _this = this;
         Log.d("TUOMainActivity", "onCreate");
-        setContentView(de.neuwirthinformatik.Alexander.mTUO.R.layout.activity_main);
-        Toolbar toolbar = findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
+        setContentView(de.neuwirthinformatik.alexander.mTUO.R.layout.activity_main);
+        Toolbar toolbar = findViewById(de.neuwirthinformatik.alexander.mTUO.R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() + " v" + BuildConfig.VERSION_NAME);
 
@@ -266,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.neuwirthinformatik.Alexander.mTUO.R.menu.menu_main, menu);
+        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mTUO.R.menu.menu_main, menu);
         return true;
     }
 
@@ -278,41 +277,41 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_output) {
+        if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_output) {
             Intent intent = new Intent(getApplicationContext(), OutActivity.class);
             startActivity(intent);
             return true;
         }
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_xml) {
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_xml) {
             updateXML();
             return true;
         }
         /*
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_own) {
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_own) {
             editFile(tuodir + "data/ownedcards.txt");
             return true;
         }
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_custom) {
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_custom) {
             editFile(tuodir + "data/customdecks.txt");
             return true;
         }*/
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_settings)
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_settings)
         {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             return true;
-        }else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_donate)
+        }else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_donate)
         {
             GlobalData.error(this,"Paypal","apnpucky@gmail.com");
             return true;
         }
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_history)
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_history)
         {
             Intent i = new Intent(this, HistoryActivity.class);
             startActivity(i);
             return true;
         }
-        else if (id == de.neuwirthinformatik.Alexander.mTUO.R.id.action_exit)
+        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_exit)
         {
             GlobalData.stopAllTUO(this);
             finish();

@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -49,7 +48,7 @@ public class GlobalData {
         ActivityManager manager = (ActivityManager) a.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> services = manager.getRunningAppProcesses();
         for (ActivityManager.RunningAppProcessInfo s : services) {
-            if (s.processName.equals("de.neuwirthinformatik.Alexander.mTUO:tuo"))
+            if (s.processName.equals("de.neuwirthinformatik.alexander.mTUO:tuo"))
                 android.os.Process.killProcess(s.pid);
             Log.d("TUO_PROC", s.processName);
         }

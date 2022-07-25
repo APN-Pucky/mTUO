@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import de.neuwirthinformatik.alexander.mTUO.R;
 
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;
@@ -44,9 +46,9 @@ public class OutActivity extends AppCompatActivity {
 
 
 
-        tv = (TextView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.tv_out);
+        tv = (TextView) findViewById(R.id.tv_out);
         tv.setMovementMethod(new ScrollingMovementMethod());
-        sv = (ScrollView) findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.sv_out);
+        sv = (ScrollView) findViewById(R.id.sv_out);
         sv.post(new Runnable()
         {
             public void run()

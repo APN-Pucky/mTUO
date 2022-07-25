@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -8,12 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.File;
 
 public class InActivity extends AppCompatActivity {
     static InActivity _this = null;
@@ -56,7 +53,7 @@ public class InActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.neuwirthinformatik.Alexander.mTUO.R.menu.menu_in, menu);
+        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mTUO.R.menu.menu_in, menu);
         return true;
     }
 

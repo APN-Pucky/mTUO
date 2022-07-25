@@ -1,6 +1,5 @@
-package de.neuwirthinformatik.Alexander.mTUO;
+package de.neuwirthinformatik.alexander.mTUO;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedInputStream;

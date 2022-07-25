@@ -3,17 +3,17 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="de.neuwirthinformatik.Alexander.mTUO.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="de.neuwirthinformatik.alexander.mTUO.SettingsActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pt_general" />
 
     <header
-        android:fragment="de.neuwirthinformatik.Alexander.mTUO.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="de.neuwirthinformatik.alexander.mTUO.SettingsActivity$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/pt_notification" />
 
     <header
-        android:fragment="de.neuwirthinformatik.Alexander.mTUO.SettingsActivity$DataSyncPreferenceFragment"
+        android:fragment="de.neuwirthinformatik.alexander.mTUO.SettingsActivity$DataSyncPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pt_output_history" />
 
