@@ -73,23 +73,7 @@ public class TUOWorker extends Worker {
         int id = (int)System.currentTimeMillis();
         Log.d("TUO_PROC_IntentService", "onHandleIntent");
 
-        tuo = new TUO(this.getApplicationContext(),receiver);
-        out.setLength(0);
-        out.append("./");
-        out.append(param[0] + " ");
-        out.append("\"");
-        out.append(param[1] + "\" ");
-        out.append("\"");
-        out.append(param[2] + "\" ");
-        for (int i = 3; i < param.length; i++) {
-            out.append(param[i] + " ");
-        }
-        out.append("\n\n");
-        Bundle b = new Bundle();
-        final String so = out.toString();
-        Log.d("TUO_RUN", so);
-        b.putString("out",so);
-        receiver.send(STATUS_RUNNING,b);
+        tuo = new TUO(this.getApplicationContext(),param,op,receiver);
         mNotificationManager =
                 (NotificationManager) this.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(getApplicationContext(), "tuo_channel")
@@ -106,18 +90,9 @@ public class TUOWorker extends Worker {
         nintent.putExtra("stop",android.os.Process.myPid());
         pi = PendingIntent.getActivity(this.getApplicationContext(), id+3, nintent,PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
         mBuilder.addAction(R.drawable.ic_clear,"Cancel All",pi);
-/*
-        Intent deleteIntent = new Intent(this, TUOIntentService.class);
-        deleteIntent.putExtra("stop", true);
-        PendingIntent deletePendingIntent = PendingIntent.getService(this,
-                0,
-                deleteIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
-        mBuilder.addAction(R.drawable.ic_cancel,"Cancel",deletePendingIntent);*/
-
         Notification n= mBuilder.build();
         setForegroundAsync(new ForegroundInfo(id+1,n));
-        callMain(param);
+        tuo.run();
 
         Log.d("TUO_IntentService", "onHandleIntentFinished");
         receiver.send(STATUS_FINISHED,Bundle.EMPTY);
@@ -133,11 +108,6 @@ public class TUOWorker extends Worker {
         if(sp.getBoolean("notification_sound",false))mBuilder.setSound(Uri.parse(sp.getString("notification_sound_uri","content://settings/system/notification_sound")));
         if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});
         if(sp.getBoolean("notification_led",false))mBuilder.setLights(Color.RED, 3000, 3000);
-        if(sp.getBoolean("history",false)) {
-            //save to output
-            String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-            GlobalData.writeToFile(tuodir + "output/" + name, result + "WTF");
-        }
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();
         return Result.success();

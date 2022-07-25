@@ -17,9 +17,9 @@ import java.io.File;
 
 public class InActivity extends AppCompatActivity {
     static InActivity _this = null;
-    static String file = "";
-    static EditText tv=null;
-    static ScrollView sv=null;
+    String file = "";
+    EditText tv=null;
+    ScrollView sv=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +70,8 @@ public class InActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
             Log.d("TUO_InActivity","Save");
-            String text = InActivity.tv.getText().toString();
-            GlobalData.writeToFile(this.file ,text );
+            String text = tv.getText().toString();
+            GlobalData.writeToFile(file ,text );
             tv.setSelection(tv.getText().length());
             Log.d("TUO_InActivity",text);
             finish();
@@ -94,13 +94,13 @@ public class InActivity extends AppCompatActivity {
         if(getIntent().hasExtra("file"))
         {
             Log.d("TUO_InActivity","file");
-            this.file = getIntent().getStringExtra("file");
+            file = getIntent().getStringExtra("file");
             String in  = GlobalData.readFile(file);
             Log.d("TUO_InActivity",in);
             tv.setText(in);
         }
         else {
-            this.file = "";
+            file = "";
         }
 
         _this = this;
@@ -109,10 +109,10 @@ public class InActivity extends AppCompatActivity {
 
     public void setText(final String out)
     {
-        if (InActivity.tv != null) {
-            InActivity._this.runOnUiThread(new Runnable() {
+        if (tv != null) {
+            runOnUiThread(new Runnable() {
                 public void run() {
-                    InActivity.tv.setText(out);
+                    tv.setText(out);
                 }
             });
         }

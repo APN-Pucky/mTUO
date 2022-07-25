@@ -20,10 +20,10 @@ android {
     compileSdkVersion 32
     defaultConfig {
         applicationId "de.neuwirthinformatik.Alexander.mTUO"
-        minSdkVersion 26
+        minSdkVersion 21
         //targetSdkVersion 27
         targetSdkVersion 32
-        versionCode 13
+        versionCode 18
         versionName "4.4.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {

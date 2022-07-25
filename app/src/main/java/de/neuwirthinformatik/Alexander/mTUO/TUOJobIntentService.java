@@ -61,24 +61,8 @@ public class TUOJobIntentService extends JobIntentService {
         String op = intent.getStringExtra("operation");
 
 
-        String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-        tuo = new TUO(this,receiver);
-        out.setLength(0);
-        out.append("./");
-        out.append(param[0] + " ");
-        out.append("\"");
-        out.append(param[1] + "\" ");
-        out.append("\"");
-        out.append(param[2] + "\" ");
-        for (int i = 3; i < param.length; i++) {
-            out.append(param[i] + " ");
-        }
-        out.append("\n\n");
-        Bundle b = new Bundle();
-        final String so = out.toString();
-        b.putString("out",so);
-        receiver.send(STATUS_RUNNING,b);
-        Log.d("TUO_RUN", so);
+        tuo = new TUO(this,param,op,receiver);
+
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(getApplicationContext(), "tuo_channel")
@@ -105,14 +89,8 @@ public class TUOJobIntentService extends JobIntentService {
         mBuilder.addAction(R.drawable.ic_cancel,"Cancel",deletePendingIntent);*/
 
         startForeground(id+1,mBuilder.build());
-        callMain(param);
+        tuo.run();
 
-        Log.d("TUO_IntentService", "onHandleIntentFinished");
-        b = new Bundle();
-        final String sos = tuo.out.toString();
-        b.putString("name",name);
-        b.putString("out",sos);
-        receiver.send(STATUS_FINISHED,b);
 
         mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
         mBuilder.mActions.clear();
@@ -131,7 +109,4 @@ public class TUOJobIntentService extends JobIntentService {
     }
 
 
-    public void callMain(String[] args) {tuo.callMain(args);};
-
-    public String stringFromJNI(String s) {return tuo.stringFromJNI(s);};
 }

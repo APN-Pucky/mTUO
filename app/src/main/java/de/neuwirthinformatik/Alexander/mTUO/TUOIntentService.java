@@ -49,31 +49,18 @@ public class TUOIntentService extends IntentService {
         //Hacky ugly but works
         //SharedPreferences sp = getSharedPreferences(getPackageName()+"_preferences",Context.MODE_MULTI_PROCESS);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        int id = (int)System.currentTimeMillis();
         Log.d("TUO_PROC_IntentService", "onHandleIntent");
         receiver = intent.getParcelableExtra("receiver");
         String[] param = intent.getStringArrayExtra("param");
         String op = intent.getStringExtra("operation");
 
 
-        String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-        tuo = new TUO(this,receiver);
-        out.setLength(0);
-        out.append("./");
-        out.append(param[0] + " ");
-        out.append("\"");
-        out.append(param[1] + "\" ");
-        out.append("\"");
-        out.append(param[2] + "\" ");
-        for (int i = 3; i < param.length; i++) {
-            out.append(param[i] + " ");
-        }
-        out.append("\n\n");
-        Bundle b = new Bundle();
-        final String so = out.toString();
-        Log.d("TUO_RUN", so);
-        b.putString("out",so);
-        receiver.send(STATUS_RUNNING,b);
+        int id = (int)System.currentTimeMillis();
+
+
+
+        tuo = new TUO(this,param,op,receiver);
+
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(getApplicationContext(), "tuo_channel")
@@ -83,12 +70,12 @@ public class TUOIntentService extends IntentService {
                 .setOngoing(true);
         Intent nintent = new Intent(getApplicationContext(), OutActivity.class);
 
-        PendingIntent pi = PendingIntent.getActivity(this, id+2, nintent,PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getActivity(this, id+2, nintent,MainActivity.intent_flag);
         mBuilder.setContentIntent(pi);
 
         nintent = new Intent(getApplicationContext(), OutActivity.class);
         nintent.putExtra("stop",android.os.Process.myPid());
-        pi = PendingIntent.getActivity(this, id+3, nintent,PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        pi = PendingIntent.getActivity(this, id+3, nintent,MainActivity.intent_flag);
         mBuilder.addAction(R.drawable.ic_clear,"Cancel All",pi);
 /*
         Intent deleteIntent = new Intent(this, TUOIntentService.class);
@@ -100,14 +87,8 @@ public class TUOIntentService extends IntentService {
         mBuilder.addAction(R.drawable.ic_cancel,"Cancel",deletePendingIntent);*/
 
         startForeground(id+1,mBuilder.build());
-        callMain(param);
+        tuo.run();
 
-        Log.d("TUO_IntentService", "onHandleIntentFinished");
-                b = new Bundle();
-        final String sos = tuo.out.toString();
-        b.putString("name",name);
-        b.putString("out",sos);
-        receiver.send(STATUS_FINISHED,b);
 
         mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
         mBuilder.mActions.clear();
@@ -115,7 +96,7 @@ public class TUOIntentService extends IntentService {
         final String result = tuo.out.toString();
         nintent.putExtra("text",result);
         //Log.d("TUO_Out",out);
-        pi = PendingIntent.getActivity(this, id, nintent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        pi = PendingIntent.getActivity(this, id, nintent, MainActivity.intent_flag);
         mBuilder.setContentIntent(pi);
         if(sp.getBoolean("notification_sound",false))mBuilder.setSound(Uri.parse(sp.getString("notification_sound_uri","content://settings/system/notification_sound")));
         if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});
@@ -128,7 +109,4 @@ public class TUOIntentService extends IntentService {
 
 
 
-    public void callMain(String[] args) {tuo.callMain(args);};
-
-    public String stringFromJNI(String s) {return tuo.stringFromJNI(s);};
 }

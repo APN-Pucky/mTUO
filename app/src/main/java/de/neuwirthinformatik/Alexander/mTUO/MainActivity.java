@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static MainActivity _this;
     public SharedPreferences sp;
 
+    public static int intent_flag = PendingIntent.FLAG_ONE_SHOT;
+    static {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            intent_flag |= PendingIntent.FLAG_IMMUTABLE;
+        }
+    }
     NotificationManager mNotificationManager;
     //SharedPreferences preferences;
 
@@ -451,15 +457,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setOngoing(true);
 
         Intent intent = new Intent(getApplicationContext(), OutActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, MainActivity.intent_flag);
         mBuilder.setContentIntent(pi);
         //mNotificationManager.notify(0, mBuilder.build());
 
         Intent i = null;
         TUOResultReceiver receiver = getReceiver();
 
-        String mmode = "foreground";
+        String mmode = "intentservice";
         if (mmode.equals( "intentservice")) {
+
             i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
 
             i.putExtra("param",param);
@@ -469,6 +476,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             startService(i);
         }
         else if ( mmode.equals("jobintentservice")) {
+            //TODO cancel does not work
             i = new Intent(Intent.ACTION_SYNC, null, this,TUOJobIntentService.class);
 
             i.putExtra("param",param);
@@ -479,6 +487,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
         else if (mmode.equals("workmanager"))
         {
+            //TODO cancel does not work
                                         WorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(TUOWorker.class)
                                                 .setInputData(
                                                         new Data.Builder()

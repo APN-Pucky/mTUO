@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;
-    static TextView tv=null;
-    static ScrollView sv=null;
+    TextView tv=null;
+    ScrollView sv=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +75,10 @@ public class OutActivity extends AppCompatActivity {
 
     public void setText(final String out)
     {
-        if (OutActivity.tv != null) {
-            OutActivity._this.runOnUiThread(new Runnable() {
+        if (tv != null) {
+            runOnUiThread(new Runnable() {
                 public void run() {
-                    OutActivity.tv.setText(out);
+                    tv.setText(out);
                 }
             });
         }
