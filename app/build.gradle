@@ -23,8 +23,8 @@ android {
         minSdkVersion 21
         //targetSdkVersion 27
         targetSdkVersion 32
-        versionCode 20
-        versionName "4.4.1-r2"
+        versionCode 22
+        versionName "4.4.1-r4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
             cmake {
