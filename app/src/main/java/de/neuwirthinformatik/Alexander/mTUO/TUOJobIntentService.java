@@ -30,7 +30,7 @@ public class TUOJobIntentService extends JobIntentService {
     public static final int STATUS_ERROR = 2;
     public static StringBuilder out = new StringBuilder();
     private ResultReceiver receiver;
-        private TUO tuo;
+    private TUO tuo;
     public static String tuodir;
 
     public TUOJobIntentService() {
@@ -59,7 +59,10 @@ public class TUOJobIntentService extends JobIntentService {
         receiver = intent.getParcelableExtra("receiver");
         String[] param = intent.getStringArrayExtra("param");
         String op = intent.getStringExtra("operation");
-         tuo = new TUO(this,receiver);
+
+
+        String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
+        tuo = new TUO(this,receiver);
         out.setLength(0);
         out.append("./");
         out.append(param[0] + " ");
@@ -73,9 +76,9 @@ public class TUOJobIntentService extends JobIntentService {
         out.append("\n\n");
         Bundle b = new Bundle();
         final String so = out.toString();
-        Log.d("TUO_RUN", so);
         b.putString("out",so);
         receiver.send(STATUS_RUNNING,b);
+        Log.d("TUO_RUN", so);
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(getApplicationContext(), "tuo_channel")
@@ -105,7 +108,11 @@ public class TUOJobIntentService extends JobIntentService {
         callMain(param);
 
         Log.d("TUO_IntentService", "onHandleIntentFinished");
-        receiver.send(STATUS_FINISHED,Bundle.EMPTY);
+        b = new Bundle();
+        final String sos = tuo.out.toString();
+        b.putString("name",name);
+        b.putString("out",sos);
+        receiver.send(STATUS_FINISHED,b);
 
         mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
         mBuilder.mActions.clear();
@@ -119,10 +126,6 @@ public class TUOJobIntentService extends JobIntentService {
         if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});
         if(sp.getBoolean("notification_led",false))mBuilder.setLights(Color.RED, 3000, 3000);
         stopForeground(true);
-        if(sp.getBoolean("history",false)) {
-            String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-            GlobalData.writeToFile(tuodir + "output/" + name, result );
-        }
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();
     }

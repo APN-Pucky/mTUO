@@ -33,15 +33,16 @@ public class TUOIntentService extends IntentService {
     public TUOIntentService() {
         super("TUOIntentService");
 
-        Log.d("TUO_IntentService", "loading TUO lib");
+        Log.e("TUO_IntentService", "loading TUO lib");
         //System.loadLibrary("tuo");
-        Log.d("TUO_IntentService", "load TUO lib");
+        Log.e("TUO_IntentService", "load TUO lib");
         //_this = this;
     }
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.e("TUODONE", "OK");
         tuodir = GlobalData.tuodir();
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
@@ -53,6 +54,9 @@ public class TUOIntentService extends IntentService {
         receiver = intent.getParcelableExtra("receiver");
         String[] param = intent.getStringArrayExtra("param");
         String op = intent.getStringExtra("operation");
+
+
+        String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
         tuo = new TUO(this,receiver);
         out.setLength(0);
         out.append("./");
@@ -99,7 +103,11 @@ public class TUOIntentService extends IntentService {
         callMain(param);
 
         Log.d("TUO_IntentService", "onHandleIntentFinished");
-        receiver.send(STATUS_FINISHED,Bundle.EMPTY);
+                b = new Bundle();
+        final String sos = tuo.out.toString();
+        b.putString("name",name);
+        b.putString("out",sos);
+        receiver.send(STATUS_FINISHED,b);
 
         mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
         mBuilder.mActions.clear();
@@ -113,11 +121,7 @@ public class TUOIntentService extends IntentService {
         if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});
         if(sp.getBoolean("notification_led",false))mBuilder.setLights(Color.RED, 3000, 3000);
         stopForeground(true);
-        if(sp.getBoolean("history",false)) {
-            //save to output
-            String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
-            GlobalData.writeToFile(tuodir + "output/" + name, result );
-        }
+        Log.d("TUODONE", "DOK");
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();
     }

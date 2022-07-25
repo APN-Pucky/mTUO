@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,6 +18,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static String out = "";
     private String tuodir;
     public static MainActivity _this;
+    public SharedPreferences sp;
 
     NotificationManager mNotificationManager;
     //SharedPreferences preferences;
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() + " v" + BuildConfig.VERSION_NAME);
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
         //Request Permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -452,42 +456,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         //mNotificationManager.notify(0, mBuilder.build());
 
         Intent i = null;
-        TUOResultReceiver receiver = new TUOResultReceiver(new Handler(), new TUOResultReceiver.Receiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
+        TUOResultReceiver receiver = getReceiver();
 
-                Log.d("TUOIntentReceiver", "onReceiveResult");
-                switch (resultCode) {
-                    case TUOIntentService.STATUS_RUNNING:
-                        Log.d("TUOIntentService","Running");
-                        String ts = resultData.getString("out");
-                        Log.d("TUOIntentService",ts);
-                        messageMe(ts);
-                        //setProgressBarIndeterminateVisibility(true);
-                        break;
-                    case TUOIntentService.STATUS_FINISHED:
-                        //mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
-                        //mNotificationManager.notify(0, mBuilder.build());
-                        /* Hide progress & extract result from bundle */
-                        //setProgressBarIndeterminateVisibility(false);
-                        //String[] results = resultData.getStringArray("result");
-
-                        /* Update ListView with result */
-                        //arrayAdapter = new ArrayAdapter(MyActivity.this, android.R.layout.simple_list_item_2, results);
-                        //listView.setAdapter(arrayAdapter);
-                        Log.d("TUOIntentService","Finished");
-                        break;
-                    case TUOIntentService.STATUS_ERROR:
-                        /* Handle the error */
-                        //String error = resultData.getString(Intent.EXTRA_TEXT);
-                        //Toast.makeText(this, error, Toast.LENGTH_LONG).show();
-                        Log.e("TUOIntentService","Error");
-                        break;
-                }
-            }
-        });
-
-        String mmode = "jobintentservice";
+        String mmode = "foreground";
         if (mmode.equals( "intentservice")) {
             i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
 
@@ -521,6 +492,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                                 .enqueue(uploadWorkRequest);
 
         }
+        else if (mmode.equals("foreground")) {
+            i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
+
+            i.putExtra("param",param);
+            i.putExtra("operation",operation);
+            i.putExtra("receiver", receiver);
+
+            startForegroundService(i);
+
+        }
 
 
        /* AsyncTask.execute(new Runnable() {
@@ -535,6 +516,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public static TUOResultReceiver getReceiver() {
         return new TUOResultReceiver(new Handler(), new TUOResultReceiver.Receiver() {
+            private String cached;
             @Override
             public void onReceiveResult(int resultCode, Bundle resultData) {
 
@@ -544,6 +526,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         Log.d("TUOIntentService","Running");
                         String ts = resultData.getString("out");
                         Log.d("TUOIntentService",ts);
+                        cached = ts;
                         _this.messageMe(ts);
                         //setProgressBarIndeterminateVisibility(true);
                         break;
@@ -558,6 +541,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         //arrayAdapter = new ArrayAdapter(MyActivity.this, android.R.layout.simple_list_item_2, results);
                         //listView.setAdapter(arrayAdapter);
                         Log.d("TUOIntentService","Finished");
+                                if(_this.sp.getBoolean("history",false)) {
+                                    GlobalData.writeToFile(_this.tuodir+ "output/" + resultData.getString("name"),cached );
+                                }
                         break;
                     case TUOIntentService.STATUS_ERROR:
                         /* Handle the error */

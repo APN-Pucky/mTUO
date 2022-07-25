@@ -144,9 +144,17 @@ public class HistoryActivity extends AppCompatActivity {
             String date = file.getName().replace("_",":").replace(".txt","");
             //line += "";
             String fl = GlobalData.readFirstLine(GlobalData.tuodir() + "output/" +file.getName());
-            String param ="";
-            Log.d("TUO_HIST",fl);
-            String[] i = get(fl);
+            if (fl == null || fl.equals("")) {
+                fl = "ERROR";
+
+                tv_date.setText(fl);
+
+                tv_param.setText(fl);
+                return convertView;
+            }
+                String param = "";
+                Log.d("TUO_HIST", fl);
+            String[] i= get(fl);
             param += "" + i[0];
             param += " vs " + i[1];
             param += " " + getOP(fl);
