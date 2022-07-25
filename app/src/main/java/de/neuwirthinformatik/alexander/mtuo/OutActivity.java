@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.alexander.mTUO;
+package de.neuwirthinformatik.alexander.mtuo;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import de.neuwirthinformatik.alexander.mTUO.R;
+import de.neuwirthinformatik.alexander.mtuo.R;
 
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;

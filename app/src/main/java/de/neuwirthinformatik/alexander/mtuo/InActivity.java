@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.alexander.mTUO;
+package de.neuwirthinformatik.alexander.mtuo;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -53,7 +53,7 @@ public class InActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mTUO.R.menu.menu_in, menu);
+        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mtuo.R.menu.menu_in, menu);
         return true;
     }
 

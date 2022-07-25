@@ -1,4 +1,4 @@
-package de.neuwirthinformatik.alexander.mTUO;
+package de.neuwirthinformatik.alexander.mtuo;
 
 import android.app.Activity;
 import android.app.ActivityManager;

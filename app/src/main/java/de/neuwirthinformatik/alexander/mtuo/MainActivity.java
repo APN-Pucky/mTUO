@@ -1,16 +1,12 @@
-package de.neuwirthinformatik.alexander.mTUO;
+package de.neuwirthinformatik.alexander.mtuo;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,10 +41,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.neuwirthinformatik.alexander.mTUO.R;
+import de.neuwirthinformatik.alexander.mtuo.R;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, Configuration.Provider {
-    public static final String textEditorPackage = "fr.xgouchet.texteditor";
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final int CARD_SECTIONS_COUNT = 20;
     public static String out = "";
     private String tuodir;
@@ -65,12 +60,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     //SharedPreferences preferences;
 
 
-    @Override
-    public Configuration getWorkManagerConfiguration() {
-        return new Configuration.Builder()
-                .setMinimumLoggingLevel(android.util.Log.INFO)
-                .build();
-    }
 
 
     @Override
@@ -78,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         _this = this;
         Log.d("TUOMainActivity", "onCreate");
-        setContentView(de.neuwirthinformatik.alexander.mTUO.R.layout.activity_main);
-        Toolbar toolbar = findViewById(de.neuwirthinformatik.alexander.mTUO.R.id.toolbar);
+        setContentView(de.neuwirthinformatik.alexander.mtuo.R.layout.activity_main);
+        Toolbar toolbar = findViewById(de.neuwirthinformatik.alexander.mtuo.R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() + " v" + BuildConfig.VERSION_NAME);
 
@@ -265,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mTUO.R.menu.menu_main, menu);
+        getMenuInflater().inflate(de.neuwirthinformatik.alexander.mtuo.R.menu.menu_main, menu);
         return true;
     }
 
@@ -277,12 +266,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_output) {
+        if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_output) {
             Intent intent = new Intent(getApplicationContext(), OutActivity.class);
             startActivity(intent);
             return true;
         }
-        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_xml) {
+        else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_xml) {
             updateXML();
             return true;
         }
@@ -295,23 +284,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             editFile(tuodir + "data/customdecks.txt");
             return true;
         }*/
-        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_settings)
+        else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_settings)
         {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             return true;
-        }else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_donate)
+        }else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_donate)
         {
             GlobalData.error(this,"Paypal","apnpucky@gmail.com");
             return true;
         }
-        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_history)
+        else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_history)
         {
             Intent i = new Intent(this, HistoryActivity.class);
             startActivity(i);
             return true;
         }
-        else if (id == de.neuwirthinformatik.alexander.mTUO.R.id.action_exit)
+        else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_exit)
         {
             GlobalData.stopAllTUO(this);
             finish();
@@ -335,40 +324,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Log.d("TUOIN",abs_file);
         intent.putExtra("file",abs_file);
         //startActivity(intent);
-        try
-        {
         startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    if (!isFinishing()){
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("No Editor")
-                                .setMessage("You don't have a text editor installed")
-                                .setCancelable(false)
-                                .setPositiveButton("link", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        try {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + textEditorPackage)));
-                                        } catch (android.content.ActivityNotFoundException anfe) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + textEditorPackage)));
-                                        }
-                                    }
-                                })
-                                .setNegativeButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            return;
-                                        }
-                                }).show();
-                    }
-                }
-            });
-        }
     }
 
 
@@ -495,10 +451,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                                                                 .build()
                                                 )
                                                 .build();
-                                        WorkManager
-                                                .getInstance(this)
+                                        // provide custom configuration
+ Configuration myConfig = new Configuration.Builder()
+    .setMinimumLoggingLevel(android.util.Log.INFO)
+    .build();
+                                                WorkManager.getInstance(this.getApplicationContext())
                                                 .enqueue(uploadWorkRequest);
-
         }
         else if (mmode.equals("foreground")) {
             i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
