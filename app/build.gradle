@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
     //def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.67.0";
     //def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
     //def my_boost_dir_inc = my_boost_dir + "/include"
-    def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/1.68.0";
+    def my_boost_dir = projectDir.getAbsolutePath() + "/prebuilt/ndk_25_boost_1.79.0";
     //def my_boost_dir_libs = my_boost_dir + "/libs/llvm"
     //def my_boost_dir_inc = projectDir.getAbsolutePath() + "/prebuilt/1.67.0"+ "/include"
     // println '.... my message : boost_build_dir = ' + boost_build_dir
@@ -23,8 +23,8 @@ android {
         minSdkVersion 21
         //targetSdkVersion 27
         targetSdkVersion 32
-        versionCode 23
-        versionName "4.4.1-r5"
+        versionCode 24
+        versionName "4.4.1-r6"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
             cmake {
