@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class GlobalData {
-
+    static String _tuodir="";
 
     public static void error(Context c, String title,String msg)
     {
@@ -124,7 +124,10 @@ public class GlobalData {
 
     public static String tuodir()
     {
-        return Environment.getExternalStorageDirectory() + "/TUO/";
+        return _tuodir +"/";
+        // Old code no longer viable
+        //return Environment.getExternalStorageDirectory() + "/TUO/";
     }
+
 
 }

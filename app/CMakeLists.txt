@@ -60,6 +60,8 @@ find_library (log-lib log)
 
 
 add_library (tuo  SHARED
+        src/main/cpp/tyrant_optimize/algorithms.cpp
+        src/main/cpp/tyrant_optimize/algorithms_util.cpp
         src/main/cpp/tyrant_optimize/tyrant_optimize.cpp
         src/main/cpp/tyrant_optimize/cards.cpp
         src/main/cpp/tyrant_optimize/deck.cpp

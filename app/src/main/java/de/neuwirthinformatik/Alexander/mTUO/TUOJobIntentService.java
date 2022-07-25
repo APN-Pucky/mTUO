@@ -1,5 +1,10 @@
 package de.neuwirthinformatik.Alexander.mTUO;
 
+import android.content.Intent;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
 import android.app.IntentService;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -19,28 +24,29 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TUOIntentService extends IntentService {
-    public static final int STATUS_RUNNING = 0;
+public class TUOJobIntentService extends JobIntentService {
+        public static final int STATUS_RUNNING = 0;
     public static final int STATUS_FINISHED = 1;
     public static final int STATUS_ERROR = 2;
     public static StringBuilder out = new StringBuilder();
     private ResultReceiver receiver;
-    private TUO tuo;
+        private TUO tuo;
     public static String tuodir;
 
+    public TUOJobIntentService() {
 
-
-    public TUOIntentService() {
-        super("TUOIntentService");
-
-        Log.d("TUO_IntentService", "loading TUO lib");
+        Log.d("TUO_JobIntentService", "loading TUO lib");
         //System.loadLibrary("tuo");
-        Log.d("TUO_IntentService", "load TUO lib");
+        Log.d("TUO_JobIntentService", "load TUO lib");
         //_this = this;
+    }
+    @Override
+    protected void onHandleWork(@NonNull Intent intent) {
+        onHandleIntent(intent);
+
     }
 
 
-    @Override
     protected void onHandleIntent(Intent intent) {
         tuodir = GlobalData.tuodir();
         NotificationCompat.Builder mBuilder;
@@ -53,7 +59,7 @@ public class TUOIntentService extends IntentService {
         receiver = intent.getParcelableExtra("receiver");
         String[] param = intent.getStringArrayExtra("param");
         String op = intent.getStringExtra("operation");
-        tuo = new TUO(this,receiver);
+         tuo = new TUO(this,receiver);
         out.setLength(0);
         out.append("./");
         out.append(param[0] + " ");
@@ -114,14 +120,12 @@ public class TUOIntentService extends IntentService {
         if(sp.getBoolean("notification_led",false))mBuilder.setLights(Color.RED, 3000, 3000);
         stopForeground(true);
         if(sp.getBoolean("history",false)) {
-            //save to output
             String name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
             GlobalData.writeToFile(tuodir + "output/" + name, result );
         }
         mNotificationManager.notify(id, mBuilder.build());
         //stopSelf();
     }
-
 
 
     public void callMain(String[] args) {tuo.callMain(args);};

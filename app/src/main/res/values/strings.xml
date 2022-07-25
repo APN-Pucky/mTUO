@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">mTUO</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_out"> Output</string>
-    <string name="title_activity_history"> History</string>
+    <string name="title_activity_out">Output</string>
+    <string name="title_activity_in">Input</string>
+    <string name="title_activity_history">History</string>
 
     <string name="action_output">Output</string>
     <string name="action_xml">Update XMLs</string>
@@ -13,6 +14,7 @@
     <string name="action_donate">Donate</string>
     <string name="action_exit">Exit</string>
     <string name="action_clear_history">Clear History</string>
+    <string name="action_save">Save</string>
 
     <string name="pt_restart">RESTART MAY BE NECESSARY TO APPLY CHANGES</string>
 
@@ -34,6 +36,7 @@
     <string name="pp_history">Save Output in tuo folder</string>
 
 
+    <string name="s_save">Save</string>
     <string name="s_runsim">Queue Simulation</string>
     <string name="s_updatexml">Update XMLs</string>
     <string name="s_ownedcards">Ownedcards</string>

@@ -17,9 +17,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.work.Configuration;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,29 +40,34 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, Configuration.Provider {
     public static final String textEditorPackage = "fr.xgouchet.texteditor";
     public static final int CARD_SECTIONS_COUNT = 20;
     public static String out = "";
     private String tuodir;
-    //public static MainActivity _this;
+    public static MainActivity _this;
 
     NotificationManager mNotificationManager;
     //SharedPreferences preferences;
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("tuo");
+
+    @Override
+    public Configuration getWorkManagerConfiguration() {
+        return new Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.INFO)
+                .build();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //_this = this;
+        _this = this;
         Log.d("TUOMainActivity", "onCreate");
         setContentView(de.neuwirthinformatik.Alexander.mTUO.R.layout.activity_main);
         Toolbar toolbar = findViewById(de.neuwirthinformatik.Alexander.mTUO.R.id.toolbar);
@@ -79,6 +90,26 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 e.printStackTrace();
             }
         }
+        //Notification
+        mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        // run it
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("tuo_channel",
+                    "TUO_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("TUO_NOTIFICATION_CHANNEL_DISCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        //update xml
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("xml_channel",
+                    "XML_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("XML_NOTIFICATION_CHANNEL_DISCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        GlobalData._tuodir = this.getFilesDir().getAbsolutePath();
         tuodir = GlobalData.tuodir();
         File directory1 = new File(tuodir);
         if (!directory1.exists()) {
@@ -95,8 +126,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         initButtons();
 
-        mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 
         loadPrefs();
@@ -293,9 +322,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         {
             e.printStackTrace();
         }
-        Intent intent = new Intent(Intent.ACTION_EDIT);
-        Uri uri = Uri.parse("file://"+abs_file);
-        intent.setDataAndType(uri, "text/plain");
+        Intent intent = new Intent(getApplicationContext(), InActivity.class);
+        Log.d("TUOIN",abs_file);
+        intent.putExtra("file",abs_file);
+        //startActivity(intent);
         try
         {
         startActivity(intent);
@@ -409,35 +439,30 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
         //out += "\n\n";
 
-        //Notification
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default",
-                    "TUO_CHANNEL_NAME",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("TUO_NOTIFICATION_CHANNEL_DISCRIPTION");
-            mNotificationManager.createNotificationChannel(channel);
-        }
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "tuo_channel")
                 .setSmallIcon(R.mipmap.ic_launcher) // notification icon
                 .setContentTitle(operation) // title for notification
                 .setContentText("Running")// message for notification
                 .setOngoing(true);
+
         Intent intent = new Intent(getApplicationContext(), OutActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pi);
         //mNotificationManager.notify(0, mBuilder.build());
 
-        Intent i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
-        i.putExtra("param",param);
-        i.putExtra("operation",operation);
-        i.putExtra("receiver", new TUOIntentService.TUOResultReceiver(new Handler(), new TUOIntentService.TUOResultReceiver.Receiver() {
+        Intent i = null;
+        TUOResultReceiver receiver = new TUOResultReceiver(new Handler(), new TUOResultReceiver.Receiver() {
             @Override
             public void onReceiveResult(int resultCode, Bundle resultData) {
 
                 Log.d("TUOIntentReceiver", "onReceiveResult");
                 switch (resultCode) {
                     case TUOIntentService.STATUS_RUNNING:
-                        messageMe(resultData.getString("out"));
+                        Log.d("TUOIntentService","Running");
+                        String ts = resultData.getString("out");
+                        Log.d("TUOIntentService",ts);
+                        messageMe(ts);
                         //setProgressBarIndeterminateVisibility(true);
                         break;
                     case TUOIntentService.STATUS_FINISHED:
@@ -450,16 +475,53 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         /* Update ListView with result */
                         //arrayAdapter = new ArrayAdapter(MyActivity.this, android.R.layout.simple_list_item_2, results);
                         //listView.setAdapter(arrayAdapter);
+                        Log.d("TUOIntentService","Finished");
                         break;
                     case TUOIntentService.STATUS_ERROR:
                         /* Handle the error */
                         //String error = resultData.getString(Intent.EXTRA_TEXT);
                         //Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+                        Log.e("TUOIntentService","Error");
                         break;
                 }
             }
-        }));
-        startService(i);
+        });
+
+        String mmode = "jobintentservice";
+        if (mmode.equals( "intentservice")) {
+            i = new Intent(Intent.ACTION_SYNC, null, this,TUOIntentService.class);
+
+            i.putExtra("param",param);
+            i.putExtra("operation",operation);
+            i.putExtra("receiver", receiver);
+
+            startService(i);
+        }
+        else if ( mmode.equals("jobintentservice")) {
+            i = new Intent(Intent.ACTION_SYNC, null, this,TUOJobIntentService.class);
+
+            i.putExtra("param",param);
+            i.putExtra("operation",operation);
+            i.putExtra("receiver", receiver);
+
+            TUOJobIntentService.enqueueWork(this,TUOJobIntentService.class, 1, i);
+        }
+        else if (mmode.equals("workmanager"))
+        {
+                                        WorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(TUOWorker.class)
+                                                .setInputData(
+                                                        new Data.Builder()
+                                                                .putStringArray("param", param)
+                                                                .putString("operation", operation)
+                                                                .build()
+                                                )
+                                                .build();
+                                        WorkManager
+                                                .getInstance(this)
+                                                .enqueue(uploadWorkRequest);
+
+        }
+
 
        /* AsyncTask.execute(new Runnable() {
             public void run() {
@@ -469,6 +531,43 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         });*/
         //mNotificationManager.cancel(0);
+    }
+
+    public static TUOResultReceiver getReceiver() {
+        return new TUOResultReceiver(new Handler(), new TUOResultReceiver.Receiver() {
+            @Override
+            public void onReceiveResult(int resultCode, Bundle resultData) {
+
+                Log.d("TUOIntentReceiver", "onReceiveResult");
+                switch (resultCode) {
+                    case TUOIntentService.STATUS_RUNNING:
+                        Log.d("TUOIntentService","Running");
+                        String ts = resultData.getString("out");
+                        Log.d("TUOIntentService",ts);
+                        _this.messageMe(ts);
+                        //setProgressBarIndeterminateVisibility(true);
+                        break;
+                    case TUOIntentService.STATUS_FINISHED:
+                        //mBuilder.setOngoing(false).setAutoCancel(true).setContentText("Done");
+                        //mNotificationManager.notify(0, mBuilder.build());
+                        /* Hide progress & extract result from bundle */
+                        //setProgressBarIndeterminateVisibility(false);
+                        //String[] results = resultData.getStringArray("result");
+
+                        /* Update ListView with result */
+                        //arrayAdapter = new ArrayAdapter(MyActivity.this, android.R.layout.simple_list_item_2, results);
+                        //listView.setAdapter(arrayAdapter);
+                        Log.d("TUOIntentService","Finished");
+                        break;
+                    case TUOIntentService.STATUS_ERROR:
+                        /* Handle the error */
+                        //String error = resultData.getString(Intent.EXTRA_TEXT);
+                        //Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+                        Log.e("TUOIntentService","Error");
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -523,17 +622,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void updateXML(final boolean dev) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default",
-                    "YOUR_CHANNEL_NAME",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
-            mNotificationManager.createNotificationChannel(channel);
-        }
+
         final String[] arr = new String[]{"fusion_recipes_cj2", "missions", "levels", "skills_set"};
         final int max_p = CARD_SECTIONS_COUNT+arr.length+2;
 
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "xml_channel")
                 .setSmallIcon(R.mipmap.ic_launcher) // notification icon
                 .setContentTitle("XML") // title for notification
                 .setContentText("Downloading")// message for notification
@@ -541,7 +634,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setProgress(max_p,1,false);
         AsyncTask.execute(new Runnable() {
             public void run() {
-                final String tyrant_url = (dev ? "http://mobile-dev.tyrantonline.com/assets/" : "http://mobile.tyrantonline.com/assets/");
+                final String tyrant_url = (dev ? "https://mobile-dev.tyrantonline.com/assets/" : "https://mobile.tyrantonline.com/assets/");
                 //XML
                 Wget.Status status = Wget.Status.Success;
                 Log.d("MainActivity", "Downloading new XMLs ...");
@@ -571,11 +664,4 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
     }
 
-    /**
-     * A native method that is implemented by the 'tuo' native library,
-     * which is packaged with this application.
-     */
-    //public native String stringFromJNI(String s);
-
-    //public native void callMain(String[] args);
 }
