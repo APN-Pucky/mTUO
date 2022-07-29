@@ -10,5 +10,5 @@
      height="80">](https://f-droid.org/packages/de.neuwirthinformatik.alexander.mtuo/)
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=alexander.neuwirthinformatik.de.mtuo)
+     height="80">](https://play.google.com/store/apps/details?id=de.alexander.neuwirthinformatik.mtuo)
 
