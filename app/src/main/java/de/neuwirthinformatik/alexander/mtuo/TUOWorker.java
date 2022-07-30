@@ -80,12 +80,12 @@ public class TUOWorker extends Worker {
                 .setOngoing(true);
         Intent nintent = new Intent(getApplicationContext(), OutActivity.class);
 
-        PendingIntent pi = PendingIntent.getActivity(this.getApplicationContext(), id+2, nintent,PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getActivity(this.getApplicationContext(), id+2, nintent,MainActivity.intent_flag);
         mBuilder.setContentIntent(pi);
 
         nintent = new Intent(getApplicationContext(), OutActivity.class);
         nintent.putExtra("stop",android.os.Process.myPid());
-        pi = PendingIntent.getActivity(this.getApplicationContext(), id+3, nintent,PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        pi = PendingIntent.getActivity(this.getApplicationContext(), id+3, nintent,MainActivity.intent_flag);
         mBuilder.addAction(R.drawable.ic_clear,"Cancel All",pi);
         Notification n= mBuilder.build();
         setForegroundAsync(new ForegroundInfo(id+1,n));
@@ -100,7 +100,7 @@ public class TUOWorker extends Worker {
         final String result = tuo.out.toString();
         nintent.putExtra("text",result);
         //Log.d("TUO_Out",out);
-        pi = PendingIntent.getActivity(this.getApplicationContext(), id, nintent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
+        pi = PendingIntent.getActivity(this.getApplicationContext(), id, nintent,MainActivity.intent_flag);
         mBuilder.setContentIntent(pi);
         if(sp.getBoolean("notification_sound",false))mBuilder.setSound(Uri.parse(sp.getString("notification_sound_uri","content://settings/system/notification_sound")));
         if(sp.getBoolean("notification_vibrate",false))mBuilder.setVibrate(new long[] { 1000, 1000});

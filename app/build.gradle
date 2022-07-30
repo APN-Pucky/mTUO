@@ -15,10 +15,10 @@ android {
     compileSdkVersion 32
     defaultConfig {
         applicationId "de.neuwirthinformatik.alexander.mtuo"
-        minSdkVersion 26
+        minSdkVersion 21
         targetSdkVersion 32
-        versionCode 26
-        versionName "4.4.1-r8"
+        versionCode 27
+        versionName "4.4.1-r9"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
             cmake {
@@ -101,5 +101,5 @@ dependencies {
     //compileOnly 'org.projectlombok:lombok:1.16.22'
     //annotationProcessor 'org.projectlombok:lombok:1.16.22'
 
-    implementation 'com.github.APN-Pucky:TULib:0.3.15'
+    implementation 'com.github.APN-Pucky:TULib:0.3.16'
 }

@@ -2,6 +2,8 @@ package de.neuwirthinformatik.alexander.mtuo;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.WorkManager;
+
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -67,6 +69,7 @@ public class OutActivity extends AppCompatActivity {
         {
             Log.d("TUO_OutActivity","stop");
             MobileGlobalData.stopAllTUO(this);
+
 
         }
         _this = this;

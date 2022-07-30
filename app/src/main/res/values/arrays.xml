@@ -2,15 +2,15 @@
     <!-- Reply Preference -->
     <string-array name="run_entries">
         <item>Intent Service</item>
-        <item>Job Intent Service</item>
-        <item>Work Manager</item>
         <item>Foreground</item>
+        <item>Job Intent Service (No cancel)</item>
+        <item>Work Manager (No cancel)</item>
     </string-array>
 
     <string-array name="run_values">
         <item>intentservice</item>
+        <item>foreground</item>
         <item>jobintentservice</item>
         <item>workermanager</item>
-        <item>foreground</item>
     </string-array>
 </resources>

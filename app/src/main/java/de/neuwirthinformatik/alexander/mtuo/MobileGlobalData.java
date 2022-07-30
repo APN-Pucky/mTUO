@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.work.WorkManager;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,10 +22,9 @@ import java.util.List;
 import de.neuwirthinformatik.Alexander.TU.Basic.GlobalData;
 
 public class MobileGlobalData extends GlobalData {
-    static String _tuodir="";
+    static String _tuodir = "";
 
-    public static void error(Context c, String title,String msg)
-    {
+    public static void error(Context c, String title, String msg) {
         new AlertDialog.Builder(c)
                 .setTitle(title)
                 .setMessage(msg)
@@ -35,14 +36,16 @@ public class MobileGlobalData extends GlobalData {
                     }
                 }).show();
     }
-    public static void alert(Context c,String msg)
-    {
+
+    public static void alert(Context c, String msg) {
         Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
     }
+
     public static void stopAllTUO(Activity a) {
         Log.d("TUO_GLOBAL", "stop all tuo");
 
         a.stopService(new Intent(a, TUOIntentService.class));
+        a.stopService(new Intent(a, TUOJobIntentService.class));
         //android.os.Process.killProcess(c.getIntent().getIntExtra("stop",0));
         //TUOIntentService._this.stopForeground(true);
         //TUOIntentService._this.stopSelf();
@@ -50,10 +53,13 @@ public class MobileGlobalData extends GlobalData {
         ActivityManager manager = (ActivityManager) a.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> services = manager.getRunningAppProcesses();
         for (ActivityManager.RunningAppProcessInfo s : services) {
-            if (s.processName.equals("de.neuwirthinformatik.alexander.mTUO:tuo"))
+            if (s.processName.equals("de.neuwirthinformatik.alexander.mtuo:tuo"))
                 android.os.Process.killProcess(s.pid);
             Log.d("TUO_PROC", s.processName);
         }
+        // TODO use alternative here?
+        WorkManager.getInstance(a).cancelAllWork();
+
     }
 
     public static void writeToFile(String file, String data) {
@@ -72,8 +78,7 @@ public class MobileGlobalData extends GlobalData {
         }
     }
 
-    public static String readFirstLine(String file)
-    {
+    public static String readFirstLine(String file) {
         FileInputStream fin = null;
         String ret = "";
         try {
@@ -123,9 +128,8 @@ public class MobileGlobalData extends GlobalData {
         return sb.toString();
     }
 
-    public static String tuodir()
-    {
-        return _tuodir +"/";
+    public static String tuodir() {
+        return _tuodir + "/";
         // Old code no longer viable
         //return Environment.getExternalStorageDirectory() + "/TUO/";
     }

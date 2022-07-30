@@ -7,12 +7,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -481,7 +482,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public static TUOResultReceiver getReceiver() {
-        return new TUOResultReceiver(new Handler(), new TUOResultReceiver.Receiver() {
+        return new TUOResultReceiver(new Handler(Looper.getMainLooper()), new TUOResultReceiver.Receiver() {
             private String cached;
 
             @Override
@@ -584,7 +585,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .setContentText("Downloading")// message for notification
                 .setOngoing(true)
                 .setProgress(max_p, 1, false);
-        AsyncTask.execute(new Runnable() {
+        Tasks.executeAsync(new Runnable() {
             public void run() {
                 final String tyrant_url = (dev ? "https://mobile-dev.tyrantonline.com/assets/" : "https://mobile.tyrantonline.com/assets/");
                 //XML

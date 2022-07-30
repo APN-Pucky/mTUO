@@ -282,7 +282,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pt_vibrate">Vibrate</string>
-    <string name="title_activity_settings2">SettingsActivity2</string>
+    <string name="title_activity_settings2">Settings</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
