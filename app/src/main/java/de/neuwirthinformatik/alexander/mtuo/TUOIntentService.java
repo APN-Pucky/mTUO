@@ -27,17 +27,13 @@ public class TUOIntentService extends IntentService {
     public TUOIntentService() {
         super("TUOIntentService");
 
-        Log.e("TUO_IntentService", "loading TUO lib");
-        //System.loadLibrary("tuo");
-        Log.e("TUO_IntentService", "load TUO lib");
-        //_this = this;
     }
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.e("TUODONE", "OK");
-        tuodir = GlobalData.tuodir();
+        tuodir = MobileGlobalData.tuodir();
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
         //Hacky ugly but works

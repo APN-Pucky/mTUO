@@ -28,7 +28,7 @@ public class TUO {
         this.receiver = receiver;
         this.param = param;
         this.op = op;
-        tuodir = GlobalData.tuodir();
+        tuodir = MobileGlobalData.tuodir();
 
         name = new SimpleDateFormat("yyyy-MM-dd hh_mm_ss'.txt'").format(new Date());//save to output
         out.setLength(0);

@@ -97,126 +97,126 @@
         <item>Megamorphosis</item>
         <item>Revenge X</item>
         <item>TurningTides</item>
-</string-array>
+    </string-array>
 
-<string-array name="a_endgame">
-    <item>2</item>
-    <item>1</item>
-    <item>0</item>
-</string-array>
+    <string-array name="a_endgame">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 
-<string-array name="a_order">
-    <item>random</item>
-    <item>ordered</item>
-    <item>flexible</item>
-</string-array>
+    <string-array name="a_order">
+        <item>random</item>
+        <item>ordered</item>
+        <item>flexible</item>
+    </string-array>
 
-<string-array name="a_dominion">
-    <item>dom-owned</item>
-    <item>dom-maxed</item>
-    <item>dom-none</item>
-</string-array>
+    <string-array name="a_dominion">
+        <item>dom-owned</item>
+        <item>dom-maxed</item>
+        <item>dom-none</item>
+    </string-array>
 
-<string-array name="a_strategy">
-    <item></item>
-    <item>recent</item>
-    <item>jam</item>
-    <item>mortar</item>
-    <item>siege</item>
-    <item>strike</item>
-    <item>sunder</item>
-    <item>weaken</item>
-    <item>enhance</item>
-    <item>evolve</item>
-    <item>heal</item>
-    <item>mend</item>
-    <item>overload</item>
-    <item>protect</item>
-    <item>rally</item>
-    <item>fortify</item>
-    <item>enrage</item>
-    <item>entrap</item>
-    <item>rush</item>
-    <item>mimic</item>
-    <item>armor</item>
-    <item>avenge</item>
-    <item>scavenge</item>
-    <item>corrosive</item>
-    <item>counter</item>
-    <item>evade</item>
-    <item>subdue</item>
-    <item>absorb</item>
-    <item>flying</item>
-    <item>payback</item>
-    <item>revenge</item>
-    <item>tribute</item>
-    <item>refresh</item>
-    <item>wall</item>
-    <item>barrier</item>
-    <item>coalition</item>
-    <item>legion</item>
-    <item>pierce</item>
-    <item>rupture</item>
-    <item>swipe</item>
-    <item>drain</item>
-    <item>venom</item>
-    <item>hunt</item>
-    <item>berserk</item>
-    <item>inhibit</item>
-    <item>sabotage</item>
-    <item>leech</item>
-    <item>poison</item>
-    <item>allegiance</item>
-    <item>flurry</item>
-    <item>valor</item>
-    <item>stasis</item>
-    <item>summon</item>
-    <item>bravery</item>
-    <item>enfeeble</item>
-    <item>mark</item>
-</string-array>
+    <string-array name="a_strategy">
+        <item></item>
+        <item>recent</item>
+        <item>jam</item>
+        <item>mortar</item>
+        <item>siege</item>
+        <item>strike</item>
+        <item>sunder</item>
+        <item>weaken</item>
+        <item>enhance</item>
+        <item>evolve</item>
+        <item>heal</item>
+        <item>mend</item>
+        <item>overload</item>
+        <item>protect</item>
+        <item>rally</item>
+        <item>fortify</item>
+        <item>enrage</item>
+        <item>entrap</item>
+        <item>rush</item>
+        <item>mimic</item>
+        <item>armor</item>
+        <item>avenge</item>
+        <item>scavenge</item>
+        <item>corrosive</item>
+        <item>counter</item>
+        <item>evade</item>
+        <item>subdue</item>
+        <item>absorb</item>
+        <item>flying</item>
+        <item>payback</item>
+        <item>revenge</item>
+        <item>tribute</item>
+        <item>refresh</item>
+        <item>wall</item>
+        <item>barrier</item>
+        <item>coalition</item>
+        <item>legion</item>
+        <item>pierce</item>
+        <item>rupture</item>
+        <item>swipe</item>
+        <item>drain</item>
+        <item>venom</item>
+        <item>hunt</item>
+        <item>berserk</item>
+        <item>inhibit</item>
+        <item>sabotage</item>
+        <item>leech</item>
+        <item>poison</item>
+        <item>allegiance</item>
+        <item>flurry</item>
+        <item>valor</item>
+        <item>stasis</item>
+        <item>summon</item>
+        <item>bravery</item>
+        <item>enfeeble</item>
+        <item>mark</item>
+    </string-array>
 
-<string-array name="a_monofaction">
-    <item></item>
-    <item>imperial</item>
-    <item>raider</item>
-    <item>bloodthristy</item>
-    <item>xeno</item>
-    <item>righteous</item>
-    <item>progenitor</item>
-</string-array>
+    <string-array name="a_monofaction">
+        <item></item>
+        <item>imperial</item>
+        <item>raider</item>
+        <item>bloodthristy</item>
+        <item>xeno</item>
+        <item>righteous</item>
+        <item>progenitor</item>
+    </string-array>
 
-<string-array name="a_operation">
-    <item>sim</item>
-    <item>climb</item>
-    <item>reorder</item>
-    <item>climbex</item>
-    <item>anneal</item>
-    <item>debug</item>
-    <item>climb_forts</item>
-</string-array>
+    <string-array name="a_operation">
+        <item>sim</item>
+        <item>climb</item>
+        <item>reorder</item>
+        <item>climbex</item>
+        <item>anneal</item>
+        <item>debug</item>
+        <item>climb_forts</item>
+    </string-array>
 
-<string-array name="a_mode">
-    <item>pvp</item>
-    <item>pvp-defense</item>
-    <item>gw</item>
-    <item>gw-defense</item>
-    <item>brawl</item>
-    <item>brawl-defense</item>
-    <item>raid</item>
-    <item>surge</item>
-    <item>campaign</item>
-</string-array>
-<string-array name="a_restart_keys">
-    <item>notification_vibrate</item>
-    <item>notification_sound</item>
-    <item>notification_sound_uri</item>
-    <item>notification_led</item>
-    <item>history</item>
-</string-array>
+    <string-array name="a_mode">
+        <item>pvp</item>
+        <item>pvp-defense</item>
+        <item>gw</item>
+        <item>gw-defense</item>
+        <item>brawl</item>
+        <item>brawl-defense</item>
+        <item>raid</item>
+        <item>surge</item>
+        <item>campaign</item>
+    </string-array>
+    <string-array name="a_restart_keys">
+        <item>notification_vibrate</item>
+        <item>notification_sound</item>
+        <item>notification_sound_uri</item>
+        <item>notification_led</item>
+        <item>history</item>
+    </string-array>
 
 
-<!-- Strings related to Settings -->
+    <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
 
@@ -282,4 +282,20 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pt_vibrate">Vibrate</string>
+    <string name="title_activity_settings2">SettingsActivity2</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="run_title">Default run action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

@@ -68,7 +68,7 @@ public class InActivity extends AppCompatActivity {
         if (id == R.id.action_save) {
             Log.d("TUO_InActivity","Save");
             String text = tv.getText().toString();
-            GlobalData.writeToFile(file ,text );
+            MobileGlobalData.writeToFile(file ,text );
             tv.setSelection(tv.getText().length());
             Log.d("TUO_InActivity",text);
             finish();
@@ -92,7 +92,7 @@ public class InActivity extends AppCompatActivity {
         {
             Log.d("TUO_InActivity","file");
             file = getIntent().getStringExtra("file");
-            String in  = GlobalData.readFile(file);
+            String in  = MobileGlobalData.readFile(file);
             Log.d("TUO_InActivity",in);
             tv.setText(in);
         }

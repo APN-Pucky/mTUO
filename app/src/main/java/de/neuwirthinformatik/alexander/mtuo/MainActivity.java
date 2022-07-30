@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.neuwirthinformatik.alexander.mtuo.R;
+import de.neuwirthinformatik.Alexander.TU.util.Wget;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final int CARD_SECTIONS_COUNT = 20;
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             channel.setDescription("XML_NOTIFICATION_CHANNEL_DISCRIPTION");
             mNotificationManager.createNotificationChannel(channel);
         }
-        GlobalData._tuodir = this.getFilesDir().getAbsolutePath();
-        tuodir = GlobalData.tuodir();
+        MobileGlobalData._tuodir = this.getFilesDir().getAbsolutePath();
+        tuodir = MobileGlobalData.tuodir();
         File directory1 = new File(tuodir);
         if (!directory1.exists()) {
             directory1.mkdirs();
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         //effects
         AutoCompleteTextView mydeck = (AutoCompleteTextView) findViewById(R.id.et_mydeck);
         // Get the string array
-        String decks = GlobalData.readFile(GlobalData.tuodir() + "data/customdecks.txt");
+        String decks = MobileGlobalData.readFile(MobileGlobalData.tuodir() + "data/customdecks.txt");
         String[] lines = decks.split("\n");
         ArrayList<String> al = new ArrayList<String>(lines.length);
         for (String l : lines) {
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         Log.d("TUO_PREF", s);
         for (String k : getResources().getStringArray(R.array.a_restart_keys)) {
-            if (k.equals(s)) GlobalData.alert(MainActivity.this, "Changes apply after restart.");
+            if (k.equals(s)) MobileGlobalData.alert(MainActivity.this, "Changes apply after restart.");
         }
     }
 
@@ -306,14 +306,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             startActivity(i);
             return true;
         } else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_donate) {
-            GlobalData.error(this, "Paypal", "apnpucky@gmail.com");
+            MobileGlobalData.error(this, "Paypal", "apnpucky@gmail.com");
             return true;
         } else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_history) {
             Intent i = new Intent(this, HistoryActivity.class);
             startActivity(i);
             return true;
         } else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_exit) {
-            GlobalData.stopAllTUO(this);
+            MobileGlobalData.stopAllTUO(this);
             finish();
             return true;
         }
@@ -388,19 +388,19 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         //TODO checks to prevent SIGSEGV
         for (int i = 0; i < param.length; i++) {
             if (mydeck.equals("") || enemydeck.equals("")) {
-                GlobalData.error(this, "Deck missing", "Deck missing");
+                MobileGlobalData.error(this, "Deck missing", "Deck missing");
                 return;
             }
             if (param[i].equals("climbex")) {
                 if (i + 2 >= param.length || !param[i + 2].matches("\\d+")) {
-                    GlobalData.error(this, "Climbex Param missing", "Add it to the start of flags");
+                    MobileGlobalData.error(this, "Climbex Param missing", "Add it to the start of flags");
                     return;
                 }
 
             }
             if (param[i].equals("anneal")) {
                 if (i + 3 >= param.length || !param[i + 2].matches("\\d+") || !param[i + 3].matches("\\d+")) {
-                    GlobalData.error(this, "Anneal Param missing", "Add it to the start of flags");
+                    MobileGlobalData.error(this, "Anneal Param missing", "Add it to the start of flags");
                     return;
                 }
             }
@@ -422,7 +422,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Intent i = null;
         TUOResultReceiver receiver = getReceiver();
 
-        String mmode = "intentservice";
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String mmode = sp.getString("run","intentservice");
         if (mmode.equals("intentservice")) {
 
             i = new Intent(Intent.ACTION_SYNC, null, this, TUOIntentService.class);
@@ -441,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             i.putExtra("receiver", receiver);
 
             TUOJobIntentService.enqueueWork(this, TUOJobIntentService.class, 1, i);
-        } else if (mmode.equals("workmanager")) {
+        } else if (mmode.equals("workermanager")) {
             //TODO cancel does not work
             WorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(TUOWorker.class)
                     .setInputData(
@@ -508,7 +509,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         //listView.setAdapter(arrayAdapter);
                         Log.d("TUOIntentService", "Finished");
                         if (_this.sp.getBoolean("history", false)) {
-                            GlobalData.writeToFile(_this.tuodir + "output/" + resultData.getString("name"), cached);
+                            MobileGlobalData.writeToFile(_this.tuodir + "output/" + resultData.getString("name"), cached);
                         }
                         break;
                     case TUOIntentService.STATUS_ERROR:

@@ -10,7 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -61,7 +61,7 @@ public class TUOWorker extends Worker {
         String op = data.getString("operation");
 
 
-        tuodir = GlobalData.tuodir();
+        tuodir = MobileGlobalData.tuodir();
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotificationManager;
         //Hacky ugly but works

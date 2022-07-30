@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import de.neuwirthinformatik.alexander.mtuo.R;
-
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;
     TextView tv=null;
@@ -68,7 +66,7 @@ public class OutActivity extends AppCompatActivity {
         if(getIntent().hasExtra("stop"))
         {
             Log.d("TUO_OutActivity","stop");
-            GlobalData.stopAllTUO(this);
+            MobileGlobalData.stopAllTUO(this);
 
         }
         _this = this;

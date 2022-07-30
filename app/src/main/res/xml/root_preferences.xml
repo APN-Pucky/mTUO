@@ -1,0 +1,49 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="History">
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="history"
+            app:summary="@string/pp_history"
+            app:title="@string/p_history" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Notifications">
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="notification_vibrate"
+            app:summary="@string/pp_notification_vibrate"
+            app:title="@string/p_notification_vibrate" />
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="notification_sound"
+            app:summary="@string/pp_notification_sound"
+            app:title="@string/p_notification_sound" />
+
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="notification_led"
+            app:summary="@string/pp_notification_led"
+            app:title="@string/p_notification_led" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Running">
+
+
+        <ListPreference
+            app:defaultValue="intentservice"
+            app:entries="@array/run_entries"
+            app:entryValues="@array/run_values"
+            app:key="run"
+            app:title="@string/run_title"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

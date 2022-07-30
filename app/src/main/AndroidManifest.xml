@@ -7,9 +7,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-
     <application
-        android:name="de.neuwirthinformatik.alexander.mtuo.MainApplication"
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,7 +17,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="de.neuwirthinformatik.alexander.mtuo.MainActivity"
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings2" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -29,26 +32,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.neuwirthinformatik.alexander.mtuo.OutActivity"
+            android:name=".OutActivity"
             android:label="@string/title_activity_out"
-            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity" />
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".InActivity"
             android:label="@string/title_activity_in"
-            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity" />
+            android:parentActivityName=".MainActivity" />
 
         <service
             android:name=".TUOIntentService"
             android:excludeFromRecents="false"
             android:exported="false"
             android:process=":tuo" />
-
         <service
             android:name=".TUOJobIntentService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             tools:node="merge" />
@@ -58,17 +58,13 @@
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
             tools:node="merge">
+
             <!-- If you are using androidx.startup to initialize other components -->
             <meta-data
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
                 tools:node="remove" />
         </provider>
-
-
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
 
         <activity
             android:name=".HistoryActivity"

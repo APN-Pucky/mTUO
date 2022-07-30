@@ -17,7 +17,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class GlobalData {
+import de.neuwirthinformatik.Alexander.TU.Basic.GlobalData;
+
+public class MobileGlobalData extends GlobalData {
     static String _tuodir="";
 
     public static void error(Context c, String title,String msg)

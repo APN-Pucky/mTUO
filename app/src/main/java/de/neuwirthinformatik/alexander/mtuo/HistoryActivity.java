@@ -2,9 +2,6 @@ package de.neuwirthinformatik.alexander.mtuo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.preference.PreferenceManager;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,20 +14,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HistoryActivity extends AppCompatActivity {
-    private  HistoryAdapter ada;
+    private HistoryAdapter ada;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        File[] files = new File(GlobalData.tuodir() + "output/").listFiles();
+        File[] files = new File(MobileGlobalData.tuodir() + "output/").listFiles();
         ArrayList<File> fal = new ArrayList<File>();
-        for(int i= files.length-1;i>=0;i--)
+        for (int i = files.length - 1; i >= 0; i--)
             fal.add(files[i]);
 
         final ListView lv = (ListView) findViewById(R.id.history_list);
@@ -39,19 +41,20 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                File f = (File)lv.getItemAtPosition(position);
+                File f = (File) lv.getItemAtPosition(position);
 
-                final String content = GlobalData.readFile(f.getAbsolutePath());
+                final String content = MobileGlobalData.readFile(f.getAbsolutePath());
 
                 Intent nintent = new Intent(getApplicationContext(), OutActivity.class);
-                nintent.putExtra("text",content);
+                nintent.putExtra("text", content);
                 startActivity(nintent);
 
             }
         });
         lv.setAdapter(ada);
         setupActionBar();
-        if(files.length==0 && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("history",false))GlobalData.alert(this,"Enable History in Settings.");
+        if (files.length == 0 && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("history", false))
+            MobileGlobalData.alert(this, "Enable History in Settings.");
     }
 
 
@@ -71,9 +74,8 @@ public class HistoryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_clear_history) {
-            File[] files = new File(GlobalData.tuodir() + "output/").listFiles();
-            for(File f: files)
-            {
+            File[] files = new File(MobileGlobalData.tuodir() + "output/").listFiles();
+            for (File f : files) {
                 f.delete();
             }
             ada.clear();
@@ -102,11 +104,13 @@ public class HistoryActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
     public class HistoryAdapter extends ArrayAdapter<File> {
 
         public HistoryAdapter(Context context, ArrayList<File> users) {
@@ -114,7 +118,6 @@ public class HistoryActivity extends AppCompatActivity {
             super(context, 0, users);
 
         }
-
 
 
         @Override
@@ -141,9 +144,9 @@ public class HistoryActivity extends AppCompatActivity {
 
             // Populate the data into the template view using the data object
 
-            String date = file.getName().replace("_",":").replace(".txt","");
+            String date = file.getName().replace("_", ":").replace(".txt", "");
             //line += "";
-            String fl = GlobalData.readFirstLine(GlobalData.tuodir() + "output/" +file.getName());
+            String fl = MobileGlobalData.readFirstLine(MobileGlobalData.tuodir() + "output/" + file.getName());
             if (fl == null || fl.equals("")) {
                 fl = "ERROR";
 
@@ -152,9 +155,9 @@ public class HistoryActivity extends AppCompatActivity {
                 tv_param.setText(fl);
                 return convertView;
             }
-                String param = "";
-                Log.d("TUO_HIST", fl);
-            String[] i= get(fl);
+            String param = "";
+            Log.d("TUO_HIST", fl);
+            String[] i = get(fl);
             param += "" + i[0];
             param += " vs " + i[1];
             param += " " + getOP(fl);
@@ -181,29 +184,27 @@ public class HistoryActivity extends AppCompatActivity {
             ret[1] = m.group(1);
             return ret;
         }
-        private String getOP(String fl)
-        {
-            return getLastOf(fl,getResources().getStringArray(R.array.a_operation));
-        }
-        private String getOrder(String fl)
-        {
-            return getLastOf(fl,getResources().getStringArray(R.array.a_order));
-        }
-        private String getBGE(String fl)
-        {
-            return getLastOf(fl,getResources().getStringArray(R.array.a_effects));
+
+        private String getOP(String fl) {
+            return getLastOf(fl, getResources().getStringArray(R.array.a_operation));
         }
 
-        private String getLastOf(String fl,String[] opt)
-        {
+        private String getOrder(String fl) {
+            return getLastOf(fl, getResources().getStringArray(R.array.a_order));
+        }
+
+        private String getBGE(String fl) {
+            return getLastOf(fl, getResources().getStringArray(R.array.a_effects));
+        }
+
+        private String getLastOf(String fl, String[] opt) {
             int max = 0;
-            String cur="";
+            String cur = "";
             String[] m = opt;
-            for(int i =0 ; i < m.length;i++)
-            {
+            for (int i = 0; i < m.length; i++) {
                 int t = fl.lastIndexOf(" " + m[i] + " ");
-                if(max < t){
-                    max=t;
+                if (max < t) {
+                    max = t;
                     cur = m[i];
                 }
             }
