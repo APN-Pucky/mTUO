@@ -4,7 +4,6 @@ permissions:
       id-token: 'write'
 on:
   push:
-  pull_request:
 
 jobs:
   test:
