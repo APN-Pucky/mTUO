@@ -5,23 +5,23 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
     <application
+        android:name="de.neuwirthinformatik.alexander.mtuo.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="de.neuwirthinformatik.alexander.mtuo.MainApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="de.neuwirthinformatik.alexander.mtuo.MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +31,12 @@
         <activity
             android:name="de.neuwirthinformatik.alexander.mtuo.OutActivity"
             android:label="@string/title_activity_out"
-            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity"/>
+            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity" />
 
         <activity
             android:name=".InActivity"
             android:label="@string/title_activity_in"
-            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity"/>
+            android:parentActivityName="de.neuwirthinformatik.alexander.mtuo.MainActivity" />
 
         <service
             android:name=".TUOIntentService"
@@ -46,25 +46,24 @@
 
         <service
             android:name=".TUOJobIntentService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             tools:node="merge" />
 
         <provider
-    android:name="androidx.startup.InitializationProvider"
-    android:authorities="${applicationId}.androidx-startup"
-    android:exported="false"
-    tools:node="merge">
-    <!-- If you are using androidx.startup to initialize other components -->
-    <meta-data
-        android:name="androidx.work.WorkManagerInitializer"
-        android:value="androidx.startup"
-        tools:node="remove" />
- </provider>
-
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <!-- If you are using androidx.startup to initialize other components -->
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
 
 
         <activity
