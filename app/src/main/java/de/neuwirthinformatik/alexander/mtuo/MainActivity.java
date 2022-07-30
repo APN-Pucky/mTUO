@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -307,7 +308,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             startActivity(i);
             return true;
         } else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_donate) {
-            MobileGlobalData.error(this, "Paypal", "apnpucky@gmail.com");
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://paypal.me/apnpucky"));
+            startActivity(browserIntent);
             return true;
         } else if (id == de.neuwirthinformatik.alexander.mtuo.R.id.action_history) {
             Intent i = new Intent(this, HistoryActivity.class);
