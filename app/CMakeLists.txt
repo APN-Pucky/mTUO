@@ -12,7 +12,6 @@ add_definitions(-DNDEBUG -DNQUEST )# -DNTIMER
 #add_library (tuo  SHARED
 #             src/main/cpp/tyrant_optimize.cpp)
 
-
 #-----------------------------------------
 add_library (boost_system STATIC IMPORTED)
 
@@ -53,6 +52,7 @@ set_target_properties(boost_filesystem PROPERTIES IMPORTED_LOCATION
 #include_directories( ${MY_BOOST_DIR_INC} )
 
 include_directories( ${MY_BOOST_DIR}/include/ )
+include_directories( src/main/cpp/tyrant_optimize/extern/hPMML/include )
 #-----------------------------------------
 find_library (log-lib log)
 
