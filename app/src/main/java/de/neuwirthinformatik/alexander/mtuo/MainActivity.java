@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             mNotificationManager.createNotificationChannel(channel);
         }
         MobileGlobalData._tuodir = this.getFilesDir().getAbsolutePath();
+        //Log.d("TUO_DIR4",MobileGlobalData._tuodir );
+        //MobileGlobalData._tuodir = this.getExternalFilesDir(null).getAbsolutePath();
+
         tuodir = MobileGlobalData.tuodir();
         File directory1 = new File(tuodir);
         if (!directory1.exists()) {
@@ -187,13 +191,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         final Button button_xml = findViewById(R.id.b_updatexml);
         button_xml.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                updateXML(true);
+
+                Log.d("TUO_DEBUG", "update_xmls click");
+                updateXML(false);
             }
         });
 
         final Button button_owned = findViewById(R.id.b_ownedcards);
         button_owned.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
+                //Log.d("TUO_DIR2", tuodir);
                 editFile(tuodir + "data/ownedcards.txt");
             }
         });
@@ -201,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         final Button button_custom = findViewById(R.id.b_customdecks);
         button_custom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                Log.d("TUO_DEBUG", "customdecks click");
                 editFile(tuodir + "data/customdecks.txt");
             }
         });
@@ -577,6 +587,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void updateXML(final boolean dev) {
+        Log.d("TUO_DEBUG", "update_xmls");
 
         final String[] arr = new String[]{"fusion_recipes_cj2", "missions", "levels", "skills_set"};
         final int max_p = CARD_SECTIONS_COUNT + arr.length + 2;
@@ -597,14 +608,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 int p = 0;
                 while (status == Wget.Status.Success) {
                     final String sec = "cards_section_" + i + ".xml";
+                    Log.d("TUO_WGET", "dl: " + tyrant_url + sec + " to: " + tuodir + "data/" + sec);
                     status = Wget.wGet(tuodir + "data/" + sec, tyrant_url + sec);
+                    Log.d("TUO_WGET", "" + status);
                     i++;
                     p++;
                     mNotificationManager.notify(1, mBuilder.setProgress(max_p, p, false).build());
                 }
                 for (i = 0; i < arr.length; i++) {
                     final String sec = arr[i] + ".xml";
-                    Wget.wGet(tuodir + "data/" + sec, tyrant_url + sec);
+                    Wget.Status ws = Wget.wGet(tuodir + "data/" + sec, tyrant_url + sec);
                     p++;
                     mNotificationManager.notify(1, mBuilder.setProgress(max_p, p, false).build());
                 }
