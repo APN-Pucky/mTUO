@@ -40,7 +40,7 @@ jobs:
       - name: Generate APKs
         run: ./gradlew clean assembleDebug assembleRelease
       - name: Upload APKs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: app/build/outputs/apk/**/*.apk 
