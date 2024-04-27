@@ -18,8 +18,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
         compileSdk 33
-        versionCode 29
-        versionName "6.5.1-r0"
+        versionCode 30
+        versionName "6.5.1-r1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
             cmake {
