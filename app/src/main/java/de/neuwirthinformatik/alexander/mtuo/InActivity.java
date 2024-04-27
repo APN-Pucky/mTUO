@@ -16,7 +16,6 @@ public class InActivity extends AppCompatActivity {
     static InActivity _this = null;
     String file = "";
     EditText tv=null;
-    ScrollView sv=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +23,7 @@ public class InActivity extends AppCompatActivity {
         setContentView(R.layout.activity_in);
         setupActionBar();
         tv = (EditText) findViewById(R.id.et_in);
-        tv.setMovementMethod(new ScrollingMovementMethod());
-        sv = (ScrollView) findViewById(R.id.sv_in);
-        sv.post(new Runnable()
-        {
-            public void run()
-            {
-                sv.fullScroll(View.FOCUS_DOWN);
-            }
-        });
-
+        tv.requestFocus();
     }
 
     /**
@@ -121,6 +111,5 @@ public class InActivity extends AppCompatActivity {
         Log.d("TUO_OutActivity","onStop");
         tv=null;
         _this = null;
-        sv= null;
     }
 }

@@ -12,11 +12,12 @@ def getTUOVersion = {
 }
 
 android {
-    compileSdkVersion 32
+
     defaultConfig {
         applicationId "de.neuwirthinformatik.alexander.mtuo"
         minSdkVersion 21
         targetSdkVersion 33
+        compileSdk 33
         versionCode 29
         versionName "6.5.1-r0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'

@@ -11,22 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/sv_in"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbars="vertical">
 
             <EditText
                 android:id="@+id/et_in"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:enabled="true"
                 android:gravity="bottom"
                 android:text=""
-                android:textIsSelectable="true" />
-        </ScrollView>
+                android:textIsSelectable="true"
+                android:scrollbars="vertical"
+                android:longClickable="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

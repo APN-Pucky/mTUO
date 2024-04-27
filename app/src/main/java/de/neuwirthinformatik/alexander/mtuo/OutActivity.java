@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.WorkManager;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 public class OutActivity extends AppCompatActivity {
     static OutActivity _this = null;
     TextView tv=null;
-    ScrollView sv=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class OutActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -47,15 +48,8 @@ public class OutActivity extends AppCompatActivity {
 
 
         tv = (TextView) findViewById(R.id.tv_out);
-        tv.setMovementMethod(new ScrollingMovementMethod());
-        sv = (ScrollView) findViewById(R.id.sv_out);
-        sv.post(new Runnable()
-        {
-            public void run()
-            {
-                sv.fullScroll(View.FOCUS_DOWN);
-            }
-        });
+
+
         if(getIntent().hasExtra("text"))
         {
             Log.d("TUO_OutActivity","text");
@@ -65,13 +59,20 @@ public class OutActivity extends AppCompatActivity {
             Log.d("TUO_OutActivity","out");
             tv.setText(MainActivity.out);
         }
-        if(getIntent().hasExtra("stop"))
-        {
-            Log.d("TUO_OutActivity","stop");
-            MobileGlobalData.stopAllTUO(this);
+        tv.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Layout l = tv.getLayout();
+                        final int scrollAmount = l.getLineTop(tv.getLineCount()) - tv.getHeight();
+                        if (scrollAmount > 0)
+                            tv.scrollTo(0, scrollAmount);
+                        else
+                            tv.scrollTo(0, 0);
+                    }
+                }
+        );
 
-
-        }
         _this = this;
 
     }
@@ -93,6 +94,5 @@ public class OutActivity extends AppCompatActivity {
         Log.d("TUO_OutActivity","onStop");
         tv=null;
         _this = null;
-        sv= null;
     }
 }
